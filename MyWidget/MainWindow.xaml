@@ -108,7 +108,7 @@
             <hc:SearchBar x:Name="searchBarTxt" Grid.Row ="0" Grid.Column="1"  Grid.ColumnSpan="3"  TextWrapping="Wrap" Text="SearchBar" VerticalAlignment="Center" SearchStarted="SearchBar_SearchStarted"  Height="28" KeyDown="searchBarTxt_KeyDown" />
             <Label x:Name="CityLabel" Grid.Column="1" Grid.ColumnSpan="2" Content="Label" Grid.Row="1" Width="140" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" Height="36" HorizontalAlignment="Left"/>
             <Label x:Name="CurrentWeatherLabel" Grid.Column="2" Content="Label" Grid.Row="1" Foreground="White" Width="90" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" Height="36" HorizontalAlignment="Right"/>
-
+            
         </Grid>
         <Grid Margin="0,1,0,17">
             <Grid.ColumnDefinitions>
@@ -331,7 +331,6 @@
                 </ContextMenu>
             </hc:NotifyIcon.ContextMenu>
         </hc:NotifyIcon>
-        <hc:GotoTop Content="GotoTop" HorizontalAlignment="Left" Margin="483,111,0,0" Grid.Row="2" VerticalAlignment="Top"/>
     </Grid>
 
 </Window>

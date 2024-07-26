@@ -16,6 +16,7 @@
     <None Remove="mute.png" />
     <None Remove="play.png" />
     <None Remove="power-off-solid %281%29.png" />
+    <None Remove="power-off-solid %282%29.svg" />
     <None Remove="power-off-solid.png" />
     <None Remove="rotate-right-solid.png" />
     <None Remove="volume-xmark-solid.png" />
@@ -55,6 +56,7 @@
     <Resource Include="mute.png" />
     <Resource Include="play.png" />
     <Resource Include="power-off-solid (1).png" />
+    <Resource Include="power-off-solid (2).svg" />
     <Resource Include="rotate-right-solid.png" />
     <Resource Include="volume-xmark-solid.png" />
     <Resource Include="xmark-solid (1).png" />

@@ -53,8 +53,9 @@ namespace MyWidget
         public MainWindow()
         {
             InitializeComponent();
-            searchBarTxt.Text = "gumushane";
-            GetFiveDaysWeatherForecast("gumushane");
+            searchBarTxt.Text = "basaksehir";
+            GetFiveDaysWeatherForecast("basaksehir");
+          
         }
 
  
