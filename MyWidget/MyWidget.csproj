@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Adsız.png" />
+    <None Remove="ban-solid.png" />
+    <None Remove="closeicon.png" />
+    <None Remove="foward.png" />
+    <None Remove="mute.png" />
+    <None Remove="play.png" />
+    <None Remove="power-off-solid %281%29.png" />
+    <None Remove="power-off-solid.png" />
+    <None Remove="rotate-right-solid.png" />
+    <None Remove="volume-xmark-solid.png" />
+    <None Remove="xmark-solid %281%29.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="Microsoft.Vbe.Interop.Forms">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>0d452ee1-e08f-101a-852e-02608c4d0bb4</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>215d64d2-031c-33c7-96e3-61794cd1ee61</Guid>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.5.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Language.Intellisense" Version="17.9.187" />
+    <PackageReference Include="NPSMLib" Version="0.9.14" />
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Adsız.png" />
+    <Resource Include="ban-solid.png" />
+    <Resource Include="closeicon.png" />
+    <Resource Include="foward.png" />
+    <Resource Include="mute.png" />
+    <Resource Include="play.png" />
+    <Resource Include="power-off-solid (1).png" />
+    <Resource Include="rotate-right-solid.png" />
+    <Resource Include="volume-xmark-solid.png" />
+    <Resource Include="xmark-solid (1).png" />
+  </ItemGroup>
+
+</Project>
