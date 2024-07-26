@@ -6363,11 +6363,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC_3741\\Desktop\\MyWidget\\MyWidget\\MyWidget.csproj",
+      "projectUniqueName": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
       "projectName": "MyWidget",
-      "projectPath": "C:\\Users\\PC_3741\\Desktop\\MyWidget\\MyWidget\\MyWidget.csproj",
+      "projectPath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
       "packagesPath": "C:\\Users\\PC_3741\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC_3741\\Desktop\\MyWidget\\MyWidget\\obj\\",
+      "outputPath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\PC_3741\source\repos\MyWidget\MyWidget\obj\Release\net8.0-windows\
+C:\Users\PC_3741\Source\Repos\eaykinn\UsefulWidget\MyWidget\obj\Release\net8.0-windows\
 MyWidget
 none
 false
 TRACE;RELEASE;NET;NET8_0;NETCOREAPP
-C:\Users\PC_3741\source\repos\MyWidget\MyWidget\App.xaml
+C:\Users\PC_3741\Source\Repos\eaykinn\UsefulWidget\MyWidget\App.xaml
 2-1775066643
 
 6-1505849289
-2181595878076
+22048278593
 MainWindow.xaml;TimePickerUC.xaml;
 
-False
+True
 
