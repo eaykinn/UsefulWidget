@@ -260,3 +260,4 @@ C:\Users\PC_3741\Desktop\MyWidget\MyWidget\obj\Debug\net8.0-windows\ref\MyWidget
 C:\Users\PC_3741\Desktop\MyWidget\MyWidget\obj\Debug\net8.0-windows\Interop.Microsoft.Vbe.Interop.Forms.dll
 C:\Users\PC_3741\Desktop\MyWidget\MyWidget\obj\Debug\net8.0-windows\MyWidget.csproj.ResolveComReference.cache
 C:\Users\USER\source\repos\MyWidget\MyWidget\obj\Debug\net8.0-windows\MyWidget.csproj.ResolveComReference.cache
+C:\Users\PC_3741\Desktop\MyWidget\MyWidget\obj\Debug\net8.0-windows\MyWidget.sourcelink.json

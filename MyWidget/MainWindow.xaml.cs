@@ -561,11 +561,6 @@ namespace MyWidget
         
         }
 
-        private void Window_KeyUp_1(object sender, KeyEventArgs e)
-        {
-
-        }
-
         private void searchBarTxt_KeyDown(object sender, KeyEventArgs e)
         {
             searchCoordinates(searchBarTxt.Text);           
