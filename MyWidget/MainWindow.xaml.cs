@@ -100,17 +100,23 @@ namespace MyWidget
             if (currentVolume > 50)
             {
                 lastpath = GetImageDir("volume-high-solid.png");
+                
             }
             else if (currentVolume <= 50 && currentVolume > 0)
             {
                 lastpath = GetImageDir("volume-low-solid.png");
+               // muteButton.Strecth = Stretch.UniformToFill;
             }
             else
             {
                 lastpath = GetImageDir("volume-xmark-solid.png");
+                // muteButton.Strecth = Stretch.UniformToFill;
+                //muteButton.Stretch = Stretch.UniformToFill;
+
             }
 
             img2.Source = new BitmapImage(new Uri(lastpath));
+            img2.Stretch = Stretch.Uniform;
             muteButton.Content = img2;
 
 

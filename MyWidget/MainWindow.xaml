@@ -193,7 +193,10 @@
                 </hc:PreviewSlider.Effect>
             </hc:PreviewSlider>
 
-            <Button Style="{DynamicResource ButtonStyle1}" x:Name="muteButton" Width="25" Click="muteButton_Click" BorderBrush="{x:Null}" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="0,28,0,22" Background="{x:Null}" Foreground="{x:Null}" >
+            <Button Style="{DynamicResource ButtonStyle1}" x:Name="muteButton" Width="34" Click="muteButton_Click"   BorderBrush="{x:Null}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="39,28,0,22" Foreground="{x:Null}" Grid.ColumnSpan="2" >
+                <Button.Background>
+                    <ImageBrush/>
+                </Button.Background>
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -342,7 +345,7 @@
 
             </Button>
             <hc:ColorPicker x:Name="themeColorPicker" Grid.Column="8" Grid.Row="1" Visibility="Hidden" SelectedColorChanged="themeColorPicker_SelectedColorChanged" Canceled="themeColorPicker_Canceled" Confirmed="themeColorPicker_Confirmed"/>
-          
+
         </Grid>
         <hc:Divider x:Name="asdsa" Width="424" HorizontalAlignment="Center" Foreground="White" Background="White" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
