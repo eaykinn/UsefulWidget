@@ -4,24 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyWidget"
-             mc:Ignorable="d" Width="108" Height="207">
-    <Grid x:Name="grid" HorizontalAlignment="Center" Width="108" Height="206" VerticalAlignment="Top">
+             mc:Ignorable="d" Width="108" Height="212">
+    <Grid x:Name="grid" HorizontalAlignment="Center" Width="108" Height="212" VerticalAlignment="Center">
         <Grid.RowDefinitions>
+            <RowDefinition Height="1"/>
             <RowDefinition Height="32*"/>
             <RowDefinition Height="147*"/>
             <RowDefinition Height="27*"/>
+            <RowDefinition Height="1"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="53*"/>
             <ColumnDefinition Width="54*"/>
+            <ColumnDefinition Width="1"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="hourList"  HorizontalAlignment="Center" Width="48" Height="143" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <ListBox x:Name="minList" Width="48" HorizontalAlignment="Center" Height="143" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
-        <Button x:Name="okbutton" Content="OK" Click="Button_Click" Grid.Row="2" Grid.Column="0" Width="48" FontSize="11"/>
-        <Button x:Name="cancelbutton" Content="Cancel" Click="cancelbutton_Click" Grid.Row="2" Grid.Column="1" Width="56" FontSize="11"/>
-        <Grid x:Name="grid2" Grid.ColumnSpan="2">
-            <Label x:Name="TimePickerReturn" Content="00:00" FontSize="14" FontWeight="Bold" />
+        <ListBox x:Name="hourList"  HorizontalAlignment="Center" Width="48" Height="143" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <ListBox x:Name="minList" Width="48" HorizontalAlignment="Center" Height="143" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"/>
+        <Button x:Name="okbutton" Content="OK" Click="Button_Click" Grid.Row="3" Grid.Column="1" Width="48" FontSize="10" Height="22"/>
+        <Button x:Name="cancelbutton" Content="Cancel" Click="cancelbutton_Click" Grid.Row="3" Grid.Column="2" Width="48" FontSize="10" Height="22"/>
+        <Grid x:Name="grid2" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label x:Name="TimePickerReturn" Content="00:00" FontSize="14" FontWeight="Bold"/>
         </Grid>
     </Grid>
 </UserControl>

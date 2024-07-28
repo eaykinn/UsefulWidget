@@ -6357,34 +6357,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC_3741\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
       "projectName": "MyWidget",
-      "projectPath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
-      "packagesPath": "C:\\Users\\PC_3741\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
+      "projectPath": "C:\\Users\\USER\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\USER\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\PC_3741\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "C:\\Users\\PC_3741\\Desktop\\pckg": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -6443,7 +6435,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -6452,7 +6444,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Microsoft.VisualStudio.Language.Intellisense 17.9.187, Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime (>= 17.9.36507) öğesine bağımlı ancak Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime 17.9.36507 bulunamadı. Yaklaşık bir en iyi eşleşme olan Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime 17.9.37000 çözümlendi.",
+      "message": "Microsoft.VisualStudio.Language.Intellisense 17.9.187 depends on Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime (>= 17.9.36507) but Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime 17.9.36507 was not found. An approximate best match of Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime 17.9.37000 was resolved.",
       "libraryId": "Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime",
       "targetGraphs": [
         "net8.0-windows7.0"
@@ -6462,7 +6454,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Microsoft.VisualStudio.Language.Intellisense 17.9.187, Microsoft.VisualStudio.Threading (>= 17.9.27) öğesine bağımlı ancak Microsoft.VisualStudio.Threading 17.9.27 bulunamadı. Yaklaşık bir en iyi eşleşme olan Microsoft.VisualStudio.Threading 17.9.28 çözümlendi.",
+      "message": "Microsoft.VisualStudio.Language.Intellisense 17.9.187 depends on Microsoft.VisualStudio.Threading (>= 17.9.27) but Microsoft.VisualStudio.Threading 17.9.27 was not found. An approximate best match of Microsoft.VisualStudio.Threading 17.9.28 was resolved.",
       "libraryId": "Microsoft.VisualStudio.Threading",
       "targetGraphs": [
         "net8.0-windows7.0"
@@ -6472,7 +6464,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Microsoft.VisualStudio.Language.Intellisense 17.9.187, Microsoft.VisualStudio.Threading.Analyzers (>= 17.9.27) öğesine bağımlı ancak Microsoft.VisualStudio.Threading.Analyzers 17.9.27 bulunamadı. Yaklaşık bir en iyi eşleşme olan Microsoft.VisualStudio.Threading.Analyzers 17.9.28 çözümlendi.",
+      "message": "Microsoft.VisualStudio.Language.Intellisense 17.9.187 depends on Microsoft.VisualStudio.Threading.Analyzers (>= 17.9.27) but Microsoft.VisualStudio.Threading.Analyzers 17.9.27 was not found. An approximate best match of Microsoft.VisualStudio.Threading.Analyzers 17.9.28 was resolved.",
       "libraryId": "Microsoft.VisualStudio.Threading.Analyzers",
       "targetGraphs": [
         "net8.0-windows7.0"
@@ -6482,7 +6474,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "'Microsoft.VisualStudio.Language.Intellisense 17.9.187' paketi, proje hedef çerçevesi 'net8.0-windows7.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "message": "Package 'Microsoft.VisualStudio.Language.Intellisense 17.9.187' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.VisualStudio.Language.Intellisense",
       "targetGraphs": [
         "net8.0-windows7.0"

@@ -25,6 +25,8 @@ using HandyControl.Tools.Extension;
 using System.Media;
 using System.Numerics;
 using System.Linq;
+using System.Net;
+using System.Windows.Markup;
 
 
 
@@ -50,6 +52,7 @@ namespace MyWidget
         string path1 = Directory.GetCurrentDirectory();
         List<List<string>> coordList = new List<List<string>>();
         List<string> cityNames = new List<string>();
+        Brush x;
         public MainWindow()
         {
             InitializeComponent();
@@ -61,6 +64,7 @@ namespace MyWidget
  
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
             GetCurrentMedia(true,true);
             
             timer.Interval = TimeSpan.FromMilliseconds(10);
@@ -71,6 +75,17 @@ namespace MyWidget
             ctimer.Interval = TimeSpan.FromSeconds(1);
             ctimer.Tick += ctimer_Tick;
 
+            for (int i=0; i <= 23; i++)
+            {
+                hourCmbx.Items.Add(i.ToString());
+            }
+
+            for (int i = 0; i <= 59; i++)
+            {
+                minCmbx.Items.Add(i.ToString());
+            }
+            hourCmbx.SelectedValue = "1";
+            minCmbx.SelectedValue = "0";
         }
         void TimerTickAsync(object sender, EventArgs e)
         {
@@ -79,14 +94,26 @@ namespace MyWidget
             int currentVolume = SystemAudio.WindowsSystemAudio.GetVolume();
 
             prewslid.Value = currentVolume;
-            if (timepicker.canClose == 1)
+            currentSoundLevel.Content = currentVolume;
+            Image img2 = new Image();
+            string lastpath;
+            if (currentVolume > 50)
             {
-                timepicker.Height = 33;
-                this.timepicker.SetValue(Grid.RowSpanProperty, 1);
-                timepicker.canClose = 0;
-
+                lastpath = GetImageDir("volume-high-solid.png");
             }
-           
+            else if (currentVolume <= 50 && currentVolume > 0)
+            {
+                lastpath = GetImageDir("volume-low-solid.png");
+            }
+            else
+            {
+                lastpath = GetImageDir("volume-xmark-solid.png");
+            }
+
+            img2.Source = new BitmapImage(new Uri(lastpath));
+            muteButton.Content = img2;
+
+
             GetCurrentMedia(true,true);
             
         }
@@ -99,7 +126,9 @@ namespace MyWidget
                 currVol = changedVolume;
             }
             SystemAudio.WindowsSystemAudio.SetVolume(changedVolume);
-           
+
+    
+
         }
 
         private void Slider_Initialized(object sender, EventArgs e)
@@ -137,9 +166,9 @@ namespace MyWidget
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            timepicker.GettTime();
-            cthour = timepicker.HOUR;
-            ctmin = timepicker.MIN;
+            //timepicker.GettTime();
+            cthour = Convert.ToInt16(hourCmbx.SelectedValue);
+            ctmin = Convert.ToInt16(minCmbx.SelectedValue);
             if (cthour != 0 || ctmin != 0)
             {
                 Process.Start("shutdown", "/s /t " + ((cthour * 3600) + ctmin * 60).ToString());
@@ -151,17 +180,17 @@ namespace MyWidget
             }
         }
 
-        private void timepicker_MouseDown(object sender, MouseButtonEventArgs e)
+       /* private void timepicker_MouseDown(object sender, MouseButtonEventArgs e)
         {
             timepicker.Height = 207;
             this.timepicker.SetValue(Grid.RowSpanProperty, 7);
-        }
+        }*/
 
         private void resButton_Click(object sender, RoutedEventArgs e)
         {
-            timepicker.GettTime();
-            cthour = timepicker.HOUR;
-            ctmin = timepicker.MIN;
+           
+            cthour = Convert.ToInt16(hourCmbx.SelectedValue);
+            ctmin = Convert.ToInt16(minCmbx.SelectedValue);
             if (cthour != 0 || ctmin != 0)
             {
                 Process.Start("shutdown", "/r /t " + ((cthour * 3600) + ctmin * 60).ToString());
@@ -642,6 +671,69 @@ namespace MyWidget
             }
 
          
+        }
+
+        private void changeTheme(SolidColorBrush color)
+        {
+            var color2 = Colors.Black;
+
+            var startPoint = new System.Windows.Point();
+            startPoint.X = 0.5;
+            startPoint.Y = 0;
+
+            var endPoint = new System.Windows.Point();
+            endPoint.X = 0.5;
+            endPoint.Y = 1;
+
+            GradientStop gradientStop = new GradientStop();
+            gradientStop.Color = color2;
+
+            GradientStop gradientStop2 = new GradientStop();
+            gradientStop2.Color = color.Color;
+            gradientStop2.Offset = 1;
+
+            IEnumerable<GradientStop> coll = [gradientStop, gradientStop2];
+
+            var z = new GradientStopCollection(coll);
+
+            var x = new LinearGradientBrush(z, startPoint, endPoint);
+            this.Background = x;
+            toprect.Fill = x;
+
+        }
+
+       
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            x = this.Background;
+
+            themeColorPicker.Visibility = Visibility.Visible;
+            Grid.SetRow(themeColorPicker, 1);
+            Grid.SetColumn(themeColorPicker, 3);
+            Grid.SetColumnSpan(themeColorPicker, 8);
+            Grid.SetRowSpan(themeColorPicker, 10);
+
+        }
+
+        private void themeColorPicker_SelectedColorChanged(object sender, HandyControl.Data.FunctionEventArgs<System.Windows.Media.Color> e)
+        {
+           
+            var color = themeColorPicker.SelectedBrush;
+            changeTheme(color);
+        }
+
+        private void themeColorPicker_Canceled(object sender, EventArgs e)
+        {
+            themeColorPicker.Visibility = Visibility.Hidden;
+            this.Background = x;
+            toprect.Fill = x;
+        }
+
+        private void themeColorPicker_Confirmed(object sender, HandyControl.Data.FunctionEventArgs<System.Windows.Media.Color> e)
+        {
+            themeColorPicker.Visibility = Visibility.Hidden;
+            var color = themeColorPicker.SelectedBrush;
+            changeTheme(color);
         }
     }
 }

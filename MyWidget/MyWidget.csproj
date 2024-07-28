@@ -14,6 +14,7 @@
     <None Remove="closeicon.png" />
     <None Remove="foward.png" />
     <None Remove="mute.png" />
+    <None Remove="palette.png" />
     <None Remove="play.png" />
     <None Remove="power-off-solid %281%29.png" />
     <None Remove="power-off-solid %282%29.svg" />
@@ -21,6 +22,7 @@
     <None Remove="rotate-right-solid.png" />
     <None Remove="volume-xmark-solid.png" />
     <None Remove="xmark-solid %281%29.png" />
+    <None Remove="xmark.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,12 +56,12 @@
     <Resource Include="closeicon.png" />
     <Resource Include="foward.png" />
     <Resource Include="mute.png" />
+    <Resource Include="palette.png" />
     <Resource Include="play.png" />
     <Resource Include="power-off-solid (1).png" />
-    <Resource Include="power-off-solid (2).svg" />
     <Resource Include="rotate-right-solid.png" />
     <Resource Include="volume-xmark-solid.png" />
-    <Resource Include="xmark-solid (1).png" />
+    <Resource Include="xmark.png" />
   </ItemGroup>
 
 </Project>
