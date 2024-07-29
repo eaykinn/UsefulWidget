@@ -27,7 +27,8 @@ using System.Numerics;
 using System.Linq;
 using System.Net;
 using System.Windows.Markup;
-
+using Microsoft.Win32;
+using Microsoft.VisualBasic;
 
 
 namespace MyWidget
@@ -64,7 +65,26 @@ namespace MyWidget
  
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
+            SystemEvents.SessionSwitch += (sender, e) =>
+            {
+                if (e.Reason == SessionSwitchReason.SessionLock)
+                {
+
+                    NowPlayingSessionManager player = new NowPlayingSessionManager();
+                    NowPlayingSession currentSession = player.CurrentSession;
+                    if (player.Count == 0) { return; }
+                    var x = currentSession.ActivateMediaPlaybackDataSource();
+                    var z = x.GetMediaPlaybackInfo();
+
+                    if (z.PlaybackState.ToString() == "Playing")
+                    {
+                        x.SendMediaPlaybackCommand(MediaPlaybackCommands.Stop);
+                        x.SendMediaPlaybackCommand(MediaPlaybackCommands.Pause);
+                    }
+                }
+            };
+
             GetCurrentMedia(true,true);
             
             timer.Interval = TimeSpan.FromMilliseconds(10);
@@ -741,5 +761,21 @@ namespace MyWidget
             var color = themeColorPicker.SelectedBrush;
             changeTheme(color);
         }
+
+        /*   private static void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
+        {
+   
+            if (e.Reason == SessionSwitchReason.SessionLock)
+            {
+                System.Windows.MessageBox.Show("asdsda");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("asdsda");
+            }
+            
+        }*/
+  
+    
     }
 }
