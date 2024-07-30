@@ -12,7 +12,9 @@
     <None Remove="Adsız.png" />
     <None Remove="ban-solid.png" />
     <None Remove="closeicon.png" />
+    <None Remove="forward.png" />
     <None Remove="foward.png" />
+    <None Remove="Icons\mute.png" />
     <None Remove="mute.png" />
     <None Remove="palette.png" />
     <None Remove="play.png" />
@@ -51,16 +53,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Adsız.png" />
-    <Resource Include="ban-solid.png" />
-    <Resource Include="closeicon.png" />
-    <Resource Include="foward.png" />
-    <Resource Include="mute.png" />
-    <Resource Include="palette.png" />
-    <Resource Include="play.png" />
-    <Resource Include="power-off-solid (1).png" />
+    <Resource Include="forward.png" />
+    <Resource Include="Icons\ban-solid.png" />
+    <Resource Include="Icons\mute.png" />
+    <Resource Include="Icons\palette.png" />
+    <Resource Include="Icons\volume-xmark-solid.png" />
+    <Resource Include="Icons\xmark.png" />
+    <Resource Include="power-off-solid.png" />
     <Resource Include="rotate-right-solid.png" />
-    <Resource Include="volume-xmark-solid.png" />
     <Resource Include="xmark.png" />
   </ItemGroup>
 

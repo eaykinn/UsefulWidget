@@ -109,7 +109,7 @@ namespace MyWidget {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MyWidget;component/timepickeruc.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MyWidget;V1.0.0.0;component/timepickeruc.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\TimePickerUC.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

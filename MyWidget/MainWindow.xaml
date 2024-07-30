@@ -151,7 +151,7 @@
                 <RowDefinition Height="48"/>
                 <RowDefinition Height="49"/>
             </Grid.RowDefinitions>
-            <Label x:Name="timeLbl" Width="208" Height="52" FontSize="36" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="3" Grid.ColumnSpan="4" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" VerticalAlignment="Top" Grid.Row="1" Margin="0,4,0,0">
+            <Label x:Name="timeLbl" Width="208" Height="54" FontSize="36" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="3" Grid.ColumnSpan="4" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="1">
                 <Label.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -161,7 +161,7 @@
                     <DropShadowEffect/>
                 </Label.Effect>
             </Label>
-            <Label x:Name="dateLbl" FontSize="14" Grid.Column="4" Grid.ColumnSpan="2" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="2">
+            <Label x:Name="dateLbl" FontSize="14" Grid.Column="2" Grid.ColumnSpan="6" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="1" Width="248" Height="32" Margin="0,58,0,0" Grid.RowSpan="3" VerticalAlignment="Top">
                 <Label.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -181,7 +181,7 @@
             </Rectangle>
             <Button Width="17" Height="22" Click="Button_Click_1" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalContentAlignment="Top" Padding="1,0,1,1" Grid.Column="9" BorderBrush="{x:Null}">
                 <Button.Background>
-                    <ImageBrush ImageSource="/xmark.png"/>
+                    <ImageBrush ImageSource="Icons/xmark.png"/>
                 </Button.Background>
 
             </Button>
@@ -207,10 +207,10 @@
                     <DropShadowEffect/>
                 </Button.Effect>
                 <Button.Background>
-                    <ImageBrush ImageSource="/power-off-solid (1).png"/>
+                    <ImageBrush ImageSource="/power-off-solid.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="resButton" Content="" Click="resButton_Click" Width="29"  Grid.Column="2"  Grid.Row="5"  Height="28" Padding="0,0,0,0"  BorderBrush="{x:Null}"  Margin="22,40,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Top"   >
+            <Button x:Name="resButton" Content="" Click="resButton_Click" Width="29"  Grid.Column="2"  Grid.Row="5"  Height="28" Padding="0,0,0,0"  BorderBrush="{x:Null}"  Margin="23,40,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Top"   >
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -226,12 +226,12 @@
                     <ImageBrush ImageSource="/rotate-right-solid.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="CancelButton" Content="" Click="CancelButton_Click" Width="29" Grid.Column="3" Grid.Row="5" Height="28" Padding="0,0,0,0" BorderBrush="{x:Null}" Margin="28,40,0,0" Grid.RowSpan="2" VerticalAlignment="Top" >
+            <Button x:Name="CancelButton" Content="" Click="CancelButton_Click"  Grid.Column="3" Grid.Row="5" Width="25" Height="32" Padding="0,0,0,0" BorderBrush="{x:Null}" Margin="32,38,0,0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" >
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
                 <Button.Background>
-                    <ImageBrush ImageSource="/ban-solid.png"/>
+                    <ImageBrush ImageSource="/xmark.png"/>
                 </Button.Background>
             </Button>
             <TextBox x:Name="hTxtBox" TextWrapping="Wrap"  Width="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Left" Margin="30,6,0,5"  >
@@ -281,7 +281,7 @@
                     <DropShadowEffect/>
                 </Label.Effect>
             </Label>
-            <Button x:Name="oncekiSarki" Content=""  Click="oncekiSarki_Click" Height="40" Width="40" RenderTransformOrigin="0.5,0.5"  Grid.Column="3" Grid.Row="13" BorderBrush="{x:Null}" Foreground="{x:Null}" HorizontalAlignment="Left" Margin="1,0,0,0">
+            <Button x:Name="oncekiSarki" Content=""  Click="oncekiSarki_Click" Height="24" Width="18" RenderTransformOrigin="0.5,0.5"  Grid.Column="3" Grid.Row="13" BorderBrush="{x:Null}" Foreground="{x:Null}">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -291,13 +291,13 @@
                     </TransformGroup>
                 </Button.RenderTransform>
                 <Button.Background>
-                    <ImageBrush ImageSource="/foward.png"/>
+                    <ImageBrush ImageSource="/forward.png"/>
                 </Button.Background>
 
             </Button>
 
 
-            <Button x:Name="playStop"   Width="62" Click="Button_Click_3" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="48" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="13" HorizontalAlignment="Left" Margin="28,0,0,0">
+            <Button x:Name="playStop"   Width="54" Click="Button_Click_3" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="45" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="13" HorizontalAlignment="Left" Margin="29,0,0,0">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -307,9 +307,9 @@
                     <ImageBrush/>
                 </Button.Background>
             </Button>
-            <Button x:Name="sonrakiSarki"  RenderTransformOrigin="0.5,0.5"  Click="sonrakiSarki_Click" Width="40" Height="40"  Grid.Column="6"   Grid.Row="13" BorderBrush="{x:Null}" Foreground="{x:Null}" Margin="26,0,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+            <Button x:Name="sonrakiSarki"  RenderTransformOrigin="0.5,0.5"  Click="sonrakiSarki_Click" Width="18" Height="24"  Grid.Column="6"   Grid.Row="13" BorderBrush="{x:Null}" Foreground="{x:Null}" Margin="23,0,0,0" HorizontalAlignment="Left">
                 <Button.Background>
-                    <ImageBrush ImageSource="/foward.png"/>
+                    <ImageBrush ImageSource="/forward.png"/>
                 </Button.Background>
             </Button>
             <hc:Divider Width="424" Grid.Column="0" Grid.ColumnSpan= "10" HorizontalAlignment="Left" Margin="0,63,0,0" Grid.Row="3" VerticalAlignment="Top"/>
@@ -340,7 +340,7 @@
             <Label x:Name ="currentSoundLevel" Grid.Column="7" Content="-"  Grid.Row="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Width="51" Foreground="White" FontSize="14" FontWeight="Bold" />
             <Button Grid.Column="8" Content="Button" Width="18" Click="Button_Click_2" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="18">
                 <Button.Background>
-                    <ImageBrush ImageSource="/palette.png"/>
+                    <ImageBrush ImageSource="/Icons/palette.png"/>
                 </Button.Background>
 
             </Button>

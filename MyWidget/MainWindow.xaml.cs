@@ -29,6 +29,7 @@ using System.Net;
 using System.Windows.Markup;
 using Microsoft.Win32;
 using Microsoft.VisualBasic;
+using System.IO.Packaging;
 
 
 namespace MyWidget
@@ -110,7 +111,8 @@ namespace MyWidget
         void TimerTickAsync(object sender, EventArgs e)
         {
             timeLbl.Content = DateTime.Now.ToString("HH:mm:ss");
-            dateLbl.Content = DateTime.Now.ToString("yyy-MM-dd");
+            dateLbl.Content = DateTime.Now.ToString("yyy-MM-dd")+" / " + DateTime.Now.DayOfWeek;
+            
             int currentVolume = SystemAudio.WindowsSystemAudio.GetVolume();
 
             prewslid.Value = currentVolume;
@@ -354,13 +356,13 @@ namespace MyWidget
             NowPlayingSession currentSession = player.CurrentSession;
             if(player.Count == 0) { return; }
             MediaPlaybackDataSource playnaclDataSource = currentSession.ActivateMediaPlaybackDataSource();
+            
+             await GetTimeLinePosition(playnaclDataSource,true);
 
-            await GetTimeLinePosition(playnaclDataSource,true);
+
+
 
            
-
-
-
             Stream streamInfo = playnaclDataSource.GetThumbnailStream(); 
             if (streamInfo != null) { 
                 songImage.Source = BitmapFrame.Create(streamInfo, BitmapCreateOptions.None, BitmapCacheOption.OnLoad); 
@@ -400,7 +402,7 @@ namespace MyWidget
             DirectoryInfo path2 = Directory.GetParent(path1);
             DirectoryInfo path3 = Directory.GetParent(path2.ToString());
             DirectoryInfo path4 = Directory.GetParent(path3.ToString());
-            string lastpath = path4.ToString() + "\\" + imgName;
+            string lastpath = path4.ToString() + "\\Icons\\" + imgName;
             return lastpath;
         }
 
@@ -415,11 +417,17 @@ namespace MyWidget
         private void PlayStopMedia()
         {
 
-            NowPlayingSessionManager player = new NowPlayingSessionManager();
+            NowPlayingSessionManager player = new NowPlayingSessionManager();     
             NowPlayingSession currentSession = player.CurrentSession;
+ 
             if (player.Count == 0) { return; }
             var x = currentSession.ActivateMediaPlaybackDataSource();
             var z = x.GetMediaPlaybackInfo();
+            
+            
+            
+            
+
 
             if (z.PlaybackState.ToString() == "Playing")
             {
@@ -429,10 +437,13 @@ namespace MyWidget
                 string lastpath = GetImageDir("stop.png");
                 img.Source = new BitmapImage(new Uri(lastpath));
                 playStop.Content = img;
+
+             
             }
             else
             {
                 x.SendMediaPlaybackCommand(MediaPlaybackCommands.Play);
+               
                 string lastpath = GetImageDir("play.png");
                 img.Source = new BitmapImage(new Uri(lastpath));
                 playStop.Content = img;
@@ -448,6 +459,7 @@ namespace MyWidget
             MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
             x.SendMediaPlaybackCommand(MediaPlaybackCommands.Previous);
             GetCurrentMedia(false,true);
+         
         }
 
         private void sonrakiSarki_Click(object sender, RoutedEventArgs e)
@@ -458,6 +470,7 @@ namespace MyWidget
             MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
             x.SendMediaPlaybackCommand(MediaPlaybackCommands.Next); 
             GetCurrentMedia(false, true);
+         
         }
 
         private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
