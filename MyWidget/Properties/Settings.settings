@@ -5,5 +5,8 @@
     <Setting Name="defaultColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="defaultCityName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

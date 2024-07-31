@@ -57,13 +57,11 @@ namespace MyWidget
         List<string> cityNames = new List<string>();
         Brush themeColor;
         System.Drawing.Color defcol;
+        String defCity;
 
         public MainWindow()
         {
-            InitializeComponent();
-            searchBarTxt.Text = "basaksehir";
-            GetFiveDaysWeatherForecast("basaksehir");
-          
+            InitializeComponent();          
         }
 
         private void GetSettings()
@@ -77,17 +75,25 @@ namespace MyWidget
             mediaColor.B = defcol.B;
             SolidColorBrush newCol = new SolidColorBrush(mediaColor);
             changeTheme(newCol);
+
+            searchBarTxt.Text = Properties.Settings.Default.defaultCityName;
         }
 
-        private void SetSettings(SolidColorBrush newcolor)
+        private void SetColorSettings(SolidColorBrush newcolor)
         {
             System.Drawing.Color newColorDrawing = System.Drawing.Color.FromArgb(0Xff, (byte)newcolor.Color.R, (byte)newcolor.Color.G, (byte)newcolor.Color.B);
             Properties.Settings.Default.defaultColor = newColorDrawing;
             Properties.Settings.Default.Save();
         }
  
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+            
+        private void SetCitySettings(String newCity)
         {
+            Properties.Settings.Default.defaultCityName = newCity;
+            Properties.Settings.Default.Save();
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {   
             GetSettings();
             SystemEvents.SessionSwitch += (sender, e) =>
             {
@@ -129,6 +135,8 @@ namespace MyWidget
             }
             hourCmbx.SelectedValue = "1";
             minCmbx.SelectedValue = "0";
+
+            GetFiveDaysWeatherForecast(searchBarTxt.Text);
         }
         void TimerTickAsync(object sender, EventArgs e)
         {
@@ -381,10 +389,6 @@ namespace MyWidget
             
              await GetTimeLinePosition(playnaclDataSource,true);
 
-
-
-
-           
             Stream streamInfo = playnaclDataSource.GetThumbnailStream(); 
             if (streamInfo != null) { 
                 songImage.Source = BitmapFrame.Create(streamInfo, BitmapCreateOptions.None, BitmapCacheOption.OnLoad); 
@@ -508,6 +512,10 @@ namespace MyWidget
         private async Task GetFiveDaysWeatherForecast(string cityName)
         {
             await GetLatitudeAndLongitude(cityName);
+
+            SetCitySettings(cityName);
+
+            if (lat == null || lon == null) { return; }
             await GetWheather(lat, lon);
 
             Grid weatherGrid = (Grid)FindName("weatherGrid");
@@ -524,6 +532,7 @@ namespace MyWidget
 
         async Task GetLatitudeAndLongitude(string nameOfTheCity)
         {
+            
             HttpClient client = new HttpClient();
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
@@ -546,9 +555,9 @@ namespace MyWidget
                     CityLabel.Content = "cityNotFound";
                     return;
                 }
-                
-                
 
+
+                
                 foreach (JToken obj in results)
                 {
                     string fcstr = obj["feature_code"].ToString();
@@ -558,10 +567,13 @@ namespace MyWidget
                         lat = obj["latitude"].ToString();
                         lon = obj["longitude"].ToString();
                         CityLabel.Content = obj["name"].ToString();
+                        
                         break;
                     }
 
                 }
+                
+                
 
             }
             catch (HttpRequestException e)
@@ -569,6 +581,7 @@ namespace MyWidget
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", e.Message);
             }
+           
         }
 
         private async Task GetWheather(string lat, string lon)
@@ -612,6 +625,8 @@ namespace MyWidget
                 ucuncuGunMin.Content = dailyMin[2].ToString();
                 ucuncuGunMax.Content = dailyMax[2].ToString();
                 ucuncuGunDurum.Content = dailyWheatherCode[2].ToString();
+
+                
 
             }
             catch (HttpRequestException e)
@@ -694,6 +709,7 @@ namespace MyWidget
                     string x = coordList[selectedIndex][0];
                     string y = coordList[selectedIndex][1];
                     CityLabel.Content = cityNames[selectedIndex];
+                    SetCitySettings(cityNames[selectedIndex]);
                     GetWheather(x, y);
 
                     Grid weatherGrid = (Grid)FindName("weatherGrid");
@@ -715,6 +731,8 @@ namespace MyWidget
                     searchBarListBox.Items.Add(obj["country_code"].ToString() + "," + obj["name"].ToString() + " " + obj["latitude"].ToString() + "," + obj["longitude"].ToString());
                     coordList.Add([obj["latitude"].ToString(), obj["longitude"].ToString()]);
                     cityNames.Add(obj["name"].ToString());
+
+                    
 
                 }
 
@@ -767,7 +785,7 @@ namespace MyWidget
             this.Background = x;
             toprect.Fill = x;
 
-            SetSettings(color);
+            SetColorSettings(color);
         }
 
        
