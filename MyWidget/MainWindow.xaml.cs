@@ -30,6 +30,7 @@ using System.Windows.Markup;
 using Microsoft.Win32;
 using Microsoft.VisualBasic;
 using System.IO.Packaging;
+using Microsoft.Windows.Themes;
 
 
 namespace MyWidget
@@ -54,7 +55,9 @@ namespace MyWidget
         string path1 = Directory.GetCurrentDirectory();
         List<List<string>> coordList = new List<List<string>>();
         List<string> cityNames = new List<string>();
-        Brush x;
+        Brush themeColor;
+        System.Drawing.Color defcol;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -63,10 +66,29 @@ namespace MyWidget
           
         }
 
+        private void GetSettings()
+        {
+
+            defcol = Properties.Settings.Default.defaultColor;
+            System.Windows.Media.Color mediaColor = new System.Windows.Media.Color();
+            mediaColor.A = defcol.A;
+            mediaColor.R = defcol.R;
+            mediaColor.G = defcol.G;
+            mediaColor.B = defcol.B;
+            SolidColorBrush newCol = new SolidColorBrush(mediaColor);
+            changeTheme(newCol);
+        }
+
+        private void SetSettings(SolidColorBrush newcolor)
+        {
+            System.Drawing.Color newColorDrawing = System.Drawing.Color.FromArgb(0Xff, (byte)newcolor.Color.R, (byte)newcolor.Color.G, (byte)newcolor.Color.B);
+            Properties.Settings.Default.defaultColor = newColorDrawing;
+            Properties.Settings.Default.Save();
+        }
  
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            GetSettings();
             SystemEvents.SessionSwitch += (sender, e) =>
             {
                 if (e.Reason == SessionSwitchReason.SessionLock)
@@ -728,7 +750,13 @@ namespace MyWidget
             gradientStop.Color = color2;
 
             GradientStop gradientStop2 = new GradientStop();
-            gradientStop2.Color = color.Color;
+            System.Windows.Media.Color xasd = new System.Windows.Media.Color();
+            xasd.A = color.Color.A;
+            xasd.B = color.Color.B;
+            xasd.R = color.Color.R;
+            xasd.G = color.Color.G;
+
+            gradientStop2.Color = xasd;
             gradientStop2.Offset = 1;
 
             IEnumerable<GradientStop> coll = [gradientStop, gradientStop2];
@@ -739,12 +767,13 @@ namespace MyWidget
             this.Background = x;
             toprect.Fill = x;
 
+            SetSettings(color);
         }
 
        
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            x = this.Background;
+            themeColor = this.Background;
 
             themeColorPicker.Visibility = Visibility.Visible;
             Grid.SetRow(themeColorPicker, 1);
@@ -758,14 +787,16 @@ namespace MyWidget
         {
            
             var color = themeColorPicker.SelectedBrush;
+           
             changeTheme(color);
         }
 
         private void themeColorPicker_Canceled(object sender, EventArgs e)
         {
             themeColorPicker.Visibility = Visibility.Hidden;
-            this.Background = x;
-            toprect.Fill = x;
+            this.Background = themeColor;
+       
+            toprect.Fill = themeColor;
         }
 
         private void themeColorPicker_Confirmed(object sender, HandyControl.Data.FunctionEventArgs<System.Windows.Media.Color> e)
