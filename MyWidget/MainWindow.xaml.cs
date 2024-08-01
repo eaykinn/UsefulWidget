@@ -440,9 +440,17 @@ namespace MyWidget
                 birinciGunMax.Content = dailyMax[0].ToString();
                 birinciGunDurum.Content = dailyWheatherCode[0].ToString();
 
+                Image birinciGunImage = new Image();
+                birinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\sun-solid.png"));
+
+                birinciGunDurum.Content = birinciGunImage;
+
+                Image ikinciGunImage = new Image();
+                ikinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\moon-solid.png"));
                 ikinciGunMin.Content = dailyMin[1].ToString();
                 ikinciGunMax.Content = dailyMax[1].ToString();
                 ikinciGunDurum.Content = dailyWheatherCode[1].ToString();
+                ikinciGunDurum.Content = ikinciGunImage;
 
                 ucuncuGunMin.Content = dailyMin[2].ToString();
                 ucuncuGunMax.Content = dailyMax[2].ToString();
@@ -572,6 +580,7 @@ namespace MyWidget
                 async void srcBoxSelected(object sender, MouseButtonEventArgs e)
                 {
                     int selectedIndex = searchBarListBox.SelectedIndex;
+                    if (selectedIndex < 0 ) { return;}
                     string x = cordList[selectedIndex][0];
                     string y = cordList[selectedIndex][1];
                     CityLabel.Content = cityNames[selectedIndex];
@@ -780,11 +789,21 @@ namespace MyWidget
 
             GetFiveDaysWeatherForecast(searchBarTxt.Text);
         }
+
+
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            MinimizeWindow();
+            
+        }
+
+
         /* private void timepicker_MouseDown(object sender, MouseButtonEventArgs e)
-         {
-             timepicker.Height = 207;
-             this.timepicker.SetValue(Grid.RowSpanProperty, 7);
-         }*/
+{
+timepicker.Height = 207;
+this.timepicker.SetValue(Grid.RowSpanProperty, 7);
+}*/
         /*   private static void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
         {
             if (e.Reason == SessionSwitchReason.SessionLock)

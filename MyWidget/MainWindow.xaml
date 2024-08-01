@@ -71,7 +71,7 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="weatherGrid" Margin="10,14,10,6" Grid.Row="2">
+        <Grid x:Name="weatherGrid" Margin="10,5,10,15" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="28"/>
                 <RowDefinition Height="35"/>
@@ -202,7 +202,7 @@
                 </Button.Effect>
 
             </Button>
-            <Button Content="" Click="Button_Click" Width="29" Grid.Column="1"  Grid.Row="5" Height="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0,10,0,0"  Foreground="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" Margin="0,39,0,0" Grid.RowSpan="2" HorizontalAlignment="Left">
+            <Button x:Name="closeButton" Content="" Click="Button_Click" Width="29" Grid.Column="1"  Grid.Row="5" Height="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0,10,0,0"  Foreground="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" Margin="0,39,0,0" Grid.RowSpan="2" HorizontalAlignment="Left">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -350,7 +350,7 @@
         <hc:Divider x:Name="asdsa" Width="424" HorizontalAlignment="Center" Foreground="White" Background="White" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         <hc:NotifyIcon Text="MyWidget
-                       " Icon="C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\play.png" Margin="0,522,399,0">
+                       " Icon="C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\play.png" Margin="0,522,399,0">
             <hc:NotifyIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="hc:ControlCommands.PushMainWindow2Top" Header="Open"/>
