@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:MyWidget"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="MyWidget.MainWindow"
         mc:Ignorable="d"
-        Title="Widget" Height="760" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" MinHeight="760" MaxHeight="760" MinWidth="424" MaxWidth="424" ResizeMode="NoResize" Cursor="" ShowInTaskbar="False" WindowStyle="None">
+        Title="Widget" Height="760" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize">
 
     <Window.Resources>
 
@@ -350,7 +350,7 @@
         <hc:Divider x:Name="asdsa" Width="424" HorizontalAlignment="Center" Foreground="White" Background="White" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         <hc:NotifyIcon Text="MyWidget
-                       " Icon="C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\play.png" Margin="0,522,399,0">
+                       " Icon="C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\play.png" Margin="0,522,399,0">
             <hc:NotifyIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="hc:ControlCommands.PushMainWindow2Top" Header="Open"/>
