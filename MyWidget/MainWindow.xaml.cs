@@ -31,6 +31,7 @@ using Microsoft.Win32;
 using Microsoft.VisualBasic;
 using System.IO.Packaging;
 using Microsoft.Windows.Themes;
+using System.Windows.Media.Animation;
 
 namespace MyWidget
 {
@@ -441,12 +442,12 @@ namespace MyWidget
                 birinciGunDurum.Content = dailyWheatherCode[0].ToString();
 
                 Image birinciGunImage = new Image();
-                birinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\sun-solid.png"));
+                birinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\sun-solid.png"));
 
                 birinciGunDurum.Content = birinciGunImage;
 
                 Image ikinciGunImage = new Image();
-                ikinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\moon-solid.png"));
+                ikinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\moon-solid.png"));
                 ikinciGunMin.Content = dailyMin[1].ToString();
                 ikinciGunMax.Content = dailyMax[1].ToString();
                 ikinciGunDurum.Content = dailyWheatherCode[1].ToString();
@@ -790,13 +791,23 @@ namespace MyWidget
             GetFiveDaysWeatherForecast(searchBarTxt.Text);
         }
 
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            grid1.Visibility = Visibility.Hidden;
+            weatherGrid.Visibility = Visibility.Hidden;
+           
+            Mscply.SetValue(Grid.RowProperty, 1);
 
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
+        }
+
+
+
+        /*private void Button_Click_5(object sender, RoutedEventArgs e)
         {
             MinimizeWindow();
             
-        }
+        }*/
 
 
         /* private void timepicker_MouseDown(object sender, MouseButtonEventArgs e)
