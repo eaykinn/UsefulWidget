@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:MyWidget"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="MyWidget.MainWindow"
         mc:Ignorable="d"
-        Title="Widget" Height="760" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize">
+        Title="Widget" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize">
 
     <Window.Resources>
 
@@ -68,11 +68,13 @@
     <Grid x:Name="generalGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="43*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="25*"/>
+            <RowDefinition Height="315*"/>
+            <RowDefinition Height="229*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="199*"/>
         </Grid.RowDefinitions>
+        <hc:ColorPicker x:Name="themeColorPicker" Visibility="Hidden" SelectedColorChanged="themeColorPicker_SelectedColorChanged" Canceled="themeColorPicker_Canceled" Confirmed="themeColorPicker_Confirmed" Panel.ZIndex="1"/>
+
         <Grid x:Name="weatherGrid" Margin="10,5,10,15" Grid.Row="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="28"/>
@@ -155,12 +157,12 @@
                     <DropShadowEffect/>
                 </hc:PreviewSlider.Effect>
             </hc:PreviewSlider>
-            <hc:Divider Width="424"  HorizontalAlignment="Left" Grid.Row="9" Foreground="White" Background="White" Grid.ColumnSpan="10" Margin="0,1,0,1"/>
+            <hc:Divider Width="424"  HorizontalAlignment="Left" Grid.Row="9" Foreground="White" Background="White" Grid.ColumnSpan="10" Margin="1,4,0,-2" LineStroke="White"/>
 
             <Label x:Name="maxTimeLbl" Grid.Column="8" Content="Label" HorizontalAlignment="Left" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C3C3" Margin="16,21,0,0" FontWeight="Bold" HorizontalContentAlignment="Left" Width="48" VerticalAlignment="Top"/>
             <Label x:Name="currentTimeLbl" Grid.ColumnSpan="2" Grid.Column="0" Content="Label" Grid.RowSpan="2" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C5C5" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Width="47" HorizontalAlignment="Left" Margin="28,21,0,0" VerticalAlignment="Top" />
             <Image x:Name="songImage" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="6"  Stretch="UniformToFill" Margin="10,21,0,19"  />
-            <hc:RunningBlock x:Name="lbl1" Content="Label" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"  AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" Grid.ColumnSpan="6" FontSize="16" Margin="15,19,21,16" Grid.RowSpan="3" FontWeight="Bold">
+            <hc:RunningBlock x:Name="lbl1" Content="Label" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"  AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" Grid.ColumnSpan="6" FontSize="16" Margin="15,21,21,15" Grid.RowSpan="3" FontWeight="Bold">
                 <hc:RunningBlock.Effect>
                     <DropShadowEffect/>
                 </hc:RunningBlock.Effect>
@@ -186,7 +188,7 @@
             </Button>
 
 
-            <Button x:Name="playStop" Width="48" Click="Button_Click_3" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="40" Grid.Column="4"  Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="3" VerticalAlignment="Top" Margin="0,23,0,0" >
+            <Button x:Name="playStop" Width="48" Click="Button_Click_3" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="40" Grid.Column="4"  Grid.Row="7" Grid.ColumnSpan="2" Grid.RowSpan="3" VerticalAlignment="Top"  >
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -239,7 +241,7 @@
 
             </Button>
         </Grid>
-        <Grid Grid.Row="1" x:Name="grid1"  Margin="0,1,0,17">
+        <Grid Grid.Row="1" x:Name="grid1"  Margin="0,1,0,9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="48*"/>
@@ -253,22 +255,18 @@
                 <ColumnDefinition Width="31.27"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="63"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="76"/>
                 <RowDefinition Height="29"/>
                 <RowDefinition Height="47"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="15"/>
-                <RowDefinition Height="29"/>
-                <RowDefinition Height="36"/>
-                <RowDefinition Height="34"/>
-                <RowDefinition Height="19*"/>
-                <RowDefinition Height="48"/>
-                <RowDefinition Height="49"/>
+
             </Grid.RowDefinitions>
-            <hc:ColorPicker x:Name="themeColorPicker" Grid.RowSpan="10" Grid.Column="8" Grid.Row="1" Visibility="Hidden" SelectedColorChanged="themeColorPicker_SelectedColorChanged" Canceled="themeColorPicker_Canceled" Confirmed="themeColorPicker_Confirmed" Panel.ZIndex="1"/>
+
+
 
             <hc:PreviewSlider Name ="prewslid" Maximum="100"  Grid.Column="2" Grid.ColumnSpan="6" Grid.Row="3" Height="18" ValueChanged="Slider_ValueChanged" Initialized="Slider_Initialized" BorderBrush="{x:Null}" Margin="32,29,20,29">
                 <hc:PreviewSlider.Effect>
@@ -371,7 +369,6 @@
 
             <hc:Divider Width="424" Grid.Column="0" Grid.ColumnSpan= "10" HorizontalAlignment="Left" Margin="0,63,0,0" Grid.Row="3" VerticalAlignment="Top"/>
             <hc:Divider Width="424" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Foreground="White" Background="White" Grid.ColumnSpan="10" Margin="0,16,0,0"/>
-            <hc:Divider Width="424" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Top" Foreground="White" Background="White" Grid.ColumnSpan="10" Margin="0,62,0,0"/>
 
 
             <hc:ComboBox x:Name="hourCmbx" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Width="66" Grid.Column="1">
@@ -385,13 +382,13 @@
                 </hc:ComboBox.Effect>
             </hc:ComboBox>
             <Label x:Name ="currentSoundLevel" Grid.Column="7" Content="-"  Grid.Row="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Width="51" Foreground="White" FontSize="14" FontWeight="Bold" />
-
+            <hc:Divider Width="424" Grid.Column="0" Grid.ColumnSpan= "10" HorizontalAlignment="Left" Margin="0,63,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+            <hc:Divider Grid.Column="0" Grid.ColumnSpan="10"  Grid.Row="7" Foreground="White" Height="1" Background="White" BorderBrush="White" LineStroke="White" Margin="1,12,-1,2" />
 
         </Grid>
-        <hc:Divider x:Name="asdsa" Width="424" HorizontalAlignment="Center" Foreground="White" Background="White" Margin="0,6,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         <hc:NotifyIcon Text="MyWidget
-                       " Icon="C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\play.png" Margin="0,522,399,0">
+                       " Icon="C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\play.png" Margin="0,156,399,52" Grid.Row="2">
             <hc:NotifyIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="hc:ControlCommands.PushMainWindow2Top" Header="Open"/>
@@ -399,8 +396,8 @@
                 </ContextMenu>
             </hc:NotifyIcon.ContextMenu>
         </hc:NotifyIcon>
-        <hc:ImageBlock HorizontalAlignment="Left" Height="100" Margin="438,377,0,0" VerticalAlignment="Top" Width="100"/>
-        <hc:GifImage HorizontalAlignment="Left" Height="100" Margin="436,363,0,0" VerticalAlignment="Top" Width="100"/>
+        <hc:ImageBlock HorizontalAlignment="Left" Height="100" Margin="438,11,0,0" VerticalAlignment="Top" Width="100" Grid.Row="2"/>
+        <hc:GifImage HorizontalAlignment="Left" Height="100" Margin="436,7,0,0" VerticalAlignment="Top" Width="100" Grid.Row="2"/>
     </Grid>
 
 </Window>

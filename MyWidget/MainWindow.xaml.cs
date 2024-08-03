@@ -91,10 +91,16 @@ namespace MyWidget
             themeColor = this.Background;
 
             themeColorPicker.Visibility = Visibility.Visible;
+            Grid.SetIsSharedSizeScope(themeColorPicker,true);
             Grid.SetRow(themeColorPicker, 1);
-            Grid.SetColumn(themeColorPicker, 3);
+            Grid.SetColumn(themeColorPicker, 0);
+            Thickness mgLeft = new Thickness();
+            mgLeft.Left = 120;
+            themeColorPicker.Margin = mgLeft;
+
+
             Grid.SetColumnSpan(themeColorPicker, 8);
-            Grid.SetRowSpan(themeColorPicker, 10);
+            Grid.SetRowSpan(themeColorPicker, 15);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -793,10 +799,10 @@ namespace MyWidget
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            grid1.Visibility = Visibility.Hidden;
-            weatherGrid.Visibility = Visibility.Hidden;
-           
+            grid1.Visibility = Visibility.Collapsed;
+            weatherGrid.Visibility = Visibility.Collapsed;
             Mscply.SetValue(Grid.RowProperty, 1);
+            this.Height = 259;
 
 
         }
