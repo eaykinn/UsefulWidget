@@ -15,6 +15,8 @@
     <None Remove="forward.png" />
     <None Remove="foward.png" />
     <None Remove="Icons\mute.png" />
+    <None Remove="min.png" />
+    <None Remove="minimize-solid.png" />
     <None Remove="mute.png" />
     <None Remove="palette.png" />
     <None Remove="play.png" />
@@ -59,6 +61,8 @@
     <Resource Include="Icons\palette.png" />
     <Resource Include="Icons\volume-xmark-solid.png" />
     <Resource Include="Icons\xmark.png" />
+    <Resource Include="min.png" />
+    <Resource Include="minimize-solid.png" />
     <Resource Include="power-off-solid.png" />
     <Resource Include="rotate-right-solid.png" />
     <Resource Include="xmark.png" />

@@ -49,17 +49,17 @@ namespace MyWidget
         private int ctMin = 0;
         private int ctSec = 0;
         private int currVol;
-/*
-        private String defCity;
-*/
+        private bool isMaxSize = true;
         private System.Drawing.Color defCol;
         private readonly Image img = new();
+        private readonly Image imageSource = new();
         private byte isMuted;
         private string lblSecOfTheSong;
         private readonly string path1 = Directory.GetCurrentDirectory();
         private byte restartProcessStarted = 0;
         private Brush themeColor;
         private readonly DispatcherTimer timer = new();
+        bool colorPiclerOpened = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -88,19 +88,32 @@ namespace MyWidget
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            themeColor = this.Background;
 
-            themeColorPicker.Visibility = Visibility.Visible;
-            Grid.SetIsSharedSizeScope(themeColorPicker,true);
-            Grid.SetRow(themeColorPicker, 1);
-            Grid.SetColumn(themeColorPicker, 0);
-            Thickness mgLeft = new Thickness();
-            mgLeft.Left = 120;
-            themeColorPicker.Margin = mgLeft;
+            if (colorPiclerOpened == false)
+            {
+                OpenCloseColorPicker(false);
+                colorPiclerOpened = true;
+            }else
+            {
+                OpenCloseColorPicker(true);
+                colorPiclerOpened = false;
+            }      
+        }
 
+        private void OpenCloseColorPicker(bool isOpened)
+        {
+            if (isOpened == false) 
+            {
+                themeColor = this.Background;
+                themeColorPicker.Visibility = Visibility.Visible;
+                Grid.SetColumnSpan(themeColorPicker, 8);
+                Grid.SetRowSpan(themeColorPicker, 15);
+            }else
+            {
+                themeColorPicker.Visibility = Visibility.Hidden;
+            }
 
-            Grid.SetColumnSpan(themeColorPicker, 8);
-            Grid.SetRowSpan(themeColorPicker, 15);
+           
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -438,6 +451,9 @@ namespace MyWidget
                 string firstday = days[0].ToString();
 
                 CurrentWeatherLabel.Content = currentTemp.ToString();
+                Image anlikDurumİmage = new Image();
+                anlikDurumİmage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\sun-solid.png"));
+                CurrentWeatherPic.Content = anlikDurumİmage;
 
                 birinciGunTarih.Content = days[0].ToString();
                 ikinciGunTarih.Content = days[1].ToString();
@@ -448,12 +464,12 @@ namespace MyWidget
                 birinciGunDurum.Content = dailyWheatherCode[0].ToString();
 
                 Image birinciGunImage = new Image();
-                birinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\sun-solid.png"));
+                birinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\sun-solid.png"));
 
                 birinciGunDurum.Content = birinciGunImage;
 
                 Image ikinciGunImage = new Image();
-                ikinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\moon-solid.png"));
+                ikinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\moon-solid.png"));
                 ikinciGunMin.Content = dailyMin[1].ToString();
                 ikinciGunMax.Content = dailyMax[1].ToString();
                 ikinciGunDurum.Content = dailyWheatherCode[1].ToString();
@@ -723,13 +739,10 @@ namespace MyWidget
             else if (currentVolume <= 50 && currentVolume > 0)
             {
                 lastpath = GetImageDir("volume-low-solid.png");
-                // muteButton.Strecth = Stretch.UniformToFill;
             }
             else
             {
                 lastpath = GetImageDir("volume-xmark-solid.png");
-                // muteButton.Strecth = Stretch.UniformToFill;
-                //muteButton.Stretch = Stretch.UniformToFill;
             }
 
             img2.Source = new BitmapImage(new Uri(lastpath));
@@ -755,6 +768,7 @@ namespace MyWidget
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             GetSettings();
+            ChangeWindowSize(true);
             SystemEvents.SessionSwitch += (sender, e) =>
             {
                 if (e.Reason == SessionSwitchReason.SessionLock)
@@ -799,11 +813,56 @@ namespace MyWidget
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            grid1.Visibility = Visibility.Collapsed;
-            weatherGrid.Visibility = Visibility.Collapsed;
-            Mscply.SetValue(Grid.RowProperty, 1);
-            this.Height = 259;
+            if (isMaxSize == true) 
+            {
+                ChangeWindowSize(false);
+                isMaxSize = false;
+            }
+            else 
+            {
+                ChangeWindowSize(true);
+                isMaxSize = true;
+            }
 
+        }
+
+        private void ChangeWindowSize(bool opened)
+        {
+            string iconPath;
+            if (opened == false)
+            { 
+                grid1.Visibility = Visibility.Hidden;
+                weatherGrid.Visibility = Visibility.Hidden;
+                paletteButton.Visibility = Visibility.Hidden;
+                MscPlaterDivider.Visibility = Visibility.Hidden;
+                this.Height = 260;
+                Mscply.SetValue(Grid.RowProperty, 1);
+                Mscply.SetValue(Grid.RowSpanProperty, 4);
+                //MaxMinButton.SetValue(Grid.ColumnProperty, 6);
+                iconPath = GetImageDir("max.png");
+                imageSource.Source = new BitmapImage(new Uri(iconPath));
+                imageSource.Stretch = Stretch.Fill;
+                MaxMinButton.Content = imageSource;
+            }
+            else
+            { 
+                grid1.Visibility = Visibility.Visible;
+                weatherGrid.Visibility = Visibility.Visible;
+                paletteButton.Visibility = Visibility.Visible;
+                MscPlaterDivider.Visibility= Visibility.Visible;
+                //MaxMinButton.SetValue(Grid.ColumnProperty, 5);
+                this.Height = 780;
+                Mscply.SetValue(Grid.RowProperty, 2);
+                Mscply.SetValue(Grid.RowSpanProperty, 1);
+
+                iconPath = GetImageDir("min.png");
+                imageSource.Source = new BitmapImage(new Uri(iconPath));
+                imageSource.Stretch = Stretch.Fill;
+                MaxMinButton.Content = imageSource;
+
+               
+            }
+            
 
         }
 
