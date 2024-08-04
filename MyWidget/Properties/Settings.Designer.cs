@@ -45,5 +45,17 @@ namespace MyWidget.Properties {
                 this["defaultCityName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool colorPiclerOpenedSet {
+            get {
+                return ((bool)(this["colorPiclerOpenedSet"]));
+            }
+            set {
+                this["colorPiclerOpenedSet"] = value;
+            }
+        }
     }
 }
