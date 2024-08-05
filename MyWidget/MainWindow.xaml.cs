@@ -35,6 +35,7 @@ using System.Windows.Media.Animation;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
+
 namespace MyWidget
 {
     /// <summary>
@@ -169,8 +170,9 @@ namespace MyWidget
             this.Background = x;
             toprect.Fill = x;
 
-            searchBarTxt.Background = color;
-            searchBarTxt.BorderBrush = Brushes.White;
+            //searchBarTxt.Background = color;
+            // searchBarTxt.BorderBrush = Brushes.White;
+            
             SetColorSettings(color);
         }
 
@@ -440,7 +442,7 @@ namespace MyWidget
             {
                 lat = lat.Replace(",", ".");
                 lon = lon.Replace(",", ".");
-                string connectionStr = "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon + "&current=temperature_2m,rain,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=3";
+                string connectionStr = "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon + "&current=temperature_2m,rain,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=4";
                 HttpResponseMessage response = await client.GetAsync(connectionStr);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -455,46 +457,59 @@ namespace MyWidget
 
                 string firstday = days[0].ToString();
 
-                CurrentWeatherLabel.Content = currentTemp.ToString() + " °C"; 
+                /*CurrentWeatherLabel.Content = currentTemp.ToString() + " °C";*/
+                CurrentWeatherLabel.Content = $"{currentTemp:#}" + " °C";
                 string weatherCode = dailyWheatherCode[0].ToString();
                 JToken currentWeatherIconPath = weatherCodes[weatherCode];
                 
 
                 Image anlikDurumİmage = new Image();
-                anlikDurumİmage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + currentWeatherIconPath));
+                anlikDurumİmage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + currentWeatherIconPath));
                 CurrentWeatherPic.Content = anlikDurumİmage;
-
+                
+               
                 birinciGunTarih.Content = days[0].ToString();
                 ikinciGunTarih.Content = days[1].ToString();
                 ucuncuGunTarih.Content = days[2].ToString();
+                dorduncuGunTarih.Content = days[3].ToString();
 
-                birinciGunMin.Content = dailyMin[0].ToString() + " °C";
-                birinciGunMax.Content = dailyMax[0].ToString() + " °C"; 
+                birinciGunMin.Content = $"{dailyMin[0]:#}" + " °C";
+                birinciGunMax.Content = $"{dailyMax[0]:#}" + " °C";
                 birinciGunDurum.Content = dailyWheatherCode[0].ToString();
 
                 string birinciGunWeatherIconCode = dailyWheatherCode[0].ToString();
                 JToken birinciGunWeatherIconPath = weatherCodes[birinciGunWeatherIconCode];
                 Image birinciGunImage = new Image();
-                birinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + birinciGunWeatherIconPath));
+                birinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + birinciGunWeatherIconPath));
                 birinciGunDurum.Content = birinciGunImage;
 
                 Image ikinciGunImage = new Image();
                 ikinciGunDurum.Content = dailyWheatherCode[1].ToString();
                 string ikinciGunWeatherIconCode = dailyWheatherCode[1].ToString();
                 JToken ikinciGunWeatherIconPath = weatherCodes[ikinciGunWeatherIconCode];
-                ikinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\"+ ikinciGunWeatherIconPath));
-                ikinciGunMin.Content = dailyMin[1].ToString() + " °C"; 
-                ikinciGunMax.Content = dailyMax[1].ToString() + " °C"; 
+                ikinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\"+ ikinciGunWeatherIconPath));
+                ikinciGunMin.Content = $"{dailyMin[1]:#}" + " °C";
+                ikinciGunMax.Content = $"{dailyMax[1]:#}" + " °C";
                 ikinciGunDurum.Content = ikinciGunImage;
 
                 ucuncuGunDurum.Content = dailyWheatherCode[2].ToString();
                 string ucuncuGunWeatherIconCode = dailyWheatherCode[2].ToString();
                 JToken ucuncuGunWeatherIconPath = weatherCodes[ucuncuGunWeatherIconCode];
                 Image ucuncuGunImage = new Image();
-                ucuncuGunImage.Source = new BitmapImage(new Uri("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + ucuncuGunWeatherIconPath));
-                ucuncuGunMin.Content = dailyMin[2].ToString() + " °C"; 
-                ucuncuGunMax.Content = dailyMax[2].ToString() + " °C"; 
+                ucuncuGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + ucuncuGunWeatherIconPath));
+                ucuncuGunMin.Content = $"{dailyMin[2]:#}" + " °C";
+                ucuncuGunMax.Content = $"{dailyMax[2]:#}" + " °C";
                 ucuncuGunDurum.Content = ucuncuGunImage;
+
+                dorduncuGunDurum.Content = dailyWheatherCode[3].ToString();
+                string dorduncuGunWeatherIconCode = dailyWheatherCode[3].ToString();
+                JToken dorduncuGunWeatherIconPath = weatherCodes[dorduncuGunWeatherIconCode];
+                Image dorduncuGunImage = new Image();
+                dorduncuGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + dorduncuGunWeatherIconPath));
+                dorduncuGunMin.Content = $"{dailyMin[3]:#}" + " °C";
+                dorduncuGunMax.Content = $"{dailyMax[3]:#}" + " °C";
+                dorduncuGunDurum.Content = dorduncuGunImage;
+
             }
             catch (HttpRequestException e)
             {
@@ -614,6 +629,7 @@ namespace MyWidget
                 cordList.Clear();
                 cityNames.Clear();
                 ListBox searchBarListBox = new ListBox();
+                
                 searchBarListBox.Name = "searchBarListBox";
                 searchBarListBox.MouseDoubleClick += new MouseButtonEventHandler(srcBoxSelected);
 
@@ -787,6 +803,17 @@ namespace MyWidget
             GetCurrentMedia(true, true);
         }
 
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            ProcessStartInfo link = new("https://open-meteo.com/")
+            {
+                UseShellExecute = true
+            };
+            Process.Start(link);
+           
+        }
+
+
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F12)
@@ -857,7 +884,7 @@ namespace MyWidget
 
         private void LoadJson()
         {
-           weatherCodes = JObject.Parse(File.ReadAllText("C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\weather_icon_match.json"));
+           weatherCodes = JObject.Parse(File.ReadAllText("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\weather_icon_match.json"));
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
