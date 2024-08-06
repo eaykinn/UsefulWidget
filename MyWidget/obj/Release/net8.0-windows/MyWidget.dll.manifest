@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="MyWidget.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="MyWidget.exe" version="1.0.0.7" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
     <assemblyIdentity name="Launcher" version="8.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -71,13 +71,13 @@
       <dsig:DigestValue>/dT6ON82D1D8m4VmYDw7jJmbd7cP+MlFJdAmU4P+0S8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="MyWidget.dll" size="274840">
+  <file name="MyWidget.dll" size="275864">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>mKGfX/PkYzWBG2r4t/Qplad/BcYEafWuw1cmHa0zMhM=</dsig:DigestValue>
+      <dsig:DigestValue>WkyUGEiDtVMy4AAgchteqrlu8bUavbGz7pze8WY2YkY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MyWidget.dll.config" size="1189">
@@ -95,7 +95,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>S+N2hBava+E91YbFMJM9DYOZEoLmxXexeY7qrC+gOc4=</dsig:DigestValue>
+      <dsig:DigestValue>/8O5abGWV8uTk1Ox4+NH6ZGdE4uOAMKp3YSQrKrRhyo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MyWidget.runtimeconfig.json" size="458">

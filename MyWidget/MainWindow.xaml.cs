@@ -36,6 +36,8 @@ using System.Windows.Media.Animation;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using System.Runtime.Intrinsics.X86;
+using System.Windows.Resources;
+using System.Net.Http.Json;
 
 
 namespace MyWidget
@@ -76,6 +78,7 @@ namespace MyWidget
             catch (Exception ex)
             {
                 HandyControl.Controls.MessageBox.Show(ex.ToString());
+                Console.ReadLine();
             }
         }
 
@@ -894,23 +897,36 @@ namespace MyWidget
 
         private void LoadJson()
         {
-            string xxxx = Directory.GetCurrentDirectory();
-            var path2 = Directory.GetParent(path1);
-            if (path2 != null)
+            // string xxxx = Directory.GetCurrentDirectory();
+            //var path2 = Directory.GetParent(path1);
+            // if (path2 != null)
+            //{
+            //    DirectoryInfo? path3 = Directory.GetParent(path2.ToString());
+            //     if (path3 != null)
+            //     {
+            //         DirectoryInfo? path4 = Directory.GetParent(path3.ToString());
+            //          if (path4 != null)
+            //          {
+            Uri jsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/weather_icon_match.json", UriKind.RelativeOrAbsolute);
+            StreamResourceInfo resourceInfo = Application.GetResourceStream(jsonUri);
+            string jsonContent;
+            using (StreamReader reader = new StreamReader(resourceInfo.Stream))
             {
-                DirectoryInfo? path3 = Directory.GetParent(path2.ToString());
-                if (path3 != null)
-                {
-                    DirectoryInfo? path4 = Directory.GetParent(path3.ToString());
-                    if (path4 != null)
-                    {
-                        weatherCodes = JObject.Parse(File.ReadAllText(path4.ToString() + "\\weather_icon_match.json"));
-                    }
-
-                   
-                }
+                jsonContent = reader.ReadToEnd();
             }
-                    
+
+            JObject json = JObject.Parse(jsonContent);
+            weatherCodes = json;
+     
+      
+
+
+
+
+
+            //}
+            //}
+
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
