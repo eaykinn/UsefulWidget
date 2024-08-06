@@ -6,9 +6,12 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="defaultCityName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Ankara</Value>
     </Setting>
     <Setting Name="colorPiclerOpenedSet" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="musicLock" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

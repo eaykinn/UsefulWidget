@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj": {}
+    "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj": {
+    "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
+        "projectUniqueName": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
         "projectName": "MyWidget",
-        "projectPath": "C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
+        "projectPath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
         "packagesPath": "C:\\Users\\PC_3741\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
+        "outputPath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

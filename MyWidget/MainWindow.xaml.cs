@@ -21,6 +21,7 @@ using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using HandyControl.Controls;
 using System;
+using System.ComponentModel;
 using HandyControl.Tools.Extension;
 using System.Media;
 using System.Numerics;
@@ -34,6 +35,7 @@ using Microsoft.Windows.Themes;
 using System.Windows.Media.Animation;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
+using System.Runtime.Intrinsics.X86;
 
 
 namespace MyWidget
@@ -63,6 +65,7 @@ namespace MyWidget
         private readonly DispatcherTimer timer = new();
         bool colorPiclerOpened;
         JObject weatherCodes;
+        private bool AutoStopMusicSet;
         public MainWindow()
         {
             InitializeComponent();
@@ -370,7 +373,10 @@ namespace MyWidget
             ChangeTheme(newCol);
             colorPiclerOpened = Properties.Settings.Default.colorPiclerOpenedSet;
             searchBarTxt.Text = Properties.Settings.Default.defaultCityName;
-         
+            AutoStopMusicSet = Properties.Settings.Default.musicLock;
+            AutoStopMusic.IsChecked = AutoStopMusicSet;
+            AutoStopMusicChange(AutoStopMusicSet);
+
         }
 
         private Task GetTimeLinePosition(MediaPlaybackDataSource playnaclDataSource, bool getTimeLine)
@@ -837,23 +843,6 @@ namespace MyWidget
             ImageSource imageSrc = xxx.Source;
             TrayIcon.Icon = imageSrc;
 
-            SystemEvents.SessionSwitch += (sender, e) =>
-            {
-                if (e.Reason == SessionSwitchReason.SessionLock)
-                {
-                    NowPlayingSessionManager player = new NowPlayingSessionManager();
-                    NowPlayingSession currentSession = player.CurrentSession;
-                    if (player.Count == 0) { return; }
-                    var x = currentSession.ActivateMediaPlaybackDataSource();
-                    var z = x.GetMediaPlaybackInfo();
-
-                    if (z.PlaybackState.ToString() == "Playing")
-                    {
-                        x.SendMediaPlaybackCommand(MediaPlaybackCommands.Stop);
-                        x.SendMediaPlaybackCommand(MediaPlaybackCommands.Pause);
-                    }
-                }
-            };
 
             GetCurrentMedia(true, true);
 
@@ -944,31 +933,53 @@ namespace MyWidget
            
 
         }
-
-
-
-        /*private void Button_Click_5(object sender, RoutedEventArgs e)
+        
+        public void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
         {
-            MinimizeWindow();
-            
-        }*/
+            NowPlayingSessionManager player = new NowPlayingSessionManager();
+            NowPlayingSession currentSession = player.CurrentSession;
+            if (player.Count == 0) { return; }
+            var x = currentSession.ActivateMediaPlaybackDataSource();
+            var z = x.GetMediaPlaybackInfo();
 
-
-        /* private void timepicker_MouseDown(object sender, MouseButtonEventArgs e)
-{
-timepicker.Height = 207;
-this.timepicker.SetValue(Grid.RowSpanProperty, 7);
-}*/
-        /*   private static void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
-        {
             if (e.Reason == SessionSwitchReason.SessionLock)
             {
-                System.Windows.MessageBox.Show("asdsda");
+                if (z.PlaybackState.ToString() == "Playing")
+                {
+                    x.SendMediaPlaybackCommand(MediaPlaybackCommands.Stop);
+                    x.SendMediaPlaybackCommand(MediaPlaybackCommands.Pause);
+                }
+            }
+        }
+
+        private void AutoStopMusic_Click(object sender, RoutedEventArgs e)
+        {
+            if (AutoStopMusic.IsChecked == true)
+            {
+                AutoStopMusicChange(true);
             }
             else
             {
-                System.Windows.MessageBox.Show("asdsda");
+                AutoStopMusicChange(false);
             }
-        }*/
+        }
+
+        private void AutoStopMusicChange(bool x)
+        {
+            if (x == true)
+            {
+                Properties.Settings.Default.musicLock = true;
+
+                SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+
+            }
+            else
+            {
+                Properties.Settings.Default.musicLock = false;
+                SystemEvents.SessionSwitch -= SystemEvents_SessionSwitch;
+            }
+            Properties.Settings.Default.Save();
+
+        }
     }
 }

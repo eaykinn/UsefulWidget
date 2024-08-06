@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "t2keB7MqZyI=",
+  "dgSpecHash": "dzsaDRyWD4U=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
+  "projectFilePath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC_3741\\.nuget\\packages\\handycontrol\\3.5.1\\handycontrol.3.5.1.nupkg.sha512",
     "C:\\Users\\PC_3741\\.nuget\\packages\\messagepack\\2.5.108\\messagepack.2.5.108.nupkg.sha512",
