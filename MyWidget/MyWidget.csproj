@@ -14,7 +14,10 @@
     <None Remove="closeicon.png" />
     <None Remove="forward.png" />
     <None Remove="foward.png" />
-    <None Remove="Icons\mute.png" />
+    <None Remove="Resources\Icons\forward.png" />
+    <None Remove="Resources\Icons\max.png" />
+    <None Remove="Resources\Icons\min.png" />
+    <None Remove="Resources\Icons\mute.png" />
     <None Remove="min.png" />
     <None Remove="minimize-solid.png" />
     <None Remove="mute.png" />
@@ -23,6 +26,26 @@
     <None Remove="power-off-solid %281%29.png" />
     <None Remove="power-off-solid %282%29.svg" />
     <None Remove="power-off-solid.png" />
+    <None Remove="Resources\Icons\play.png" />
+    <None Remove="Resources\Icons\power-off-solid.png" />
+    <None Remove="Resources\Icons\rotate-right-solid.png" />
+    <None Remove="Resources\Icons\stop.png" />
+    <None Remove="Resources\Icons\volume-high-solid.png" />
+    <None Remove="Resources\Icons\volume-low-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\bolt-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\cloud-bolt-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\cloud-moon-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\cloud-rain-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\cloud-showers-heavy-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\cloud-showers-water-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\cloud-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\cloud-sun-rain-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\cloud-sun-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\moon-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\smog-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\snowflake-regular.png" />
+    <None Remove="Resources\Icons\weather_icons\sun-solid.png" />
+    <None Remove="Resources\Icons\weather_icons\wind-solid.png" />
     <None Remove="rotate-right-solid.png" />
     <None Remove="volume-xmark-solid.png" />
     <None Remove="xmark-solid %281%29.png" />
@@ -49,18 +72,41 @@
 
   <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.5.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Language.Intellisense" Version="17.9.187" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NPSMLib" Version="0.9.14" />
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="forward.png" />
-    <Resource Include="Icons\ban-solid.png" />
-    <Resource Include="Icons\mute.png" />
-    <Resource Include="Icons\palette.png" />
-    <Resource Include="Icons\volume-xmark-solid.png" />
-    <Resource Include="Icons\xmark.png" />
+    <Resource Include="Resources\Icons\ban-solid.png" />
+    <Resource Include="Resources\Icons\forward.png" />
+    <Resource Include="Resources\Icons\max.png" />
+    <Resource Include="Resources\Icons\min.png" />
+    <Resource Include="Resources\Icons\mute.png" />
+    <Resource Include="Resources\Icons\palette.png" />
+    <Resource Include="Resources\Icons\play.png" />
+    <Resource Include="Resources\Icons\power-off-solid.png" />
+    <Resource Include="Resources\Icons\rotate-right-solid.png" />
+    <Resource Include="Resources\Icons\stop.png" />
+    <Resource Include="Resources\Icons\volume-high-solid.png" />
+    <Resource Include="Resources\Icons\volume-low-solid.png" />
+    <Resource Include="Resources\Icons\volume-xmark-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\bolt-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\cloud-bolt-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\cloud-moon-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\cloud-rain-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\cloud-showers-heavy-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\cloud-showers-water-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\cloud-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\cloud-sun-rain-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\cloud-sun-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\moon-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\smog-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\snowflake-regular.png" />
+    <Resource Include="Resources\Icons\weather_icons\sun-solid.png" />
+    <Resource Include="Resources\Icons\weather_icons\wind-solid.png" />
+    <Resource Include="Resources\Icons\xmark.png" />
     <Resource Include="min.png" />
     <Resource Include="minimize-solid.png" />
     <Resource Include="power-off-solid.png" />

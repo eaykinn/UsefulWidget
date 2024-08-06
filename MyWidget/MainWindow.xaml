@@ -240,13 +240,13 @@
             </Button>
             <Button x:Name="paletteButton" Content="Button" Width="18" Click="Button_Click_2" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="18" HorizontalAlignment="Left" Grid.Column="0" Margin="9,0,0,0">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Icons/palette.png"/>
+                    <ImageBrush ImageSource="/Resources/Icons/palette.png"/>
                 </Button.Background>
 
             </Button>
             <Button Grid.Column="7" Width="17" Height="22" Click="Button_Click_1"  FontWeight="Bold"  BorderBrush="{x:Null}" >
                 <Button.Background>
-                    <ImageBrush ImageSource="Icons/xmark.png"/>
+                    <ImageBrush ImageSource="/Resources/Icons/xmark.png"/>
                 </Button.Background>
 
             </Button>

@@ -68,7 +68,15 @@ namespace MyWidget
         private bool AutoStopMusicSet;
         public MainWindow()
         {
-            InitializeComponent();
+
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                HandyControl.Controls.MessageBox.Show(ex.ToString());
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -264,7 +272,7 @@ namespace MyWidget
             }
         }
 
-        private string GetImageDir(string imgName)
+    /*    private string GetImageDir(string imgName,bool isIcon)
         {
 
             string lastPath;
@@ -276,8 +284,16 @@ namespace MyWidget
                 {
                     DirectoryInfo? path4 = Directory.GetParent(path3.ToString());
                     if (path4 != null)
-                    {
-                        lastPath = path4.ToString() + "\\Icons\\" + imgName;
+                    {   
+                        if(isIcon == false)
+                        {
+                            lastPath = path4.ToString() + "\\Resources\\Icons\\" + imgName;
+                        }
+                        else
+                        {
+                            lastPath = path4.ToString() + "\\Resources\\Icons\\weather_icons\\" + imgName;
+                        }
+                       
                     }
                     else
                     {
@@ -296,7 +312,7 @@ namespace MyWidget
 
             return lastPath;
         }
-
+    */
         private async Task GetLatitudeAndLongitude(string nameOfTheCity)
         {
             HttpClient client = new HttpClient();
@@ -348,15 +364,14 @@ namespace MyWidget
             string lastPath;
             if (z.PlaybackState.ToString() == "Playing")
             {
-                lastPath = GetImageDir("stop.png");
-
-                img.Source = new BitmapImage(new Uri(lastPath));
+                lastPath = "stop.png";
+                img.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/" + lastPath, UriKind.Absolute));
                 playStop.Content = img;
             }
             else
             {
-                lastPath = GetImageDir("play.png");
-                img.Source = new BitmapImage(new Uri(lastPath));
+                lastPath = "play.png";
+                img.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/" + lastPath, UriKind.Absolute));
                 playStop.Content = img;
             }
         }
@@ -443,6 +458,7 @@ namespace MyWidget
         private async Task GetWheather(string lat, string lon)
         {
             HttpClient client = new HttpClient();
+            string path;
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
             {
@@ -470,7 +486,8 @@ namespace MyWidget
                 
 
                 Image anlikDurumİmage = new Image();
-                anlikDurumİmage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + currentWeatherIconPath));
+                path = "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + currentWeatherIconPath.ToString();
+                anlikDurumİmage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 CurrentWeatherPic.Content = anlikDurumİmage;
                 
                
@@ -485,15 +502,17 @@ namespace MyWidget
 
                 string birinciGunWeatherIconCode = dailyWheatherCode[0].ToString();
                 JToken birinciGunWeatherIconPath = weatherCodes[birinciGunWeatherIconCode];
+                path = birinciGunWeatherIconPath.ToString();
                 Image birinciGunImage = new Image();
-                birinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + birinciGunWeatherIconPath));
+                birinciGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
                 birinciGunDurum.Content = birinciGunImage;
 
                 Image ikinciGunImage = new Image();
                 ikinciGunDurum.Content = dailyWheatherCode[1].ToString();
                 string ikinciGunWeatherIconCode = dailyWheatherCode[1].ToString();
                 JToken ikinciGunWeatherIconPath = weatherCodes[ikinciGunWeatherIconCode];
-                ikinciGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\"+ ikinciGunWeatherIconPath));
+                path = ikinciGunWeatherIconPath.ToString();
+                ikinciGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
                 ikinciGunMin.Content = $"{dailyMin[1]:#}" + " °C";
                 ikinciGunMax.Content = $"{dailyMax[1]:#}" + " °C";
                 ikinciGunDurum.Content = ikinciGunImage;
@@ -502,7 +521,8 @@ namespace MyWidget
                 string ucuncuGunWeatherIconCode = dailyWheatherCode[2].ToString();
                 JToken ucuncuGunWeatherIconPath = weatherCodes[ucuncuGunWeatherIconCode];
                 Image ucuncuGunImage = new Image();
-                ucuncuGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + ucuncuGunWeatherIconPath));
+                path = ucuncuGunWeatherIconPath.ToString();
+                ucuncuGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
                 ucuncuGunMin.Content = $"{dailyMin[2]:#}" + " °C";
                 ucuncuGunMax.Content = $"{dailyMax[2]:#}" + " °C";
                 ucuncuGunDurum.Content = ucuncuGunImage;
@@ -511,7 +531,8 @@ namespace MyWidget
                 string dorduncuGunWeatherIconCode = dailyWheatherCode[3].ToString();
                 JToken dorduncuGunWeatherIconPath = weatherCodes[dorduncuGunWeatherIconCode];
                 Image dorduncuGunImage = new Image();
-                dorduncuGunImage.Source = new BitmapImage(new Uri("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Icons\\weather_icons\\" + dorduncuGunWeatherIconPath));
+                path = dorduncuGunWeatherIconPath.ToString();
+                dorduncuGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
                 dorduncuGunMin.Content = $"{dailyMin[3]:#}" + " °C";
                 dorduncuGunMax.Content = $"{dailyMax[3]:#}" + " °C";
                 dorduncuGunDurum.Content = dorduncuGunImage;
@@ -564,16 +585,16 @@ namespace MyWidget
             {
                 x.SendMediaPlaybackCommand(MediaPlaybackCommands.Stop);
                 x.SendMediaPlaybackCommand(MediaPlaybackCommands.Pause);
-                string lastpath = GetImageDir("stop.png");
-                img.Source = new BitmapImage(new Uri(lastpath));
+               // string lastpath = GetImageDir("stop.png", false);
+                img.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/stop.png", UriKind.Absolute));
                 playStop.Content = img;
             }
             else
             {
                 x.SendMediaPlaybackCommand(MediaPlaybackCommands.Play);
 
-                string lastpath = GetImageDir("play.png");
-                img.Source = new BitmapImage(new Uri(lastpath));
+                //string lastpath = GetImageDir("play.png", false);
+                img.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/play.png", UriKind.Absolute));
                 playStop.Content = img;
             }
         }
@@ -791,18 +812,18 @@ namespace MyWidget
             string lastpath;
             if (currentVolume > 50)
             {
-                lastpath = GetImageDir("volume-high-solid.png");
+                lastpath = "volume-high-solid.png";
             }
             else if (currentVolume <= 50 && currentVolume > 0)
             {
-                lastpath = GetImageDir("volume-low-solid.png");
+                lastpath = "volume-low-solid.png";
             }
             else
             {
-                lastpath = GetImageDir("volume-xmark-solid.png");
+                lastpath = "volume-xmark-solid.png";    
             }
 
-            img2.Source = new BitmapImage(new Uri(lastpath));
+            img2.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/" + lastpath, UriKind.Absolute));
             img2.Stretch = Stretch.Uniform;
             muteButton.Content = img2;
 
@@ -839,7 +860,7 @@ namespace MyWidget
             ChangeWindowSize(colorPiclerOpened);
             Image xxx = new();
             
-            xxx.Source = new BitmapImage(new Uri(GetImageDir("play.png")));
+            xxx.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/play.png", UriKind.Absolute));
             ImageSource imageSrc = xxx.Source;
             TrayIcon.Icon = imageSrc;
 
@@ -873,7 +894,23 @@ namespace MyWidget
 
         private void LoadJson()
         {
-           weatherCodes = JObject.Parse(File.ReadAllText("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\weather_icon_match.json"));
+            string xxxx = Directory.GetCurrentDirectory();
+            var path2 = Directory.GetParent(path1);
+            if (path2 != null)
+            {
+                DirectoryInfo? path3 = Directory.GetParent(path2.ToString());
+                if (path3 != null)
+                {
+                    DirectoryInfo? path4 = Directory.GetParent(path3.ToString());
+                    if (path4 != null)
+                    {
+                        weatherCodes = JObject.Parse(File.ReadAllText(path4.ToString() + "\\weather_icon_match.json"));
+                    }
+
+                   
+                }
+            }
+                    
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
@@ -905,8 +942,8 @@ namespace MyWidget
                 Mscply.SetValue(Grid.RowProperty, 1);
                 Mscply.SetValue(Grid.RowSpanProperty, 4);
                 //MaxMinButton.SetValue(Grid.ColumnProperty, 6);
-                iconPath = GetImageDir("max.png");
-                imageSource.Source = new BitmapImage(new Uri(iconPath));
+               // iconPath = GetImageDir("max.png", false);
+                imageSource.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/max.png", UriKind.Absolute));
                 imageSource.Stretch = Stretch.Fill;
                 MaxMinButton.Content = imageSource;
                 opened = false;
@@ -922,8 +959,8 @@ namespace MyWidget
                 Mscply.SetValue(Grid.RowProperty, 2);
                 Mscply.SetValue(Grid.RowSpanProperty, 1);
 
-                iconPath = GetImageDir("min.png");
-                imageSource.Source = new BitmapImage(new Uri(iconPath));
+                iconPath = "min.png";
+                imageSource.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/" + iconPath, UriKind.Absolute));
                 imageSource.Stretch = Stretch.Fill;
                 MaxMinButton.Content = imageSource;
                 opened = true;
