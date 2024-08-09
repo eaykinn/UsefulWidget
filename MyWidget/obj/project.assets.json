@@ -292,6 +292,22 @@
           }
         }
       },
+      "SpotifyAPI.Web/7.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/net8.0/SpotifyAPI.Web.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/SpotifyAPI.Web.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1755,6 +1771,29 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "SpotifyAPI.Web/7.1.1": {
+      "sha512": "xMgjZkBqVlZNZ/hROhx5XsKEWQtxRmFTZs5mv6Z9w+fwzBnCR1EFSwTcdpKNiVx/Pa+9p7PJO0q1Cb+fOkQq6Q==",
+      "type": "package",
+      "path": "spotifyapi.web/7.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net5.0/SpotifyAPI.Web.dll",
+        "lib/net5.0/SpotifyAPI.Web.xml",
+        "lib/net6.0/SpotifyAPI.Web.dll",
+        "lib/net6.0/SpotifyAPI.Web.xml",
+        "lib/net7.0/SpotifyAPI.Web.dll",
+        "lib/net7.0/SpotifyAPI.Web.xml",
+        "lib/net8.0/SpotifyAPI.Web.dll",
+        "lib/net8.0/SpotifyAPI.Web.xml",
+        "lib/netstandard2.0/SpotifyAPI.Web.dll",
+        "lib/netstandard2.0/SpotifyAPI.Web.xml",
+        "lib/netstandard2.1/SpotifyAPI.Web.dll",
+        "lib/netstandard2.1/SpotifyAPI.Web.xml",
+        "spotifyapi.web.7.1.1.nupkg.sha512",
+        "spotifyapi.web.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -4774,23 +4813,29 @@
       "HandyControl >= 3.5.1",
       "NPSMLib >= 0.9.14",
       "Newtonsoft.Json >= 13.0.3",
+      "SpotifyAPI.Web >= 7.1.1",
       "Xam.Plugin.SimpleAudioPlayer >= 1.6.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\USER\\.nuget\\packages\\": {}
+    "C:\\Users\\PC_3741\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
+      "projectUniqueName": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
       "projectName": "MyWidget",
-      "projectPath": "C:\\Users\\USER\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
-      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
+      "projectPath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
+      "packagesPath": "C:\\Users\\PC_3741\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC_3741\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC_3741\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4798,7 +4843,9 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://www.nuget.org/v1/FeedService.svc": {}
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "C:\\Users\\PC_3741\\Desktop\\pckg": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -4832,6 +4879,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "SpotifyAPI.Web": {
+            "target": "Package",
+            "version": "[7.1.1, )"
           },
           "Xam.Plugin.SimpleAudioPlayer": {
             "target": "Package",

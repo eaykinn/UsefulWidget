@@ -38,6 +38,8 @@ using Newtonsoft.Json;
 using System.Runtime.Intrinsics.X86;
 using System.Windows.Resources;
 using System.Net.Http.Json;
+using System.Net.Http.Headers;
+using SpotifyAPI.Web;
 
 
 namespace MyWidget
@@ -57,8 +59,8 @@ namespace MyWidget
         private int ctSec = 0;
         private int currVol;
         private System.Drawing.Color defCol;
-        private readonly Image img = new();
-        private readonly Image imageSource = new();
+        private readonly System.Windows.Controls.Image img = new();
+        private readonly System.Windows.Controls.Image imageSource = new();
         private byte isMuted;
         private string lblSecOfTheSong;
         private readonly string path1 = Directory.GetCurrentDirectory();
@@ -133,9 +135,52 @@ namespace MyWidget
            
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private async void Button_Click_3(object sender, RoutedEventArgs e)
         {
             PlayStopMedia();
+            await sssss();
+        }
+
+        static async Task sssss()
+        {
+            var clientId = "57d565246d7d41d2b8dadd774621c2b1";
+            var clientSecret = "514cc776fc66433a971fa335b0bb624a";
+            var accessToken = await GetAccessToken(clientId, clientSecret);
+
+            var spotify = new SpotifyClient(accessToken);
+            var y = spotify.Playlists.Get("1sUBvHKoAzhUHhTMQE406W");
+            var z = y.Result.Tracks.Items[0].Track;
+            var track = await spotify.Tracks.Get("4Nb3djEcac3Sa5m3gkkg4u");
+            HandyControl.Controls.MessageBox.Show(track.Name);
+
+        }
+
+        static async Task<string> GetAccessToken(string clientId, string clientSecret)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+                    Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}")));
+
+                var content = new FormUrlEncodedContent(new[]
+                {
+                new KeyValuePair<string, string>("grant_type", "client_credentials")
+            });
+
+                var response = await client.PostAsync("https://accounts.spotify.com/api/token", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var tokenResponse = await response.Content.ReadAsStringAsync();
+                    JObject x = JObject.Parse(tokenResponse);
+                    string accessToken = x["access_token"].ToString();
+                    return accessToken;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to retrieve access token: {response.ReasonPhrase}");
+                    return null;
+                }
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -486,9 +531,9 @@ namespace MyWidget
                 CurrentWeatherLabel.Content = $"{currentTemp:#}" + " °C";
                 string weatherCode = dailyWheatherCode[0].ToString();
                 JToken currentWeatherIconPath = weatherCodes[weatherCode];
-                
 
-                Image anlikDurumİmage = new Image();
+
+                System.Windows.Controls.Image anlikDurumİmage = new ();
                 path = "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + currentWeatherIconPath.ToString();
                 anlikDurumİmage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 CurrentWeatherPic.Content = anlikDurumİmage;
@@ -506,11 +551,11 @@ namespace MyWidget
                 string birinciGunWeatherIconCode = dailyWheatherCode[0].ToString();
                 JToken birinciGunWeatherIconPath = weatherCodes[birinciGunWeatherIconCode];
                 path = birinciGunWeatherIconPath.ToString();
-                Image birinciGunImage = new Image();
+                System.Windows.Controls.Image birinciGunImage = new ();
                 birinciGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
                 birinciGunDurum.Content = birinciGunImage;
 
-                Image ikinciGunImage = new Image();
+                System.Windows.Controls.Image ikinciGunImage = new();
                 ikinciGunDurum.Content = dailyWheatherCode[1].ToString();
                 string ikinciGunWeatherIconCode = dailyWheatherCode[1].ToString();
                 JToken ikinciGunWeatherIconPath = weatherCodes[ikinciGunWeatherIconCode];
@@ -523,7 +568,7 @@ namespace MyWidget
                 ucuncuGunDurum.Content = dailyWheatherCode[2].ToString();
                 string ucuncuGunWeatherIconCode = dailyWheatherCode[2].ToString();
                 JToken ucuncuGunWeatherIconPath = weatherCodes[ucuncuGunWeatherIconCode];
-                Image ucuncuGunImage = new Image();
+                System.Windows.Controls.Image ucuncuGunImage = new ();
                 path = ucuncuGunWeatherIconPath.ToString();
                 ucuncuGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
                 ucuncuGunMin.Content = $"{dailyMin[2]:#}" + " °C";
@@ -533,7 +578,7 @@ namespace MyWidget
                 dorduncuGunDurum.Content = dailyWheatherCode[3].ToString();
                 string dorduncuGunWeatherIconCode = dailyWheatherCode[3].ToString();
                 JToken dorduncuGunWeatherIconPath = weatherCodes[dorduncuGunWeatherIconCode];
-                Image dorduncuGunImage = new Image();
+                System.Windows.Controls.Image dorduncuGunImage = new ();
                 path = dorduncuGunWeatherIconPath.ToString();
                 dorduncuGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
                 dorduncuGunMin.Content = $"{dailyMin[3]:#}" + " °C";
@@ -811,7 +856,7 @@ namespace MyWidget
 
             prewslid.Value = currentVolume;
             currentSoundLevel.Content = currentVolume;
-            Image img2 = new Image();
+            System.Windows.Controls.Image img2 = new ();
             string lastpath;
             if (currentVolume > 50)
             {
@@ -861,7 +906,7 @@ namespace MyWidget
         {
             GetSettings();
             ChangeWindowSize(colorPiclerOpened);
-            Image xxx = new();
+            System.Windows.Controls.Image xxx = new();
             
             xxx.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/play.png", UriKind.Absolute));
             ImageSource imageSrc = xxx.Source;
