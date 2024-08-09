@@ -14,6 +14,13 @@
           }
         }
       },
+      "HandyControl.Lang.en/3.5.1": {
+        "resources": {
+          "lib/net8.0/en/HandyControl.resources.dll": {
+            "locale": "en"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Microsoft.Win32.Primitives/4.3.0": {
@@ -1091,6 +1098,13 @@
       "sha512": "sha512-i2i0xrLev7F1MFnhf0DP1CNCdGw8hVJ0HJrI0kxRv02ZJgaAzLzDTgAXDPY8GAoD3aYnBLSgM74lBHZ844KQnQ==",
       "path": "handycontrol/3.5.1",
       "hashPath": "handycontrol.3.5.1.nupkg.sha512"
+    },
+    "HandyControl.Lang.en/3.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7Tccm+99gQDqBRzLW4jEQH070usu7KuVIU1hcwd6TIyTwsKsIPBGGUZrrvc694s+7vhpCGmxvlcUt8dU5UQs/A==",
+      "path": "handycontrol.lang.en/3.5.1",
+      "hashPath": "handycontrol.lang.en.3.5.1.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

@@ -8,10 +8,11 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="MyWidget.MainWindow"
         mc:Ignorable="d"
         Title="Widget" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" Icon="/power-off-solid.png">
-
+    
     <Window.Resources>
-
+       
         <Style x:Key="FocusVisual">
+          
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -73,8 +74,8 @@
             <RowDefinition Height="7"/>
             <RowDefinition Height="220*"/>
         </Grid.RowDefinitions>
-        <hc:ColorPicker x:Name="themeColorPicker"  Visibility="Hidden" SelectedColorChanged="themeColorPicker_SelectedColorChanged" Canceled="themeColorPicker_Canceled" Confirmed="themeColorPicker_Confirmed" Panel.ZIndex="1" Margin="0,1,195,277" Grid.Row="1"/>
-
+        <hc:ColorPicker x:Name="themeColorPicker" Language="eng" Visibility="Hidden" SelectedColorChanged="themeColorPicker_SelectedColorChanged" Canceled="themeColorPicker_Canceled" Confirmed="themeColorPicker_Confirmed" Panel.ZIndex="1" Margin="0,1,195,277" Grid.Row="1"/>
+    
         <Grid x:Name="weatherGrid" Margin="10,3,10,5" Grid.Row="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>

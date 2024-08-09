@@ -1,52 +1,26 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using NPSMLib;
-using Plugin.SimpleAudioPlayer;
-using System.Drawing;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
-using HandyControl.Controls;
-using System;
-using System.ComponentModel;
-using HandyControl.Tools.Extension;
-using System.Media;
-using System.Numerics;
-using System.Linq;
-using System.Net;
-using System.Windows.Markup;
 using Microsoft.Win32;
-using Microsoft.VisualBasic;
-using System.IO.Packaging;
-using Microsoft.Windows.Themes;
-using System.Windows.Media.Animation;
-using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
-using System.Runtime.Intrinsics.X86;
 using System.Windows.Resources;
-using System.Net.Http.Json;
 using System.Net.Http.Headers;
 using SpotifyAPI.Web;
+using System.Globalization;
+using HandyControl.Tools;
 
 
 namespace MyWidget
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : System.Windows.Window
     {
         private static string? _lat;
@@ -138,10 +112,10 @@ namespace MyWidget
         private async void Button_Click_3(object sender, RoutedEventArgs e)
         {
             PlayStopMedia();
-            await sssss();
+            await GetMusicList();
         }
 
-        static async Task sssss()
+        static async Task GetMusicList()
         {
             var clientId = "57d565246d7d41d2b8dadd774621c2b1";
             var clientSecret = "514cc776fc66433a971fa335b0bb624a";
@@ -149,9 +123,29 @@ namespace MyWidget
 
             var spotify = new SpotifyClient(accessToken);
             var y = spotify.Playlists.Get("1sUBvHKoAzhUHhTMQE406W");
-            var z = y.Result.Tracks.Items[0].Track;
-            var track = await spotify.Tracks.Get("4Nb3djEcac3Sa5m3gkkg4u");
-            HandyControl.Controls.MessageBox.Show(track.Name);
+           
+            List<PlaylistTrack<IPlayableItem>> z = y.Result.Tracks.Items;
+            var track = (FullTrack)z[60].Track;
+            HandyControl.Controls.MessageBox.Show("Song Name: " + track.Name + "\n"+ "Artist: " + track.Artists[0].Name + "\n"+
+                track.PreviewUrl + track.ExternalUrls + track.Href + track.Uri,
+                caption:"Şarkı Bilgileri");
+            List<string> a = new();
+            
+            /*foreach(PlaylistTrack<IPlayableItem> i in z)
+            {
+                if (i.Track is FullTrack track)
+                {
+                    a.Add(track.Name);
+                    //HandyControl.Controls.MessageBox.Show(track.Name);
+                }
+                if (i.Track is FullEpisode episode)
+                {
+                    Console.WriteLine(episode.Name);
+                }
+                
+            }*/
+
+            
 
         }
 
@@ -904,6 +898,11 @@ namespace MyWidget
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            ConfigHelper.Instance.SetLang("en");
+
             GetSettings();
             ChangeWindowSize(colorPiclerOpened);
             System.Windows.Controls.Image xxx = new();
@@ -942,16 +941,6 @@ namespace MyWidget
 
         private void LoadJson()
         {
-            // string xxxx = Directory.GetCurrentDirectory();
-            //var path2 = Directory.GetParent(path1);
-            // if (path2 != null)
-            //{
-            //    DirectoryInfo? path3 = Directory.GetParent(path2.ToString());
-            //     if (path3 != null)
-            //     {
-            //         DirectoryInfo? path4 = Directory.GetParent(path3.ToString());
-            //          if (path4 != null)
-            //          {
             Uri jsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/weather_icon_match.json", UriKind.RelativeOrAbsolute);
             StreamResourceInfo resourceInfo = Application.GetResourceStream(jsonUri);
             string jsonContent;
@@ -962,15 +951,6 @@ namespace MyWidget
 
             JObject json = JObject.Parse(jsonContent);
             weatherCodes = json;
-     
-      
-
-
-
-
-
-            //}
-            //}
 
         }
 
