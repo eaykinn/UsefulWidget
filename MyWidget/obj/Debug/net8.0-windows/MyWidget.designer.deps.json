@@ -6,6 +6,17 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
+      "EmbedIO/3.5.2": {
+        "dependencies": {
+          "Unosquare.Swan.Lite": "3.1.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/EmbedIO.dll": {
+            "assemblyVersion": "3.5.2.0",
+            "fileVersion": "3.5.2.0"
+          }
+        }
+      },
       "HandyControl/3.5.1": {
         "runtime": {
           "lib/net8.0/HandyControl.dll": {
@@ -18,6 +29,14 @@
         "resources": {
           "lib/net8.0/en/HandyControl.resources.dll": {
             "locale": "en"
+          }
+        }
+      },
+      "HtmlAgilityPack/1.11.62": {
+        "runtime": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "assemblyVersion": "1.11.62.0",
+            "fileVersion": "1.11.62.0"
           }
         }
       },
@@ -236,6 +255,18 @@
         },
         "runtime": {
           "lib/net8.0/SpotifyAPI.Web.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SpotifyAPI.Web.Auth/7.1.1": {
+        "dependencies": {
+          "EmbedIO": "3.5.2",
+          "SpotifyAPI.Web": "7.1.1"
+        },
+        "runtime": {
+          "lib/net8.0/SpotifyAPI.Web.Auth.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1027,6 +1058,7 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.ValueTuple/4.5.0": {},
       "System.Xml.ReaderWriter/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -1074,6 +1106,17 @@
           }
         }
       },
+      "Unosquare.Swan.Lite/3.1.0": {
+        "dependencies": {
+          "System.ValueTuple": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Swan.Lite.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.1.0.0"
+          }
+        }
+      },
       "Xam.Plugin.SimpleAudioPlayer/1.6.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -1092,6 +1135,13 @@
     }
   },
   "libraries": {
+    "EmbedIO/3.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YU4j+3XvuO8/VPkNf7KWOF1TpMhnyVhXnPsG1mvnDhTJ9D5BZOFXVDvCpE/SkQ1AJ0Aa+dXOVSW3ntgmLL7aJg==",
+      "path": "embedio/3.5.2",
+      "hashPath": "embedio.3.5.2.nupkg.sha512"
+    },
     "HandyControl/3.5.1": {
       "type": "package",
       "serviceable": true,
@@ -1105,6 +1155,13 @@
       "sha512": "sha512-7Tccm+99gQDqBRzLW4jEQH070usu7KuVIU1hcwd6TIyTwsKsIPBGGUZrrvc694s+7vhpCGmxvlcUt8dU5UQs/A==",
       "path": "handycontrol.lang.en/3.5.1",
       "hashPath": "handycontrol.lang.en.3.5.1.nupkg.sha512"
+    },
+    "HtmlAgilityPack/1.11.62": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KS4h7ZjWsO6YixRfQgYdR+PZMbTaZod1LBPi+1Ph7dJCARzQm7DOKe5HPhP/o0EWX5l7QCgAZHa4VOa4pQa8JQ==",
+      "path": "htmlagilitypack/1.11.62",
+      "hashPath": "htmlagilitypack.1.11.62.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
@@ -1266,6 +1323,13 @@
       "sha512": "sha512-xMgjZkBqVlZNZ/hROhx5XsKEWQtxRmFTZs5mv6Z9w+fwzBnCR1EFSwTcdpKNiVx/Pa+9p7PJO0q1Cb+fOkQq6Q==",
       "path": "spotifyapi.web/7.1.1",
       "hashPath": "spotifyapi.web.7.1.1.nupkg.sha512"
+    },
+    "SpotifyAPI.Web.Auth/7.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t0LE3qQQ0rw3rsKkCOWTCU6+3sa0ZMW3XnY+1aj/hoWxQESdgp8jDithvKaPTp5UoRe1+p0G0mqiIqnlHGpN2A==",
+      "path": "spotifyapi.web.auth/7.1.1",
+      "hashPath": "spotifyapi.web.auth.7.1.1.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",
@@ -1624,6 +1688,13 @@
       "path": "system.threading.timer/4.3.0",
       "hashPath": "system.threading.timer.4.3.0.nupkg.sha512"
     },
+    "System.ValueTuple/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
+      "path": "system.valuetuple/4.5.0",
+      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
+    },
     "System.Xml.ReaderWriter/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -1637,6 +1708,13 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
+    },
+    "Unosquare.Swan.Lite/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-X3s5QE/KMj3WAPFqFve7St+Ds10BB50u8kW8PmKIn7FVkn7yEXe9Yxr2htt1WV85DRqfFR0MN/BUNHkGHtL4OQ==",
+      "path": "unosquare.swan.lite/3.1.0",
+      "hashPath": "unosquare.swan.lite.3.1.0.nupkg.sha512"
     },
     "Xam.Plugin.SimpleAudioPlayer/1.6.0": {
       "type": "package",

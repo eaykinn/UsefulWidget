@@ -124,7 +124,9 @@
                     <DropShadowEffect/>
                 </hc:SearchBar.Effect>
             </hc:SearchBar>
-            <Label x:Name="CityLabel" Grid.Column="2" Grid.ColumnSpan="3" Content="Label" Grid.Row="1"  Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" Height="44"  VerticalContentAlignment="Center" Width="120" Padding="10,5,10,5"/>
+            <Label x:Name="CityLabel" Grid.Column="2" Grid.ColumnSpan="3" Content="Label" Grid.Row="1"  Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" Height="26" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="120" Padding="10,0,10,0" />
+            <Label x:Name="currentweatherCodeExpl" Grid.Column="2" Grid.ColumnSpan="3" Content="Label" Grid.Row="1"  Foreground="#FFBBB5B5" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="12" FontWeight="Bold" Height="22" VerticalAlignment="Bottom"  VerticalContentAlignment="Center" Width="120" Padding="10,0,10,0"/>
+
             <Label x:Name="CurrentWeatherLabel" Grid.Column="1" Grid.ColumnSpan="2" Content="Label" Grid.Row="1" Foreground="White" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="20" Height="44" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
             <Label x:Name="CurrentWeatherPic"  Content="anlikdurum" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="46" Width="90"   />
 

@@ -53,6 +53,10 @@
               "target": "Package",
               "version": "[3.5.1, )"
             },
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.62, )"
+            },
             "NPSMLib": {
               "target": "Package",
               "version": "[0.9.14, )"
@@ -62,6 +66,10 @@
               "version": "[13.0.3, )"
             },
             "SpotifyAPI.Web": {
+              "target": "Package",
+              "version": "[7.1.1, )"
+            },
+            "SpotifyAPI.Web.Auth": {
               "target": "Package",
               "version": "[7.1.1, )"
             },

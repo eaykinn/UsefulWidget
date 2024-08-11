@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using System.Windows.Resources;
 using System.Net.Http.Headers;
 using SpotifyAPI.Web;
+using SpotifyAPI.Web.Auth;
 using System.Globalization;
 using HandyControl.Tools;
 
@@ -129,39 +130,27 @@ namespace MyWidget
             HandyControl.Controls.MessageBox.Show("Song Name: " + track.Name + "\n"+ "Artist: " + track.Artists[0].Name + "\n"+
                 track.PreviewUrl + track.ExternalUrls + track.Href + track.Uri,
                 caption:"Şarkı Bilgileri");
-            List<string> a = new();
-            
-            /*foreach(PlaylistTrack<IPlayableItem> i in z)
-            {
-                if (i.Track is FullTrack track)
-                {
-                    a.Add(track.Name);
-                    //HandyControl.Controls.MessageBox.Show(track.Name);
-                }
-                if (i.Track is FullEpisode episode)
-                {
-                    Console.WriteLine(episode.Name);
-                }
-                
-            }*/
-
-            
+       
 
         }
 
         static async Task<string> GetAccessToken(string clientId, string clientSecret)
         {
+            
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}")));
-
+                
                 var content = new FormUrlEncodedContent(new[]
                 {
-                new KeyValuePair<string, string>("grant_type", "client_credentials")
+                new KeyValuePair<string, string>("grant_type", "client_credentials"),
+       
             });
 
+               
                 var response = await client.PostAsync("https://accounts.spotify.com/api/token", content);
+
                 if (response.IsSuccessStatusCode)
                 {
                     var tokenResponse = await response.Content.ReadAsStringAsync();
@@ -531,8 +520,9 @@ namespace MyWidget
                 path = "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + currentWeatherIconPath.ToString();
                 anlikDurumİmage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 CurrentWeatherPic.Content = anlikDurumİmage;
-                
-               
+                currentweatherCodeExpl.Content = "Overcast Clouds";
+
+
                 birinciGunTarih.Content = days[0].ToString();
                 ikinciGunTarih.Content = days[1].ToString();
                 ucuncuGunTarih.Content = days[2].ToString();
@@ -698,7 +688,7 @@ namespace MyWidget
                 cordList.Clear();
                 cityNames.Clear();
                 ListBox searchBarListBox = new ListBox();
-                
+                searchBarListBox.Margin = new Thickness(65, 0, 0, 0);
                 searchBarListBox.Name = "searchBarListBox";
                 searchBarListBox.MouseDoubleClick += new MouseButtonEventHandler(srcBoxSelected);
 
@@ -741,7 +731,7 @@ namespace MyWidget
                 }
 
                 Grid.SetRow(searchBarListBox, 1);
-                Grid.SetColumn(searchBarListBox, 1);
+                Grid.SetColumn(searchBarListBox, 0);
                 Grid.SetColumnSpan(searchBarListBox, 3);
                 Grid.SetRowSpan(searchBarListBox, 4);
 
