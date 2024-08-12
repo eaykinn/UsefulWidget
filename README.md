@@ -17,7 +17,7 @@
       <li> Weather Forecast (open-meteo)</li>
       <li>Countdown timer with Windows shutdown/restrart</li>
     </ul>
-    <p> You can also change theme from top left corner Checkbox below the player provides stopping music when the user locks the current Windows session. I use HandyControl library for interface and colorpicker.</p>
+    <p> You can also change theme from top left corner. Checkbox below the player provides stopping music when the user locks the current Windows session. I use HandyControl library for interface and colorpicker.</p>
    <div>
      <h2>Maximized Window</h2>
      <picture>
