@@ -12,17 +12,7 @@
 
   <body>
     <div class="anabaslik-h1"><h1>UsefulWidget</h1></div>
-    <ol class="abc">
-      <li>
-        <h3><a class = "filmbaslik" href="https://www.imdb.com/title/tt0092099/">TopGun</a></h3>
-        <div class = "picture"> 
-        </div>
-        <div class = "picturetext">   
-        </div>
-        <hr>
-        <h3>Cast</h3>
-        <ol class="oyunculiste">
-        </ol>   
+     
   </body>
 
 </html>
