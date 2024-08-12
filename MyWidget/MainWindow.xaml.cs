@@ -68,8 +68,33 @@ namespace MyWidget
             {
                 Process.Start("shutdown", "/s /t " + ((ctHour * 3600) + ctMin * 60).ToString());
                 restartProcessStarted = 1;
-                hTxtBox.Text = ctHour.ToString();
-                mTxtBox.Text = ctMin.ToString();
+                if (ctHour.ToString().Length == 1)
+                {
+                    hTxtBox.Text = "0" + ctHour.ToString();
+                }
+                else
+                {
+                    hTxtBox.Text = ctHour.ToString();
+                }
+
+                if (ctMin.ToString().Length == 1)
+                {
+                    mTxtBox.Text = "0" + ctMin.ToString();
+                }
+                else
+                {
+                    mTxtBox.Text = ctMin.ToString();
+                }
+
+                if (ctHour.ToString().Length == 1)
+                {
+                    hTxtBox.Text = "0" + ctHour.ToString();
+                }
+                else
+                {
+                    hTxtBox.Text = ctHour.ToString();
+                }
+
                 sTxtBox.Text = "00";
                 CountDowntimer(1);
             }
@@ -253,9 +278,34 @@ namespace MyWidget
                     }
                 }
             }
-            sTxtBox.Text = ctSec.ToString();
-            mTxtBox.Text = ctMin.ToString();
-            hTxtBox.Text = ctHour.ToString();
+
+            if (ctHour.ToString().Length == 1)
+            {
+                hTxtBox.Text = "0" + ctHour.ToString();
+            }
+            else
+            {
+                hTxtBox.Text = ctHour.ToString();
+            }
+
+            if (ctSec.ToString().Length == 1)
+            {
+                sTxtBox.Text = "0" + ctSec.ToString();
+            }
+            else
+            {
+                sTxtBox.Text = ctSec.ToString();
+            }
+
+            if (ctMin.ToString().Length == 1)
+            {
+                mTxtBox.Text = "0" + ctMin.ToString();
+            }
+            else
+            {
+                mTxtBox.Text = ctMin.ToString();
+            }
+            
         }
 
         private protected async Task GetCurrentMedia(bool onLoad, bool getTimeLine)

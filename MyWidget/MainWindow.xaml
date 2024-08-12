@@ -8,11 +8,11 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="MyWidget.MainWindow"
         mc:Ignorable="d"
         Title="Widget" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" Icon="/power-off-solid.png">
-    
+
     <Window.Resources>
-       
+
         <Style x:Key="FocusVisual">
-          
+
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -75,7 +75,7 @@
             <RowDefinition Height="220*"/>
         </Grid.RowDefinitions>
         <hc:ColorPicker x:Name="themeColorPicker" Language="eng" Visibility="Hidden" SelectedColorChanged="themeColorPicker_SelectedColorChanged" Canceled="themeColorPicker_Canceled" Confirmed="themeColorPicker_Confirmed" Panel.ZIndex="1" Margin="0,1,195,277" Grid.Row="1"/>
-    
+
         <Grid x:Name="weatherGrid" Margin="10,3,10,5" Grid.Row="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -349,7 +349,7 @@
                     <ImageBrush ImageSource="/xmark.png"/>
                 </Button.Background>
             </Button>
-            <TextBox x:Name="hTxtBox" TextWrapping="Wrap"  Width="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Left" Margin="30,10,0,30" Grid.RowSpan="2"  >
+            <TextBox x:Name="hTxtBox" TextWrapping="Wrap"  Width="51" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Left" Margin="45,19,0,21" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" ToolTip="hour"  >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -359,7 +359,7 @@
                     <DropShadowEffect/>
                 </TextBox.Effect>
             </TextBox>
-            <TextBox x:Name="mTxtBox"  TextWrapping="Wrap"  Width="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" HorizontalAlignment="Left" Margin="50,10,0,30" Grid.RowSpan="2">
+            <TextBox x:Name="mTxtBox"  TextWrapping="Wrap" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" Margin="50,19,42,21" Grid.RowSpan="2" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" ToolTip="minute">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -369,7 +369,7 @@
                     <DropShadowEffect/>
                 </TextBox.Effect>
             </TextBox>
-            <TextBox x:Name="sTxtBox" TextWrapping="Wrap" Width="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="7" Grid.Row="4" HorizontalAlignment="Left" Margin="27,10,0,30" Grid.ColumnSpan="3" Grid.RowSpan="2" >
+            <TextBox x:Name="sTxtBox" TextWrapping="Wrap" Width="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="7" Grid.Row="4" HorizontalAlignment="Left" Margin="20,19,0,21" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" ToolTip="second" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -384,12 +384,12 @@
             <hc:Divider Width="424" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Foreground="White" Background="White" Grid.ColumnSpan="10" Margin="0,16,0,0"/>
 
 
-            <hc:ComboBox x:Name="hourCmbx" Grid.ColumnSpan="3" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="66" Margin="12,4,0,0" Grid.RowSpan="2">
+            <hc:ComboBox x:Name="hourCmbx" Grid.ColumnSpan="3" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="66" Margin="12,4,0,0" Grid.RowSpan="2" Background="{x:Null}" Foreground="#FFB5B3B3" FontSize="14" ToolTip="hour">
                 <hc:ComboBox.Effect>
                     <DropShadowEffect/>
                 </hc:ComboBox.Effect>
             </hc:ComboBox>
-            <hc:ComboBox x:Name="minCmbx" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="34,4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="69" Grid.Column="2" Grid.RowSpan="2">
+            <hc:ComboBox x:Name="minCmbx" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="34,4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="69" Grid.Column="2" Grid.RowSpan="2" Background="{x:Null}" Foreground="#FFA5A5A5" FontSize="14" ToolTip="minute">
                 <hc:ComboBox.Effect>
                     <DropShadowEffect/>
                 </hc:ComboBox.Effect>
@@ -397,6 +397,26 @@
             <Label x:Name ="currentSoundLevel" Grid.Column="7" Content="-"  Grid.Row="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Width="51" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Margin="19,0,0,0" />
             <hc:Divider Width="424" Grid.Column="0" Grid.ColumnSpan= "10" HorizontalAlignment="Left" Margin="0,63,0,0" Grid.Row="3" VerticalAlignment="Top"/>
             <hc:Divider Grid.Column="0" Grid.ColumnSpan="10"  Grid.Row="6" Foreground="White" Height="1" Background="White" BorderBrush="White" LineStroke="White" Margin="0,9,0,20" />
+            <TextBox x:Name="hTxtBox_Kopyala" TextWrapping="Wrap"  Width="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text=":" FontWeight="Bold" IsReadOnly="True" Grid.Column="5" Grid.Row="4" HorizontalAlignment="Left" Margin="38,17,0,24" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Padding="0,0,0,0" Grid.ColumnSpan="2"  >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBox x:Name="hTxtBox_Kopyala1" TextWrapping="Wrap"  Width="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text=":" FontWeight="Bold" IsReadOnly="True" Grid.Column="7" Grid.Row="4" HorizontalAlignment="Left" Margin="4,17,0,23" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Padding="0,0,0,0"  >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect/>
+                </TextBox.Effect>
+            </TextBox>
 
         </Grid>
 
