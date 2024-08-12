@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     
-  <link rel = "stylesheet"
-        href = "./style.css"
-  ></link>
-
   </head>
 
   <body>
-    <div class="anabaslik-h1"><h1>UsefulWidget</h1></div>
+  
      
-  </body>
+  </body>![Ekran görüntüsü 2024-08-12 112420](https://github.com/user-attachments/assets/1f76f33e-2182-4b1e-8b65-7112ca374f64)
+
 
 </html>
