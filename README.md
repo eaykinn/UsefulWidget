@@ -11,11 +11,11 @@
     <p>My first C# WPF app. The app can be used as desktop widget.</p>
     <p>Widget includes:</p>
     <ul> 
-      <li>Date & Clock </li>
-      <li>System Volume Controller </li>
-      <li>Media Playback Control(NPSMLib)k </li>
-      <li> Weather Forecast (open-meteo) </li>
-      <li>Countdown timer with Windows shutdown/restrart </li>
+      <li>Date & Clock</li>
+      <li>System Volume Controller</li>
+      <li>Media Playback Control(NPSMLib)</li>
+      <li> Weather Forecast (open-meteo)</li>
+      <li>Countdown timer with Windows shutdown/restrart</li>
     </ul>
     <p> You can also change theme from top left corner Checkbox below the player provides stopping music when the user locks the current Windows session. I use HandyControl library for interface and colorpicker.</p>
    <div>
