@@ -21,16 +21,14 @@
    <div>
      <h2>Maximized Window</h2>
      <picture>
-      <img src="https://github.com/user-attachments/assets/1f76f33e-2182-4b1e-8b65-7112ca374f64" alt="maximized" style="width:auto;">
+      <img src="https://github.com/user-attachments/assets/3eaccf4d-9a6b-406d-a887-2cfca5d6d63a" alt="maximized" style="width:auto;">
     </picture> 
    </div> 
     <div> 
        <h2>Minimized Window</h2>
       <picture>
-        <img src="https://github.com/user-attachments/assets/a8b9ba5a-5acf-4513-a730-5edc4d7d2c72" alt="minimized" style="width:auto;">
+        <img src="https://github.com/user-attachments/assets/5c465a56-55aa-47ae-88e9-d3a6e136d9da" alt="minimized" style="width:auto;">
       </picture>
-   </div> 
+   </div>
   </body>
-
-
 </html>
