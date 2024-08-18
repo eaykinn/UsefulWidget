@@ -59,6 +59,7 @@ namespace MyWidget
             }
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //timepicker.GettTime();
@@ -138,58 +139,11 @@ namespace MyWidget
         private async void Button_Click_3(object sender, RoutedEventArgs e)
         {
             PlayStopMedia();
-            await GetMusicList();
         }
 
-        static async Task GetMusicList()
-        {
-            var clientId = "57d565246d7d41d2b8dadd774621c2b1";
-            var clientSecret = "514cc776fc66433a971fa335b0bb624a";
-            var accessToken = await GetAccessToken(clientId, clientSecret);
+    
 
-            var spotify = new SpotifyClient(accessToken);
-            var y = spotify.Playlists.Get("1sUBvHKoAzhUHhTMQE406W");
-           
-            List<PlaylistTrack<IPlayableItem>> z = y.Result.Tracks.Items;
-            var track = (FullTrack)z[60].Track;
-            HandyControl.Controls.MessageBox.Show("Song Name: " + track.Name + "\n"+ "Artist: " + track.Artists[0].Name + "\n"+
-                track.PreviewUrl + track.ExternalUrls + track.Href + track.Uri,
-                caption:"Şarkı Bilgileri");
-       
 
-        }
-
-        static async Task<string> GetAccessToken(string clientId, string clientSecret)
-        {
-            
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
-                    Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}")));
-                
-                var content = new FormUrlEncodedContent(new[]
-                {
-                new KeyValuePair<string, string>("grant_type", "client_credentials"),
-       
-            });
-
-               
-                var response = await client.PostAsync("https://accounts.spotify.com/api/token", content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var tokenResponse = await response.Content.ReadAsStringAsync();
-                    JObject x = JObject.Parse(tokenResponse);
-                    string accessToken = x["access_token"].ToString();
-                    return accessToken;
-                }
-                else
-                {
-                    Console.WriteLine($"Failed to retrieve access token: {response.ReasonPhrase}");
-                    return null;
-                }
-            }
-        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -203,6 +157,8 @@ namespace MyWidget
             restartProcessStarted = 0;
             CountDowntimer(0);
         }
+
+        
 
         private void ChangeTheme(SolidColorBrush color)
         {
@@ -599,6 +555,7 @@ namespace MyWidget
                 ikinciGunMax.Content = $"{dailyMax[1]:#}" + " °C";
                 ikinciGunDurum.Content = ikinciGunImage;
 
+               
                 ucuncuGunDurum.Content = dailyWheatherCode[2].ToString();
                 string ucuncuGunWeatherIconCode = dailyWheatherCode[2].ToString();
                 JToken ucuncuGunWeatherIconPath = weatherCodes[ucuncuGunWeatherIconCode];
@@ -1098,6 +1055,14 @@ namespace MyWidget
             }
             Properties.Settings.Default.Save();
 
+        }
+
+        private void lbl1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            string seachQuery = lbl1.Content.ToString();
+            var window1 = new Window1(seachQuery);
+            window1.Show();
+            
         }
     }
 }

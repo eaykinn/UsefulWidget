@@ -338,3 +338,7 @@ C:\Users\PC_3741\Source\Repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-win
 C:\Users\PC_3741\Source\Repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\SpotifyAPI.Web.Auth.dll
 C:\Users\PC_3741\Source\Repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Swan.Lite.dll
 C:\Users\PC_3741\Source\Repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\en\HandyControl.resources.dll
+C:\Users\USER\Source\Repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-windows\Window1.g.cs
+C:\Users\USER\Source\Repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-windows\Window1.baml
+C:\Users\USER\Source\Repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-windows\songCard.g.cs
+C:\Users\USER\Source\Repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-windows\songCard.baml

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\obj\Release\net8.0-windows\
+C:\Users\USER\Source\Repos\eaykinn\UsefulWidget\MyWidget\obj\Release\net8.0-windows\
 MyWidget
 none
 false
 TRACE;RELEASE;NET;NET8_0;NETCOREAPP
-C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\App.xaml
-21611351110
+C:\Users\USER\Source\Repos\eaykinn\UsefulWidget\MyWidget\App.xaml
+41480954361
 
-6-2048085204
-209594027910
-MainWindow.xaml;Themes\Generic.xaml;
+81003475748
+208742299368
+MainWindow.xaml;songCard.xaml;Themes\Generic.xaml;Window1.xaml;
 
 True
 
