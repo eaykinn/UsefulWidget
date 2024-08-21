@@ -30,5 +30,12 @@
         <img src="https://github.com/user-attachments/assets/5c465a56-55aa-47ae-88e9-d3a6e136d9da" alt="minimized" style="width:auto;">
       </picture>
    </div>
+        <div> 
+       <h2>Similar Music List</h2>
+          <p>Opens when double clicked on song name</p>
+      <picture>
+        <img src="https://github.com/user-attachments/assets/cc0488e0-54e6-4db4-83ea-bc399987ad69" alt="minimized" style="width:auto;">
+      </picture>
+   </div>
   </body>
 </html>
