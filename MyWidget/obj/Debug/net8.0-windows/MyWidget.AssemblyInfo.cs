@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyWidget")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+133f923628831d13aa9f92c0075ba8f593ba12c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d0952ee8590005ad61a1b5bbe43b15d38f02363")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyWidget")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyWidget")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

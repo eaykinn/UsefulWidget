@@ -69,9 +69,9 @@ namespace MyWidget
 
         private async Task<BitmapImage> GetPicofTrack(string songId)
         {
-            var xxxxxxxx = await spotify.Tracks.Get(songId);
-            var uuuu = xxxxxxxx.Album.Images[0].Url;
-            return await LoadImageFromUrl(uuuu);
+            var fullTrack = await spotify.Tracks.Get(songId);
+            var imageUrl = fullTrack.Album.Images[0].Url;
+            return await LoadImageFromUrl(imageUrl);
        
         }
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -124,8 +124,8 @@ namespace MyWidget
             searchRequest.Limit = 5;
            
             var searchResponse = await spotify.Search.Item(searchRequest);
-            var xxxx = searchResponse.Tracks;
-            tracks = xxxx.Items;
+            var fullTracks = searchResponse.Tracks;
+            tracks = fullTracks.Items;
             UpdateLabels();
  
         }
