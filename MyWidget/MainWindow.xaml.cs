@@ -44,6 +44,7 @@ namespace MyWidget
         private readonly DispatcherTimer timer = new();
         bool colorPiclerOpened;
         JObject weatherCodes;
+        JObject weatherExpCodes;
         private bool AutoStopMusicSet;
         public MainWindow()
         {
@@ -269,8 +270,19 @@ namespace MyWidget
             if (onLoad == false) { Thread.Sleep(50); }
 
             NowPlayingSessionManager player = new NowPlayingSessionManager();
+          
+            NowPlayingSession[] sessions = player.GetSessions();
+            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe").Select(x => x.GetSessionInfo()).ToList();
+            if (sessionInfos.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                player.SetCurrentSession(sessionInfos[0]);
+
+            }
             NowPlayingSession currentSession = player.CurrentSession;
-            if (player.Count == 0) { return; }
             MediaPlaybackDataSource playnaclDataSource = currentSession.ActivateMediaPlaybackDataSource();
 
             await GetTimeLinePosition(playnaclDataSource, true);
@@ -352,17 +364,24 @@ namespace MyWidget
     */
         private async Task GetLatitudeAndLongitude(string nameOfTheCity)
         {
+            _lat = null;
+            _lon = null;
             HttpClient client = new HttpClient();
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
             {
                 string connectionStr = "https://geocoding-api.open-meteo.com/v1/search?name=" + nameOfTheCity + "& count=10&language=en&format=json";
                 HttpResponseMessage response = await client.GetAsync(connectionStr);
-                response.EnsureSuccessStatusCode();
+                var httpResponse = response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
+               
                 List<JToken> results;
                 // Convert JSON string to JObject
                 JObject jsonObject = JObject.Parse(responseBody);
+                if(jsonObject.First.Path == "generationtime_ms")
+                {
+                    return;
+                }
                 try
                 {
                     results = (jsonObject["results"] ?? throw new InvalidOperationException()).ToList();
@@ -513,12 +532,13 @@ namespace MyWidget
                 List<JToken> dailyMin = jsonObject["daily"]["temperature_2m_min"].ToList();
                 List<JToken> dailyWheatherCode = jsonObject["daily"]["weather_code"].ToList();
                 JToken currentTemp = jsonObject["current"]["temperature_2m"];
+                JToken currentWC = jsonObject["current"]["weather_code"];
 
                 string firstday = days[0].ToString();
 
                 /*CurrentWeatherLabel.Content = currentTemp.ToString() + " °C";*/
                 CurrentWeatherLabel.Content = $"{currentTemp:#}" + " °C";
-                string weatherCode = dailyWheatherCode[0].ToString();
+                string weatherCode = currentWC.ToString();
                 JToken currentWeatherIconPath = weatherCodes[weatherCode];
 
 
@@ -526,8 +546,9 @@ namespace MyWidget
                 path = "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + currentWeatherIconPath.ToString();
                 anlikDurumİmage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 CurrentWeatherPic.Content = anlikDurumİmage;
-                currentweatherCodeExpl.Content = "Overcast Clouds";
 
+                string currentGunWeatherExp = currentWC.ToString();
+                currentweatherCodeExpl.Content = weatherExpCodes[currentGunWeatherExp];
 
                 birinciGunTarih.Content = days[0].ToString();
                 ikinciGunTarih.Content = days[1].ToString();
@@ -604,7 +625,19 @@ namespace MyWidget
         private void oncekiSarki_Click(object sender, RoutedEventArgs e)
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
-            if (player.Count == 0) { return; }
+         
+            
+            NowPlayingSession[] sessions = player.GetSessions();
+            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe").Select(x => x.GetSessionInfo()).ToList();
+            if (sessionInfos.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                player.SetCurrentSession(sessionInfos[0]);
+
+            }
             NowPlayingSession currentSession = player.CurrentSession;
             MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
             x.SendMediaPlaybackCommand(MediaPlaybackCommands.Previous);
@@ -614,9 +647,20 @@ namespace MyWidget
         private void PlayStopMedia()
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
+           
+            NowPlayingSession[] sessions = player.GetSessions();
+            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe").Select(x => x.GetSessionInfo()).ToList();
+            if (sessionInfos.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                player.SetCurrentSession(sessionInfos[0]);
+
+            }
             NowPlayingSession currentSession = player.CurrentSession;
 
-            if (player.Count == 0) { return; }
             var x = currentSession.ActivateMediaPlaybackDataSource();
             var z = x.GetMediaPlaybackInfo();
 
@@ -799,8 +843,31 @@ namespace MyWidget
         private void sonrakiSarki_Click(object sender, RoutedEventArgs e)
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
+            NowPlayingSession[] sessions = player.GetSessions();
+            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe").Select(x => x.GetSessionInfo()).ToList();
+            if(sessionInfos.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                player.SetCurrentSession(sessionInfos[0]);
+               
+            }
+            
             NowPlayingSession currentSession = player.CurrentSession;
-            if (player.Count == 0) { return; }
+            /*if (currentSession == null)
+            {
+                return;
+            }
+            else
+            {
+                if (currentSession.SourceAppId != "Spotify.exe")
+                {
+                    return;
+                }
+            }*/
+
             MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
             x.SendMediaPlaybackCommand(MediaPlaybackCommands.Next);
             
@@ -833,6 +900,17 @@ namespace MyWidget
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
             NowPlayingSession currentSession = player.CurrentSession;
+            if (currentSession == null)
+            {
+                return;
+            }
+            else
+            {
+                if (currentSession.SourceAppId != "Spotify.exe")
+                {
+                    return;
+                }
+            }
             MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
 
             x.SendPlaybackPositionChangeRequest(TimeSpan.FromSeconds(timelineSlider.Value));
@@ -938,8 +1016,8 @@ namespace MyWidget
 
         private void LoadJson()
         {
-            Uri jsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/weather_icon_match.json", UriKind.RelativeOrAbsolute);
-            StreamResourceInfo resourceInfo = Application.GetResourceStream(jsonUri);
+            Uri iconPathjsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/weather_icon_match.json", UriKind.RelativeOrAbsolute);
+            StreamResourceInfo resourceInfo = Application.GetResourceStream(iconPathjsonUri);
             string jsonContent;
             using (StreamReader reader = new StreamReader(resourceInfo.Stream))
             {
@@ -948,6 +1026,18 @@ namespace MyWidget
 
             JObject json = JObject.Parse(jsonContent);
             weatherCodes = json;
+
+            Uri iconExpjsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/weather_code_exp.json", UriKind.RelativeOrAbsolute);
+            StreamResourceInfo expresourceInfo = Application.GetResourceStream(iconExpjsonUri);
+            string expjsonContent;
+            using (StreamReader reader = new StreamReader(expresourceInfo.Stream))
+            {
+                expjsonContent = reader.ReadToEnd();
+            }
+
+            JObject expjson = JObject.Parse(expjsonContent);
+            weatherExpCodes = expjson;
+
 
         }
 

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyWidget"
         mc:Ignorable="d"
-        Title="Similar Music List" Height="450" Width="460" Foreground="{x:Null}">
+        Title="Similar Music List" Height="450" Width="460" Foreground="{x:Null}" ResizeMode="NoResize">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Black"/>
@@ -14,14 +14,15 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black"/>
                 <GradientStop Color="#FF050E5B" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <ListBox x:Name="songList" Background="{x:Null}" BorderBrush="{x:Null}">
-            
-        </ListBox>
+        <ListBox x:Name="songList" Background="{x:Null}" BorderBrush="{x:Null}"/>
     </Grid>
 </Window>

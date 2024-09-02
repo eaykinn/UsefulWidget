@@ -46,6 +46,7 @@
     <None Remove="Resources\Icons\weather_icons\snowflake-regular.png" />
     <None Remove="Resources\Icons\weather_icons\sun-solid.png" />
     <None Remove="Resources\Icons\weather_icons\wind-solid.png" />
+    <None Remove="Resources\weather_code_exp.json" />
     <None Remove="rotate-right-solid.png" />
     <None Remove="volume-xmark-solid.png" />
     <None Remove="weather_icon_match.json" />
@@ -115,6 +116,7 @@
     <Resource Include="min.png" />
     <Resource Include="minimize-solid.png" />
     <Resource Include="power-off-solid.png" />
+    <Resource Include="Resources\weather_code_exp.json" />
     <Resource Include="rotate-right-solid.png" />
     <Resource Include="Resources\weather_icon_match.json" />
     <Resource Include="xmark.png" />

@@ -11,7 +11,7 @@
         "projectName": "MyWidget",
         "projectPath": "C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\MyWidget.csproj",
         "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Source\\Repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
+        "outputPath": "C:\\Users\\USER\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
