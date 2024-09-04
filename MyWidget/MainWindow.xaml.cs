@@ -892,7 +892,6 @@ namespace MyWidget
         private void themeColorPicker_SelectedColorChanged(object sender, HandyControl.Data.FunctionEventArgs<System.Windows.Media.Color> e)
         {
             var color = themeColorPicker.SelectedBrush;
-
             ChangeTheme(color);
         }
 
@@ -1150,7 +1149,15 @@ namespace MyWidget
         private void lbl1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             string seachQuery = lbl1.Content.ToString();
-            var window1 = new Window1(seachQuery);
+
+            Color mediaColor = new Color();
+            mediaColor.A = defCol.A;
+            mediaColor.R = defCol.R;
+            mediaColor.G = defCol.G;
+            mediaColor.B = defCol.B;
+            SolidColorBrush newCol = new(mediaColor);
+
+            var window1 = new Window1(seachQuery, newCol);
             window1.Show();
             
         }

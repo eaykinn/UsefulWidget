@@ -6,23 +6,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyWidget"
         mc:Ignorable="d"
-        Title="Similar Music List" Height="450" Width="460" Foreground="{x:Null}" ResizeMode="NoResize">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black"/>
-            <GradientStop Color="#FF091261" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
+        Title="Similar Music List" Height="550" Width="456" Foreground="{x:Null}" MinWidth="460" MaxWidth="460" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF050E5B" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <ListBox x:Name="songList" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <ListBox x:Name="songList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Button Grid.Row="0" Grid.Column="1" Width="17" Height="22"  VerticalAlignment="Bottom" Click="Button_Click" BorderBrush="{x:Null}" Panel.ZIndex="1">
+            <Button.Background>
+                <ImageBrush ImageSource="/Resources/Icons/xmark.png"/>
+            </Button.Background>
+        </Button>
+        <Rectangle x:Name="toprect" MouseLeftButtonDown="toprect_MouseDown" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF085594" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        
     </Grid>
 </Window>

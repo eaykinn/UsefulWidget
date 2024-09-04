@@ -34,11 +34,41 @@ namespace MyWidget
         string clientSecret;
         string accessToken;
         SpotifyClient spotify;
-        public Window1(string searchQuery)
+        public Window1(string searchQuery, SolidColorBrush color)
         {
             this.searchQuery = searchQuery;
-         
             InitializeComponent();
+            var color2 = Colors.Black;
+
+            var startPoint = new System.Windows.Point();
+            startPoint.X = 0.5;
+            startPoint.Y = 0;
+
+            var endPoint = new System.Windows.Point();
+            endPoint.X = 0.5;
+            endPoint.Y = 1;
+
+            GradientStop gradientStop = new GradientStop();
+            gradientStop.Color = color2;
+
+            GradientStop gradientStop2 = new GradientStop();
+            System.Windows.Media.Color xasd = new System.Windows.Media.Color();
+            xasd.A = color.Color.A;
+            xasd.B = color.Color.B;
+            xasd.R = color.Color.R;
+            xasd.G = color.Color.G;
+
+            gradientStop2.Color = xasd;
+            gradientStop2.Offset = 1;
+
+            IEnumerable<GradientStop> coll = [gradientStop, gradientStop2];
+
+            var z = new GradientStopCollection(coll);
+
+            var x = new LinearGradientBrush(z, startPoint, endPoint);
+            this.Background = x;
+            toprect.Fill = x;
+
             GetMusicList();
         }
         private string searchQuery {  get; set; }   
@@ -121,7 +151,7 @@ namespace MyWidget
             spotify = new SpotifyClient(accessToken);
 
             SearchRequest searchRequest = new (SearchRequest.Types.Track, searchQuery);
-            searchRequest.Limit = 5;
+            searchRequest.Limit = 10;
            
             var searchResponse = await spotify.Search.Item(searchRequest);
             var fullTracks = searchResponse.Tracks;
@@ -160,6 +190,16 @@ namespace MyWidget
                     return null;
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void toprect_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

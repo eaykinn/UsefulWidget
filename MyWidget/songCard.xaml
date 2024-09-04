@@ -7,12 +7,6 @@
              xmlns:local="clr-namespace:MyWidget"
              mc:Ignorable="d" Width="455" Height="120">
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF040B35" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition Height="20*"/>
