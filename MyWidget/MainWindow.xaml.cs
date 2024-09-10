@@ -161,10 +161,10 @@ namespace MyWidget
 
         
 
-        private void ChangeTheme(SolidColorBrush color)
+        private void  ChangeTheme(SolidColorBrush color)
         {
             var color2 = Colors.Black;
-
+           
             var startPoint = new System.Windows.Point();
             startPoint.X = 0.5;
             startPoint.Y = 0;
@@ -1149,12 +1149,13 @@ namespace MyWidget
         private void lbl1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             string seachQuery = lbl1.Content.ToString();
-
+            var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
-            mediaColor.A = defCol.A;
-            mediaColor.R = defCol.R;
-            mediaColor.G = defCol.G;
-            mediaColor.B = defCol.B;
+            mediaColor.A = x.A;
+            mediaColor.R = x.R;
+            mediaColor.G = x.G;
+            mediaColor.B = x.B;
+           
             SolidColorBrush newCol = new(mediaColor);
 
             var window1 = new Window1(seachQuery, newCol);
