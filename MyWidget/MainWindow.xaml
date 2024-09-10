@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:MyWidget"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="MyWidget.MainWindow"
         mc:Ignorable="d"
-        Title="Widget" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" Icon="/power-off-solid.png">
+        Title="Widget" Background="Transparent" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" Icon="/power-off-solid.png" AllowsTransparency="True">
 
     <Window.Resources>
 
@@ -61,380 +61,370 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" />
-            <GradientStop Color="#FF085594" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
-    <Grid x:Name="generalGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="270*"/>
-            <RowDefinition Height="229*"/>
-            <RowDefinition Height="7"/>
-            <RowDefinition Height="220*"/>
-        </Grid.RowDefinitions>
-        <hc:ColorPicker x:Name="themeColorPicker" Language="eng" Visibility="Hidden" SelectedColorChanged="themeColorPicker_SelectedColorChanged" Canceled="themeColorPicker_Canceled" Confirmed="themeColorPicker_Confirmed" Panel.ZIndex="1" Margin="0,1,195,277" Grid.Row="1"/>
-
-        <Grid x:Name="weatherGrid" Margin="10,3,10,5" Grid.Row="4">
+    <Border x:Name="border"  CornerRadius="10,10,10,10" BorderThickness="1,1,1,1" BorderBrush ="Black">
+        <Grid x:Name="generalGrid" Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="30"/>
                 <RowDefinition Height="35"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="15"/>
-                <RowDefinition/>
+                <RowDefinition Height="270*"/>
+                <RowDefinition Height="229*"/>
+                <RowDefinition Height="7"/>
+                <RowDefinition Height="220*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="95"/>
-                <ColumnDefinition Width="95"/>
-                <ColumnDefinition Width="95"/>
-                <ColumnDefinition Width="95"/>
-                <ColumnDefinition Width="16*"/>
-            </Grid.ColumnDefinitions>
+            <hc:ColorPicker x:Name="themeColorPicker" Language="eng" Visibility="Hidden" SelectedColorChanged="themeColorPicker_SelectedColorChanged" Canceled="themeColorPicker_Canceled" Confirmed="themeColorPicker_Confirmed" Panel.ZIndex="1" Margin="0,1,195,277" Grid.Row="1"/>
 
-            <TextBlock Grid.Column="3" Grid.Row= "6" Grid.ColumnSpan= "2" FontSize= "9" >
+            <Grid x:Name="weatherGrid" Margin="10,3,10,5" Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95"/>
+                    <ColumnDefinition Width="95"/>
+                    <ColumnDefinition Width="95"/>
+                    <ColumnDefinition Width="95"/>
+                    <ColumnDefinition Width="16*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="3" Grid.Row= "6" Grid.ColumnSpan= "2" FontSize= "9" >
                 <Hyperlink NavigateUri= "https://open-meteo.com/" RequestNavigate= "Hyperlink_RequestNavigate" Foreground= "#FFD6D6D6" >
                     Powered by open-meteo.com
                 </Hyperlink>
-            </TextBlock>
-            <Label x:Name="birinciGunTarih"  Content="Label"  Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="28" />
-            <Label x:Name="birinciGunMin" Content="Label"  Grid.Column="0" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
-            <Label x:Name="birinciGunMax" Content="Label"  Grid.Column="0" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14"/>
-            <Label x:Name="ikinciGunTarih" Content="Label"  Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="28" FontWeight="Bold" />
-            <Label x:Name="ikinciGunMin" Content="Label"  Grid.Column="1"   Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
-            <Label x:Name="ikinciGunMax" Content="Label" Grid.Column="1"   Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
-            <Label x:Name="ucuncuGunTarih" Content="Label"  Grid.Column="2" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="28" />
-            <Label x:Name="ucuncuGunMin" Content="Label"  Grid.Column="2" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
-            <Label x:Name="ucuncuGunMax" Content="Label"  Grid.Column="2" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
-            <Label x:Name="birinciGunDurum" Content="durum1" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="36" Width="100"  />
-            <Label x:Name="ikinciGunDurum"  Content="durum2" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="36" Width="100"  />
-            <Label x:Name="ucuncuGunDurum"  Content="durum3" Grid.Column="2" Grid.Row="3" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="36" Width="90"  />
-            <Label x:Name="dorduncuGunDurum"  Content="durum3" Grid.Column="3" Grid.Row="3" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="36" Width="90"  />
+                </TextBlock>
+                <Label x:Name="birinciGunTarih"  Content="Label"  Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="28" />
+                <Label x:Name="birinciGunMin" Content="Label"  Grid.Column="0" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
+                <Label x:Name="birinciGunMax" Content="Label"  Grid.Column="0" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14"/>
+                <Label x:Name="ikinciGunTarih" Content="Label"  Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="28" FontWeight="Bold" />
+                <Label x:Name="ikinciGunMin" Content="Label"  Grid.Column="1"   Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
+                <Label x:Name="ikinciGunMax" Content="Label" Grid.Column="1"   Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
+                <Label x:Name="ucuncuGunTarih" Content="Label"  Grid.Column="2" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="28" />
+                <Label x:Name="ucuncuGunMin" Content="Label"  Grid.Column="2" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
+                <Label x:Name="ucuncuGunMax" Content="Label"  Grid.Column="2" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
+                <Label x:Name="birinciGunDurum" Content="durum1" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="36" Width="100"  />
+                <Label x:Name="ikinciGunDurum"  Content="durum2" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="36" Width="100"  />
+                <Label x:Name="ucuncuGunDurum"  Content="durum3" Grid.Column="2" Grid.Row="3" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="36" Width="90"  />
+                <Label x:Name="dorduncuGunDurum"  Content="durum3" Grid.Column="3" Grid.Row="3" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="36" Width="90"  />
 
-            <Label x:Name="dorduncuGunTarih"  Content="Label"  Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="28" />
-            <Label x:Name="dorduncuGunMin" Content="Label"  Grid.Column="3" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
-            <Label x:Name="dorduncuGunMax" Content="Label"  Grid.Column="3" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14"/>
-
-
-            <hc:SearchBar x:Name="searchBarTxt"  Grid.ColumnSpan="4"  TextWrapping="Wrap" Text="SearchBar" SearchStarted="SearchBar_SearchStarted"  Height="25" KeyDown="searchBarTxt_KeyDown" Foreground="White" VerticalAlignment="Center" Background="{x:Null}" Margin="63,0,66,0" >
-                <hc:SearchBar.Effect>
-                    <DropShadowEffect/>
-                </hc:SearchBar.Effect>
-            </hc:SearchBar>
-
-            <Label x:Name="CityLabel" Grid.Column="2" Grid.ColumnSpan="2" Content="Label" Grid.Row="1"  Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" Height="26" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="120" Padding="10,0,10,0" HorizontalAlignment="Left" Margin="64,0,0,0" />
-            <Label x:Name="currentweatherCodeExpl" Grid.Column="2" Grid.ColumnSpan="3" Content="Label" Grid.Row="1"  Foreground="#FFBBB5B5" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="10" FontWeight="Bold" Height="22" VerticalAlignment="Bottom"  VerticalContentAlignment="Center" Width="150" Padding="10,0,10,0" HorizontalAlignment="Left" Margin="49,0,0,0"/>
-
-            <Label x:Name="CurrentWeatherLabel" Grid.Column="1" Grid.ColumnSpan="2" Content="Label" Grid.Row="1" Foreground="White" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="20" Height="44" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
-            <Label x:Name="CurrentWeatherPic"  Content="anlikdurum" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="46" Width="90"   />
-
-        </Grid>
-        <Grid x:Name="Mscply" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <hc:PreviewSlider x:Name="timelineSlider" Grid.Column="1" Grid.ColumnSpan="8" HorizontalAlignment="Left"  Grid.Row="5" VerticalAlignment="Top" Width="286" PreviewMouseUp="timelineSlider_PreviewMouseUp" BorderBrush="#FFE0E0E0" Background="White" Maximum="1000" Margin="32,25,0,0" Grid.RowSpan="2">
-                <hc:PreviewSlider.Effect>
-                    <DropShadowEffect/>
-                </hc:PreviewSlider.Effect>
-            </hc:PreviewSlider>
-            <hc:Divider x:Name="MscPlaterDivider" Width="424" Grid.Row="8" Foreground="White" Background="White" Grid.ColumnSpan="10" LineStroke="White" BorderBrush="White" Height="1" Margin="0,23,1,1"/>
-
-            <Label x:Name="maxTimeLbl" Grid.Column="8" Content="Label" HorizontalAlignment="Left" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C3C3" Margin="16,21,0,0" FontWeight="Bold" HorizontalContentAlignment="Left" Width="52" VerticalAlignment="Top"/>
-            <Label x:Name="currentTimeLbl" Grid.ColumnSpan="2" Grid.Column="0" Content="Label" Grid.RowSpan="2" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C5C5" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Width="52" HorizontalAlignment="Left" Margin="22,21,0,0" VerticalAlignment="Top" />
-            <Image x:Name="songImage" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="6"  Stretch="UniformToFill" Margin="10,5,0,19" HorizontalAlignment="Left" Width="171"  />
-            <hc:RunningBlock x:Name="lbl1" MouseDoubleClick="lbl1_MouseDoubleClick" Content="Label" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"  AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" Grid.ColumnSpan="6" FontSize="16" Margin="15,6,21,25" Grid.RowSpan="3" FontWeight="Bold">
-                <hc:RunningBlock.Effect>
-                    <DropShadowEffect/>
-                </hc:RunningBlock.Effect>
-            </hc:RunningBlock>
-            <hc:RunningBlock x:Name="lbl2" Content="Label" Grid.Column="4"  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDADADA" Margin="17,6,0,0" Width="227" HorizontalContentAlignment="Left" Grid.RowSpan="2" Grid.ColumnSpan="6" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14" Height="40" VerticalAlignment="Top" AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True"   >
-                <hc:RunningBlock.Effect>
-                    <DropShadowEffect/>
-                </hc:RunningBlock.Effect>
-            </hc:RunningBlock>
-            <Button x:Name="oncekiSarki" Content="" Width="18" Height="24" Click="oncekiSarki_Click" Grid.Column="3" Grid.Row="7" BorderBrush="{x:Null}" Foreground="{x:Null}" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" VerticalAlignment="Top" Margin="12,7,0,0" HorizontalAlignment="Left" >
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="180"/>
-                        <TranslateTransform X="0" Y="0"/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-                <Button.Background>
-                    <ImageBrush ImageSource="/forward.png"/>
-                </Button.Background>
-
-            </Button>
+                <Label x:Name="dorduncuGunTarih"  Content="Label"  Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="28" />
+                <Label x:Name="dorduncuGunMin" Content="Label"  Grid.Column="3" Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14" />
+                <Label x:Name="dorduncuGunMax" Content="Label"  Grid.Column="3" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14"/>
 
 
-            <Button x:Name="playStop" Width="48" Click="Button_Click_3" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="40" Grid.Column="4"  Grid.Row="7" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="20,0,0,11" VerticalAlignment="Bottom" HorizontalAlignment="Left"  >
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Background>
-                    <ImageBrush/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="sonrakiSarki" Width="18" Height="24"  Click="sonrakiSarki_Click"  Grid.Column="6"   Grid.Row="7" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.RowSpan="2" VerticalAlignment="Top" Margin="12,7,0,0" HorizontalAlignment="Left" >
-                <Button.Background>
-                    <ImageBrush ImageSource="/forward.png"/>
-                </Button.Background>
-            </Button>
-            <hc:RunningBlock x:Name="lbl3" Content="Label"  IsRunning="False" AutoRun="True" Grid.Column="4" Grid.Row="4"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFBFBFBF" Width="226" HorizontalContentAlignment="Left" Grid.ColumnSpan="6" HorizontalAlignment="Right" Margin="0,2,12,0" Grid.RowSpan="2" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="40" Duration="00:00:10" AutoReverse="True"  >
-                <hc:RunningBlock.Effect>
-                    <DropShadowEffect/>
-                </hc:RunningBlock.Effect>
-            </hc:RunningBlock>
-            <CheckBox x:Name="AutoStopMusic" Content="" Grid.Row="8" FontSize="8" Foreground="White" Click="AutoStopMusic_Click" Margin="7,0,12,0"/>
-            <Label FontSize="9" Grid.ColumnSpan="4" Content="Stop when user locks the session" Grid.Row="8" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="136" HorizontalContentAlignment="Left" Padding="0,0,0,0" Height="16" HorizontalAlignment="Left" Margin="24,0,0,0"/>
-        </Grid>
-        <Grid x:Name="topBar">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
-            <Rectangle x:Name="toprect" MouseLeftButtonDown="Rectangle_MouseDown" Grid.Column="0" Height="30" Grid.Row="0" Grid.ColumnSpan="8">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF085594" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Label Content=": : :" Width="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="30" MouseLeftButtonDown="Rectangle_MouseDown" Foreground="White" Grid.Column="3" Grid.ColumnSpan="2" BorderBrush="{x:Null}" Background="{x:Null}"/>
-            <Button x:Name="MaxMinButton" Grid.Column="6" Width="40" Click="Button_Click_4" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="30" Panel.ZIndex="1" HorizontalAlignment="Left">
-                <Button.Background>
-                    <ImageBrush Stretch="Fill"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="paletteButton" Content="Button" Width="18" Click="Button_Click_2" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="18" HorizontalAlignment="Left" Grid.Column="0" Margin="9,0,0,0">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Resources/Icons/palette.png"/>
-                </Button.Background>
+                <hc:SearchBar x:Name="searchBarTxt"  Grid.ColumnSpan="4"  TextWrapping="Wrap" Text="SearchBar" SearchStarted="SearchBar_SearchStarted"  Height="25" KeyDown="searchBarTxt_KeyDown" Foreground="White" VerticalAlignment="Center" Background="{x:Null}" Margin="63,0,66,0" >
+                    <hc:SearchBar.Effect>
+                        <DropShadowEffect/>
+                    </hc:SearchBar.Effect>
+                </hc:SearchBar>
 
-            </Button>
-            <Button Grid.Column="7" Width="17" Height="22" Click="Button_Click_1"  FontWeight="Bold"  BorderBrush="{x:Null}" >
-                <Button.Background>
-                    <ImageBrush ImageSource="/Resources/Icons/xmark.png"/>
-                </Button.Background>
+                <Label x:Name="CityLabel" Grid.Column="2" Grid.ColumnSpan="2" Content="Label" Grid.Row="1"  Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" Height="26" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="120" Padding="10,0,10,0" HorizontalAlignment="Left" Margin="64,0,0,0" />
+                <Label x:Name="currentweatherCodeExpl" Grid.Column="2" Grid.ColumnSpan="3" Content="Label" Grid.Row="1"  Foreground="#FFBBB5B5" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="10" FontWeight="Bold" Height="22" VerticalAlignment="Bottom"  VerticalContentAlignment="Center" Width="150" Padding="10,0,10,0" HorizontalAlignment="Left" Margin="49,0,0,0"/>
 
-            </Button>
-        </Grid>
-        <Grid Grid.Row="1" x:Name="grid1"  Margin="0,1,0,4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="12*"/>
-                <ColumnDefinition Width="48*"/>
-                <ColumnDefinition Width="45*"/>
-                <ColumnDefinition Width="58*"/>
-                <ColumnDefinition Width="56*"/>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="45*"/>
-                <ColumnDefinition Width="52*"/>
-                <ColumnDefinition Width="27*"/>
-                <ColumnDefinition Width="31.27"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="76"/>
-                <RowDefinition Height="29"/>
-                <RowDefinition Height="47"/>
-                <RowDefinition Height="30"/>
+                <Label x:Name="CurrentWeatherLabel" Grid.Column="1" Grid.ColumnSpan="2" Content="Label" Grid.Row="1" Foreground="White" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="20" Height="44" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                <Label x:Name="CurrentWeatherPic"  Content="anlikdurum" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Foreground="White" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}" Height="46" Width="90"   />
+
+            </Grid>
+            <Grid x:Name="Mscply" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <hc:PreviewSlider x:Name="timelineSlider" Grid.Column="1" Grid.ColumnSpan="8" HorizontalAlignment="Left"  Grid.Row="5" VerticalAlignment="Top" Width="286" PreviewMouseUp="timelineSlider_PreviewMouseUp" BorderBrush="#FFE0E0E0" Background="White" Maximum="1000" Margin="32,25,0,0" Grid.RowSpan="2">
+                    <hc:PreviewSlider.Effect>
+                        <DropShadowEffect/>
+                    </hc:PreviewSlider.Effect>
+                </hc:PreviewSlider>
+                <hc:Divider x:Name="MscPlaterDivider" Width="424" Grid.Row="8" Foreground="White" Background="White" Grid.ColumnSpan="10" LineStroke="White" BorderBrush="White" Height="1" Margin="0,23,1,1"/>
+
+                <Label x:Name="maxTimeLbl" Grid.Column="8" Content="Label" HorizontalAlignment="Left" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C3C3" Margin="16,21,0,0" FontWeight="Bold" HorizontalContentAlignment="Left" Width="52" VerticalAlignment="Top"/>
+                <Label x:Name="currentTimeLbl" Grid.ColumnSpan="2" Grid.Column="0" Content="Label" Grid.RowSpan="2" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C5C5" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Width="52" HorizontalAlignment="Left" Margin="22,21,0,0" VerticalAlignment="Top" />
+                <Image x:Name="songImage" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="6"  Stretch="UniformToFill" Margin="10,5,0,19" HorizontalAlignment="Left" Width="171"  />
+                <hc:RunningBlock x:Name="lbl1" MouseDoubleClick="lbl1_MouseDoubleClick" Content="Label" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"  AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" Grid.ColumnSpan="6" FontSize="16" Margin="15,6,21,25" Grid.RowSpan="3" FontWeight="Bold">
+                    <hc:RunningBlock.Effect>
+                        <DropShadowEffect/>
+                    </hc:RunningBlock.Effect>
+                </hc:RunningBlock>
+                <hc:RunningBlock x:Name="lbl2" Content="Label" Grid.Column="4"  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDADADA" Margin="17,6,0,0" Width="227" HorizontalContentAlignment="Left" Grid.RowSpan="2" Grid.ColumnSpan="6" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14" Height="40" VerticalAlignment="Top" AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True"   >
+                    <hc:RunningBlock.Effect>
+                        <DropShadowEffect/>
+                    </hc:RunningBlock.Effect>
+                </hc:RunningBlock>
+                <Button x:Name="oncekiSarki" Content="" Width="18" Height="24" Click="oncekiSarki_Click" Grid.Column="3" Grid.Row="7" BorderBrush="{x:Null}" Foreground="{x:Null}" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" VerticalAlignment="Top" Margin="12,7,0,0" HorizontalAlignment="Left" >
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform X="0" Y="0"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/forward.png"/>
+                    </Button.Background>
+
+                </Button>
 
 
-            </Grid.RowDefinitions>
+                <Button x:Name="playStop" Width="48" Click="Button_Click_3" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="40" Grid.Column="4"  Grid.Row="7" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="20,0,0,11" VerticalAlignment="Bottom" HorizontalAlignment="Left"  >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <ImageBrush/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="sonrakiSarki" Width="18" Height="24"  Click="sonrakiSarki_Click"  Grid.Column="6"   Grid.Row="7" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.RowSpan="2" VerticalAlignment="Top" Margin="12,7,0,0" HorizontalAlignment="Left" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="/forward.png"/>
+                    </Button.Background>
+                </Button>
+                <hc:RunningBlock x:Name="lbl3" Content="Label"  IsRunning="False" AutoRun="True" Grid.Column="4" Grid.Row="4"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFBFBFBF" Width="226" HorizontalContentAlignment="Left" Grid.ColumnSpan="6" HorizontalAlignment="Right" Margin="0,2,12,0" Grid.RowSpan="2" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="40" Duration="00:00:10" AutoReverse="True"  >
+                    <hc:RunningBlock.Effect>
+                        <DropShadowEffect/>
+                    </hc:RunningBlock.Effect>
+                </hc:RunningBlock>
+                <CheckBox x:Name="AutoStopMusic" Content="" Grid.Row="8" FontSize="8" Foreground="White" Click="AutoStopMusic_Click" Margin="7,0,12,0"/>
+                <Label FontSize="9" Grid.ColumnSpan="4" Content="Stop when user locks the session" Grid.Row="8" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="136" HorizontalContentAlignment="Left" Padding="0,0,0,0" Height="16" HorizontalAlignment="Left" Margin="24,0,0,0"/>
+            </Grid>
+            <Grid x:Name="topBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Border x:Name="topborder" BorderBrush ="Black" CornerRadius="10,10,10,10" BorderThickness="1,1,1,1"  Grid.Column="0" Height="30" Grid.Row="0" Grid.ColumnSpan="8">
+                    <Rectangle x:Name="toprect" MouseLeftButtonDown="Rectangle_MouseDown"/>
+                </Border>
+                <Label Content=": : :" Width="56" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="30" MouseLeftButtonDown="Rectangle_MouseDown" Foreground="White" Grid.Column="3" Grid.ColumnSpan="2" BorderBrush="{x:Null}" Background="{x:Null}"/>
+                <Button x:Name="MaxMinButton" Grid.Column="6" Width="40" Click="Button_Click_4" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="30" Panel.ZIndex="1" HorizontalAlignment="Left">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="paletteButton" Content="Button" Width="18" Click="Button_Click_2" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="18" HorizontalAlignment="Left" Grid.Column="0" Margin="9,0,0,0">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Resources/Icons/palette.png"/>
+                    </Button.Background>
+
+                </Button>
+                <Button Grid.Column="7" Width="17" Height="22" Click="Button_Click_1"  FontWeight="Bold"  BorderBrush="{x:Null}" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Resources/Icons/xmark.png"/>
+                    </Button.Background>
+
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1" x:Name="grid1"  Margin="0,1,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="48*"/>
+                    <ColumnDefinition Width="45*"/>
+                    <ColumnDefinition Width="58*"/>
+                    <ColumnDefinition Width="56*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="45*"/>
+                    <ColumnDefinition Width="52*"/>
+                    <ColumnDefinition Width="27*"/>
+                    <ColumnDefinition Width="31.27"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="76"/>
+                    <RowDefinition Height="29"/>
+                    <RowDefinition Height="47"/>
+                    <RowDefinition Height="30"/>
+
+
+                </Grid.RowDefinitions>
 
 
 
-            <hc:PreviewSlider Name ="prewslid" Maximum="100"  Grid.Column="2" Grid.ColumnSpan="6" Grid.Row="3" Height="18" ValueChanged="Slider_ValueChanged" Initialized="Slider_Initialized" BorderBrush="{x:Null}" Margin="32,29,20,29">
-                <hc:PreviewSlider.Effect>
-                    <DropShadowEffect/>
-                </hc:PreviewSlider.Effect>
-            </hc:PreviewSlider>
+                <hc:PreviewSlider Name ="prewslid" Maximum="100"  Grid.Column="2" Grid.ColumnSpan="6" Grid.Row="3" Height="18" ValueChanged="Slider_ValueChanged" Initialized="Slider_Initialized" BorderBrush="{x:Null}" Margin="32,29,20,29">
+                    <hc:PreviewSlider.Effect>
+                        <DropShadowEffect/>
+                    </hc:PreviewSlider.Effect>
+                </hc:PreviewSlider>
 
-            <Label x:Name="timeLbl" Width="208" Height="64" FontSize="40" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="2" Grid.ColumnSpan="5" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="45,0,0,0" Grid.RowSpan="2">
-                <Label.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </Label.Resources>
-                <Label.Effect>
-                    <DropShadowEffect/>
-                </Label.Effect>
-            </Label>
-            <Label x:Name="dateLbl" FontSize="14" Grid.Column="2" Grid.ColumnSpan="6" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="1" Width="248" Height="32" Margin="0,45,0,0" Grid.RowSpan="2" VerticalAlignment="Top">
-                <Label.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </Label.Resources>
-                <Label.Effect>
-                    <DropShadowEffect/>
-                </Label.Effect>
-            </Label>
+                <Label x:Name="timeLbl" Width="208" Height="64" FontSize="40" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="2" Grid.ColumnSpan="5" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="45,0,0,0" Grid.RowSpan="2">
+                    <Label.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Label.Resources>
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <Label x:Name="dateLbl" FontSize="14" Grid.Column="2" Grid.ColumnSpan="6" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="1" Width="248" Height="32" Margin="0,45,0,0" Grid.RowSpan="2" VerticalAlignment="Top">
+                    <Label.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Label.Resources>
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
 
-            <Button Style="{DynamicResource ButtonStyle1}" x:Name="muteButton" Width="34" Click="muteButton_Click"   BorderBrush="{x:Null}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="39,28,0,22" Foreground="{x:Null}" Grid.ColumnSpan="2" >
-                <Button.Background>
-                    <ImageBrush/>
-                </Button.Background>
-                <Button.Effect>
-                    <DropShadowEffect/>
-                </Button.Effect>
+                <Button Style="{DynamicResource ButtonStyle1}" x:Name="muteButton" Width="34" Click="muteButton_Click"   BorderBrush="{x:Null}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="39,28,0,22" Foreground="{x:Null}" Grid.ColumnSpan="2" >
+                    <Button.Background>
+                        <ImageBrush/>
+                    </Button.Background>
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
 
-            </Button>
-            <Button x:Name="closeButton" Content="" Click="Button_Click" Width="29"  Grid.Row="5" Height="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0,10,0,0"  Foreground="{x:Null}" BorderBrush="{x:Null}" Margin="12,13,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Top">
-                <Button.Effect>
-                    <DropShadowEffect/>
-                </Button.Effect>
-                <Button.Background>
-                    <ImageBrush ImageSource="/power-off-solid.png"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="resButton" Content="" Click="resButton_Click" Width="29"  Grid.Column="2"  Grid.Row="5"  Height="28" Padding="0,0,0,0"  BorderBrush="{x:Null}"  Margin="23,14,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Top"   >
-                <Button.Effect>
-                    <DropShadowEffect/>
-                </Button.Effect>
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform X="20.126"/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-                <Button.Background>
-                    <ImageBrush ImageSource="/rotate-right-solid.png"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="CancelButton" Content="" Click="CancelButton_Click"  Grid.Column="3" Grid.Row="5" Width="25" Height="32" Padding="0,0,0,0" BorderBrush="{x:Null}" Margin="32,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
-                <Button.Effect>
-                    <DropShadowEffect/>
-                </Button.Effect>
-                <Button.Background>
-                    <ImageBrush ImageSource="/xmark.png"/>
-                </Button.Background>
-            </Button>
-            <TextBox x:Name="hTxtBox" TextWrapping="Wrap"  Width="51" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Left" Margin="45,19,0,21" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" ToolTip="hour"  >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.Effect>
-                    <DropShadowEffect/>
-                </TextBox.Effect>
-            </TextBox>
-            <TextBox x:Name="mTxtBox"  TextWrapping="Wrap" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" Margin="50,19,42,21" Grid.RowSpan="2" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" ToolTip="minute">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.Effect>
-                    <DropShadowEffect/>
-                </TextBox.Effect>
-            </TextBox>
-            <TextBox x:Name="sTxtBox" TextWrapping="Wrap" Width="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="7" Grid.Row="4" HorizontalAlignment="Left" Margin="20,19,0,21" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" ToolTip="second" >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.Effect>
-                    <DropShadowEffect/>
-                </TextBox.Effect>
-            </TextBox>
+                </Button>
+                <Button x:Name="closeButton" Content="" Click="Button_Click" Width="29"  Grid.Row="5" Height="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0,10,0,0"  Foreground="{x:Null}" BorderBrush="{x:Null}" Margin="12,13,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Top">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/power-off-solid.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="resButton" Content="" Click="resButton_Click" Width="29"  Grid.Column="2"  Grid.Row="5"  Height="28" Padding="0,0,0,0"  BorderBrush="{x:Null}"  Margin="23,14,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Top"   >
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform X="20.126"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/rotate-right-solid.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="CancelButton" Content="" Click="CancelButton_Click"  Grid.Column="3" Grid.Row="5" Width="25" Height="32" Padding="0,0,0,0" BorderBrush="{x:Null}" Margin="32,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/xmark.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBox x:Name="hTxtBox" TextWrapping="Wrap"  Width="51" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Left" Margin="45,19,0,21" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" ToolTip="hour"  >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBox x:Name="mTxtBox"  TextWrapping="Wrap" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" Margin="50,19,42,21" Grid.RowSpan="2" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" ToolTip="minute">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBox x:Name="sTxtBox" TextWrapping="Wrap" Width="45" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="7" Grid.Row="4" HorizontalAlignment="Left" Margin="20,19,0,21" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" ToolTip="second" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
 
-            <hc:Divider Width="424" Grid.Column="0" Grid.ColumnSpan= "10" HorizontalAlignment="Left" Margin="0,63,0,0" Grid.Row="3" VerticalAlignment="Top"/>
-            <hc:Divider Width="424" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Foreground="White" Background="White" Grid.ColumnSpan="10" Margin="0,16,0,0"/>
+                <hc:Divider Width="424" Grid.Column="0" Grid.ColumnSpan= "10" HorizontalAlignment="Left" Margin="0,63,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                <hc:Divider Width="424" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Foreground="White" Background="White" Grid.ColumnSpan="10" Margin="0,16,0,0"/>
 
 
-            <hc:ComboBox x:Name="hourCmbx" Grid.ColumnSpan="3" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="66" Margin="12,4,0,0" Grid.RowSpan="2" Background="{x:Null}" Foreground="#FFB5B3B3" FontSize="14" ToolTip="hour">
-                <hc:ComboBox.Effect>
-                    <DropShadowEffect/>
-                </hc:ComboBox.Effect>
-            </hc:ComboBox>
-            <hc:ComboBox x:Name="minCmbx" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="34,4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="69" Grid.Column="2" Grid.RowSpan="2" Background="{x:Null}" Foreground="#FFA5A5A5" FontSize="14" ToolTip="minute">
-                <hc:ComboBox.Effect>
-                    <DropShadowEffect/>
-                </hc:ComboBox.Effect>
-            </hc:ComboBox>
-            <Label x:Name ="currentSoundLevel" Grid.Column="7" Content="-"  Grid.Row="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Width="51" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Margin="19,0,0,0" />
-            <hc:Divider Width="424" Grid.Column="0" Grid.ColumnSpan= "10" HorizontalAlignment="Left" Margin="0,63,0,0" Grid.Row="3" VerticalAlignment="Top"/>
-            <hc:Divider Grid.Column="0" Grid.ColumnSpan="10"  Grid.Row="6" Foreground="White" Height="1" Background="White" BorderBrush="White" LineStroke="White" Margin="0,9,0,20" />
-            <TextBox x:Name="hTxtBox_Kopyala" TextWrapping="Wrap"  Width="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text=":" FontWeight="Bold" IsReadOnly="True" Grid.Column="5" Grid.Row="4" HorizontalAlignment="Left" Margin="38,17,0,24" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Padding="0,0,0,0" Grid.ColumnSpan="2"  >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.Effect>
-                    <DropShadowEffect/>
-                </TextBox.Effect>
-            </TextBox>
-            <TextBox x:Name="hTxtBox_Kopyala1" TextWrapping="Wrap"  Width="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text=":" FontWeight="Bold" IsReadOnly="True" Grid.Column="7" Grid.Row="4" HorizontalAlignment="Left" Margin="4,17,0,23" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Padding="0,0,0,0"  >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.Effect>
-                    <DropShadowEffect/>
-                </TextBox.Effect>
-            </TextBox>
+                <hc:ComboBox x:Name="hourCmbx" Grid.ColumnSpan="3" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="66" Margin="12,4,0,0" Grid.RowSpan="2" Background="{x:Null}" Foreground="#FFB5B3B3" FontSize="14" ToolTip="hour">
+                    <hc:ComboBox.Effect>
+                        <DropShadowEffect/>
+                    </hc:ComboBox.Effect>
+                </hc:ComboBox>
+                <hc:ComboBox x:Name="minCmbx" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="34,4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="69" Grid.Column="2" Grid.RowSpan="2" Background="{x:Null}" Foreground="#FFA5A5A5" FontSize="14" ToolTip="minute">
+                    <hc:ComboBox.Effect>
+                        <DropShadowEffect/>
+                    </hc:ComboBox.Effect>
+                </hc:ComboBox>
+                <Label x:Name ="currentSoundLevel" Grid.Column="7" Content="-"  Grid.Row="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Width="51" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Margin="19,0,0,0" />
+                <hc:Divider Width="424" Grid.Column="0" Grid.ColumnSpan= "10" HorizontalAlignment="Left" Margin="0,63,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                <hc:Divider Grid.Column="0" Grid.ColumnSpan="10"  Grid.Row="6" Foreground="White" Height="1" Background="White" BorderBrush="White" LineStroke="White" Margin="0,9,0,20" />
+                <TextBox x:Name="hTxtBox_Kopyala" TextWrapping="Wrap"  Width="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text=":" FontWeight="Bold" IsReadOnly="True" Grid.Column="5" Grid.Row="4" HorizontalAlignment="Left" Margin="38,17,0,24" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Padding="0,0,0,0" Grid.ColumnSpan="2"  >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBox x:Name="hTxtBox_Kopyala1" TextWrapping="Wrap"  Width="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text=":" FontWeight="Bold" IsReadOnly="True" Grid.Column="7" Grid.Row="4" HorizontalAlignment="Left" Margin="4,17,0,23" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Padding="0,0,0,0"  >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Effect>
+                        <DropShadowEffect/>
+                    </TextBox.Effect>
+                </TextBox>
 
-        </Grid>
+            </Grid>
 
-        <hc:NotifyIcon x:Name="TrayIcon" Text="MyWidget"
+            <hc:NotifyIcon x:Name="TrayIcon" Text="MyWidget"
                          Margin="0,156,399,52" Grid.Row="2">
-            <hc:NotifyIcon.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Command="hc:ControlCommands.PushMainWindow2Top" Header="Open"/>
-                    <MenuItem Command="hc:ControlCommands.ShutdownApp" Header="Exit"/>
-                </ContextMenu>
-            </hc:NotifyIcon.ContextMenu>
-        </hc:NotifyIcon>
-        <hc:ImageBlock HorizontalAlignment="Left" Height="100" Margin="438,11,0,0" VerticalAlignment="Top" Width="100" Grid.Row="2"/>
-        <hc:GifImage HorizontalAlignment="Left" Height="100" Margin="436,7,0,0" VerticalAlignment="Top" Width="100" Grid.Row="2"/>
-    </Grid>
-
+                <hc:NotifyIcon.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="hc:ControlCommands.PushMainWindow2Top" Header="Open"/>
+                        <MenuItem Command="hc:ControlCommands.ShutdownApp" Header="Exit"/>
+                    </ContextMenu>
+                </hc:NotifyIcon.ContextMenu>
+            </hc:NotifyIcon>
+            <hc:ImageBlock HorizontalAlignment="Left" Height="100" Margin="438,11,0,0" VerticalAlignment="Top" Width="100" Grid.Row="2"/>
+            <hc:GifImage HorizontalAlignment="Left" Height="100" Margin="436,7,0,0" VerticalAlignment="Top" Width="100" Grid.Row="2"/>
+        </Grid>
+    </Border>
 </Window>
 
 

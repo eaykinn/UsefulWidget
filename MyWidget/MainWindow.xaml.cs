@@ -125,7 +125,7 @@ namespace MyWidget
         {
             if (isOpened == false) 
             {
-                themeColor = this.Background;
+                themeColor = border.Background;
                 themeColorPicker.Visibility = Visibility.Visible;
                 Grid.SetColumnSpan(themeColorPicker, 8);
                 Grid.SetRowSpan(themeColorPicker, 15);
@@ -191,7 +191,7 @@ namespace MyWidget
             var z = new GradientStopCollection(coll);
 
             var x = new LinearGradientBrush(z, startPoint, endPoint);
-            this.Background = x;
+            border.Background = x;
             toprect.Fill = x;
 
             //searchBarTxt.Background = color;
@@ -877,7 +877,7 @@ namespace MyWidget
         private void themeColorPicker_Canceled(object sender, EventArgs e)
         {
             themeColorPicker.Visibility = Visibility.Hidden;
-            this.Background = themeColor;
+            border.Background = themeColor;
 
             toprect.Fill = themeColor;
         }
@@ -1162,5 +1162,6 @@ namespace MyWidget
             window1.Show();
             
         }
+
     }
 }
