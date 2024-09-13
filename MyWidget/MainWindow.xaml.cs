@@ -272,7 +272,7 @@ namespace MyWidget
             NowPlayingSessionManager player = new NowPlayingSessionManager();
           
             NowPlayingSession[] sessions = player.GetSessions();
-            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe").Select(x => x.GetSessionInfo()).ToList();
+            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe" || x.SourceAppId.Contains("spotify") || x.SourceAppId.Contains("Spotify")).Select(x => x.GetSessionInfo()).ToList();
             if (sessionInfos.Count == 0)
             {
                 return;
@@ -628,7 +628,7 @@ namespace MyWidget
          
             
             NowPlayingSession[] sessions = player.GetSessions();
-            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe").Select(x => x.GetSessionInfo()).ToList();
+            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe" || x.SourceAppId.Contains("spotify") || x.SourceAppId.Contains("Spotify")).Select(x => x.GetSessionInfo()).ToList();
             if (sessionInfos.Count == 0)
             {
                 return;
@@ -649,7 +649,7 @@ namespace MyWidget
             NowPlayingSessionManager player = new NowPlayingSessionManager();
            
             NowPlayingSession[] sessions = player.GetSessions();
-            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe").Select(x => x.GetSessionInfo()).ToList();
+            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe" || x.SourceAppId.Contains("spotify") || x.SourceAppId.Contains("Spotify")).Select(x => x.GetSessionInfo()).ToList();
             if (sessionInfos.Count == 0)
             {
                 return;
@@ -844,7 +844,7 @@ namespace MyWidget
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
             NowPlayingSession[] sessions = player.GetSessions();
-            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe").Select(x => x.GetSessionInfo()).ToList();
+            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe" || x.SourceAppId.Contains("spotify") || x.SourceAppId.Contains("Spotify")).Select(x => x.GetSessionInfo()).ToList();
             if(sessionInfos.Count == 0)
             {
                 return;
@@ -905,7 +905,7 @@ namespace MyWidget
             }
             else
             {
-                if (currentSession.SourceAppId != "Spotify.exe")
+                if (currentSession.SourceAppId != "Spotify.exe" && currentSession.SourceAppId.Contains("spotify") == false && currentSession.SourceAppId.Contains("Spotify") == false)
                 {
                     return;
                 }
