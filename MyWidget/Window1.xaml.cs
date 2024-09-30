@@ -20,6 +20,8 @@ using System.Windows.Controls.Primitives;
 using System.Diagnostics;
 using System.Windows.Navigation;
 using System.Security.Policy;
+using System.IO;
+using System.Windows.Resources;
 
 namespace MyWidget
 {
@@ -145,6 +147,17 @@ namespace MyWidget
 
         async Task GetMusicList()
         {
+            Uri keyUri = new Uri("pack://application:,,,/MyWidget;component/Resources/api_key.json", UriKind.RelativeOrAbsolute);
+            StreamResourceInfo expresourceInfo = Application.GetResourceStream(keyUri);
+            string jsonStr;
+            using (StreamReader reader = new StreamReader(expresourceInfo.Stream))
+            {
+                jsonStr = reader.ReadToEnd();
+            }
+
+            JObject expjson = JObject.Parse(jsonStr);
+            JObject key = expjson;
+
             clientId = "57d565246d7d41d2b8dadd774621c2b1";
             clientSecret = "514cc776fc66433a971fa335b0bb624a";
             accessToken = await GetAccessToken(clientId, clientSecret);
