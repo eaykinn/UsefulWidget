@@ -174,6 +174,8 @@ namespace MyWidget
             accessToken = await GetAccessToken(clientId, clientSecret);
             spotify = new SpotifyClient(accessToken);
 
+          
+
             SearchRequest searchRequest = new (SearchRequest.Types.Track, searchQuery);
             searchRequest.Limit = 10;
            
