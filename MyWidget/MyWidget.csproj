@@ -14,6 +14,7 @@
     <None Remove="closeicon.png" />
     <None Remove="forward.png" />
     <None Remove="foward.png" />
+    <None Remove="Resources\api_key.json" />
     <None Remove="Resources\Icons\forward.png" />
     <None Remove="Resources\Icons\max.png" />
     <None Remove="Resources\Icons\min.png" />
@@ -85,6 +86,7 @@
 
   <ItemGroup>
     <Resource Include="forward.png" />
+    <Resource Include="Resources\api_key.json" />
     <Resource Include="Resources\Icons\ban-solid.png" />
     <Resource Include="Resources\Icons\forward.png" />
     <Resource Include="Resources\Icons\max.png" />

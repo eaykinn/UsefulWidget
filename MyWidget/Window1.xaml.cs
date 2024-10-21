@@ -22,6 +22,8 @@ using System.Windows.Navigation;
 using System.Security.Policy;
 using System.IO;
 using System.Windows.Resources;
+using Swan.Logging;
+using Swan;
 
 namespace MyWidget
 {
@@ -148,18 +150,27 @@ namespace MyWidget
         async Task GetMusicList()
         {
             Uri keyUri = new Uri("pack://application:,,,/MyWidget;component/Resources/api_key.json", UriKind.RelativeOrAbsolute);
-            StreamResourceInfo expresourceInfo = Application.GetResourceStream(keyUri);
-            string jsonStr;
-            using (StreamReader reader = new StreamReader(expresourceInfo.Stream))
+
+            StreamResourceInfo expresourceInfo = null;
+            try
             {
-                jsonStr = reader.ReadToEnd();
+                expresourceInfo = Application.GetResourceStream(keyUri);
             }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Error);
+            }
+      
+            string jsonStr;
+
+            using (StreamReader reader = new StreamReader(expresourceInfo!.Stream))
+                {
+                    jsonStr = reader.ReadToEnd();
+                }
 
             JObject expjson = JObject.Parse(jsonStr);
             JObject key = expjson;
-
-            clientId = "57d565246d7d41d2b8dadd774621c2b1";
-            clientSecret = "514cc776fc66433a971fa335b0bb624a";
+            clientId = (string)key["clientId"];
+            clientSecret = (string)key["clientSecret"];
             accessToken = await GetAccessToken(clientId, clientSecret);
             spotify = new SpotifyClient(accessToken);
 

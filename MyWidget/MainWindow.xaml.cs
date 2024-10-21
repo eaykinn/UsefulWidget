@@ -22,7 +22,7 @@ using HandyControl.Tools;
 namespace MyWidget
 {
 
-    public partial class MainWindow : System.Windows.Window
+    public partial class MainWindow : Window
     {
         private static string? _lat;
         private static string? _lon;
