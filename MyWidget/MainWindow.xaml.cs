@@ -1159,7 +1159,7 @@ namespace MyWidget
             SolidColorBrush newCol = new(mediaColor);
 
             var window1 = new Window1(seachQuery, newCol);
-            window1.Show();
+            window1.Show(); 
             
         }
 
