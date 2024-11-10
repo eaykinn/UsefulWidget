@@ -1,0 +1,6 @@
+﻿################################################################################
+# Bu .gitignore dosyası Microsoft(R) Visual Studio tarafından otomatik olarak oluşturulmuştur.
+################################################################################
+
+/MyWidget/api_key_and_secret.json
+/MyWidget/Resources/api_key.json

@@ -18,6 +18,17 @@
       <li>Countdown timer with Windows shutdown/restrart</li>
     </ul>
     <p> You can also change theme from top left corner. Checkbox below the player provides stopping music when the user locks the current Windows session. I use HandyControl library for interface and colorpicker.</p>
+    <h2>Note:</h2>
+     <p>You need to create api_key.json file in Resources directory and put clientId and clientSecret (for spotify api) in it with following format: 
+       <p> 
+    {<br>
+    "clientId": "YOUR_CLIENT_ID",
+         <br>
+    "clientSecret": "YOUR_CLIENT_SECRET"
+         <br>
+    }
+         <br>
+     </p>
    <div>
      <h2>Maximized Window</h2>
      <picture>
