@@ -38,13 +38,15 @@ namespace MyWidget
         {
             this.searchQuery = searchQuery;
             InitializeComponent();
-            var color2 = Colors.Black;
 
-            var startPoint = new System.Windows.Point();
+
+            Color color2 = Colors.Black;
+
+            Point startPoint = new Point();
             startPoint.X = 0.5;
             startPoint.Y = 0;
 
-            var endPoint = new System.Windows.Point();
+            Point endPoint = new Point();
             endPoint.X = 0.5;
             endPoint.Y = 1;
 

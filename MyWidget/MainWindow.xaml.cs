@@ -12,9 +12,6 @@ using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using Microsoft.Win32;
 using System.Windows.Resources;
-using System.Net.Http.Headers;
-using SpotifyAPI.Web;
-using SpotifyAPI.Web.Auth;
 using System.Globalization;
 using HandyControl.Tools;
 
@@ -1147,7 +1144,7 @@ namespace MyWidget
         }
 
         private void lbl1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
+        {   
             string seachQuery = lbl1.Content.ToString();
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
@@ -1155,7 +1152,7 @@ namespace MyWidget
             mediaColor.R = x.R;
             mediaColor.G = x.G;
             mediaColor.B = x.B;
-           
+            
             SolidColorBrush newCol = new(mediaColor);
 
             var window1 = new Window1(seachQuery, newCol);

@@ -29,6 +29,16 @@ namespace MyWidget
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
+            GoToLink();
+        }
+
+        private void songName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void GoToLink()
+        {
             ProcessStartInfo linkx = new(linkText.Text)
             {
                 UseShellExecute = true
@@ -36,9 +46,9 @@ namespace MyWidget
             Process.Start(linkx);
         }
 
-        private void songName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void linkButton_Click(object sender, RoutedEventArgs e)
         {
-
+            GoToLink();
         }
     }
 }
