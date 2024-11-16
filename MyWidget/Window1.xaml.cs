@@ -20,6 +20,8 @@ using System.Windows.Controls.Primitives;
 using System.Diagnostics;
 using System.Windows.Navigation;
 using System.Security.Policy;
+using System.IO;
+using System.Windows.Resources;
 
 namespace MyWidget
 {
@@ -147,8 +149,20 @@ namespace MyWidget
 
         async Task GetMusicList()
         {
-            clientId = "57d565246d7d41d2b8dadd774621c2b1";
-            clientSecret = "514cc776fc66433a971fa335b0bb624a";
+            Uri iconExpjsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/api_key.json", UriKind.RelativeOrAbsolute);
+            StreamResourceInfo expresourceInfo = Application.GetResourceStream(iconExpjsonUri);
+            string expjsonContent;
+            using (StreamReader reader = new StreamReader(expresourceInfo.Stream))
+            {
+                expjsonContent = reader.ReadToEnd();
+            }
+
+            JObject expjson = JObject.Parse(expjsonContent);
+
+
+            clientId = expjson["client_id"].ToString();
+            clientSecret = expjson["client_secret"].ToString();
+
             accessToken = await GetAccessToken(clientId, clientSecret);
             spotify = new SpotifyClient(accessToken);
 
