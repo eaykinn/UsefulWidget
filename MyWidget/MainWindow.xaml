@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:MyWidget"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="MyWidget.MainWindow"
         mc:Ignorable="d"
-        Title="Widget" Background="Transparent" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" Icon="/power-off-solid.png" AllowsTransparency="True">
+        Title="Widget" Background="Transparent" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" Icon="/Resources/Icons/power-off-solid.png" AllowsTransparency="True">
 
     <Window.Resources>
 
@@ -115,7 +115,7 @@
                 <Label x:Name="dorduncuGunMax" Content="Label"  Grid.Column="3" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" Height="28" Width="100" FontSize="14"/>
 
 
-                <hc:SearchBar x:Name="searchBarTxt"  Grid.ColumnSpan="4"  TextWrapping="Wrap" Text="SearchBar" SearchStarted="SearchBar_SearchStarted"  Height="25" KeyDown="searchBarTxt_KeyDown" Foreground="White" VerticalAlignment="Center" Background="{x:Null}" Margin="63,0,66,0" >
+                <hc:SearchBar x:Name="searchBarTxt"  Grid.ColumnSpan="4"  TextWrapping="Wrap" Text="SearchBar" SearchStarted="SearchBar_SearchStarted"  Height="25" KeyDown="searchBarTxt_KeyDown" Foreground="White" VerticalAlignment="Center" Background="{x:Null}" Margin="63,0,66,0" SelectionBrush="White" CaretBrush="White" SelectionTextBrush="#FFA74F4F" >
                     <hc:SearchBar.Effect>
                         <DropShadowEffect/>
                     </hc:SearchBar.Effect>
@@ -184,7 +184,7 @@
                         </TransformGroup>
                     </Button.RenderTransform>
                     <Button.Background>
-                        <ImageBrush ImageSource="/forward.png"/>
+                        <ImageBrush ImageSource="/Resources/Icons/forward.png"/>
                     </Button.Background>
 
                 </Button>
@@ -202,7 +202,7 @@
                 </Button>
                 <Button x:Name="sonrakiSarki" Width="18" Height="24"  Click="sonrakiSarki_Click"  Grid.Column="6"   Grid.Row="7" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.RowSpan="2" VerticalAlignment="Top" Margin="12,7,0,0" HorizontalAlignment="Left" >
                     <Button.Background>
-                        <ImageBrush ImageSource="/forward.png"/>
+                        <ImageBrush ImageSource="/Resources/Icons/forward.png"/>
                     </Button.Background>
                 </Button>
                 <hc:RunningBlock x:Name="lbl3" Content="Label"  IsRunning="False" AutoRun="True" Grid.Column="4" Grid.Row="4"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFBFBFBF" Width="226" HorizontalContentAlignment="Left" Grid.ColumnSpan="6" HorizontalAlignment="Right" Margin="0,2,12,0" Grid.RowSpan="2" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="40" Duration="00:00:10" AutoReverse="True"  >
@@ -314,7 +314,7 @@
                         <DropShadowEffect/>
                     </Button.Effect>
                     <Button.Background>
-                        <ImageBrush ImageSource="/power-off-solid.png"/>
+                        <ImageBrush ImageSource="/Resources/Icons/power-off-solid.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="resButton" Content="" Click="resButton_Click" Width="29"  Grid.Column="2"  Grid.Row="5"  Height="28" Padding="0,0,0,0"  BorderBrush="{x:Null}"  Margin="23,14,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Top"   >
@@ -330,7 +330,7 @@
                         </TransformGroup>
                     </Button.RenderTransform>
                     <Button.Background>
-                        <ImageBrush ImageSource="/rotate-right-solid.png"/>
+                        <ImageBrush ImageSource="/Resources/Icons/rotate-right-solid.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="CancelButton" Content="" Click="CancelButton_Click"  Grid.Column="3" Grid.Row="5" Width="25" Height="32" Padding="0,0,0,0" BorderBrush="{x:Null}" Margin="32,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
@@ -338,7 +338,7 @@
                         <DropShadowEffect/>
                     </Button.Effect>
                     <Button.Background>
-                        <ImageBrush ImageSource="/xmark.png"/>
+                        <ImageBrush ImageSource="/Resources/Icons/xmark.png"/>
                     </Button.Background>
                 </Button>
                 <TextBox x:Name="hTxtBox" TextWrapping="Wrap"  Width="51" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="28" Text="00" FontWeight="Bold" IsReadOnly="True" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Left" Margin="45,19,0,21" Grid.RowSpan="2" Background="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" BorderBrush="{x:Null}" ToolTip="hour"  >

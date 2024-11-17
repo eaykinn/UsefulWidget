@@ -5,8 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyWidget"
-             mc:Ignorable="d" Width="455" Height="120">
-    <Grid>
+             mc:Ignorable="d" Width="455" Height="120"
+             Background="Transparent" Foreground="{x:Null}">
+    <Grid  Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition Height="20*"/>
@@ -28,31 +29,31 @@
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
 
-        <Label x:Name="songNameLbl" Grid.Row="1" Grid.Column="2"  Background="{x:Null}" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Foreground="White">
+        <Label x:Name="songNameLbl" Grid.Row="1" Grid.Column="2"  Background="Transparent" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Foreground="White">
             Song
         </Label>
-        <Label x:Name="artistNameLbl" Grid.Row="2" Grid.Column="2"  Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Foreground="White">
+        <Label x:Name="artistNameLbl" Grid.Row="2" Grid.Column="2"  Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Left" Foreground="White">
             Artist
         </Label>
-        <Label Grid.Row="3" Grid.Column="2"  Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Foreground="White">
+        <Label Grid.Row="3" Grid.Column="2"  Background="Transparent" BorderBrush="{x:Null}" HorizontalAlignment="Left" Foreground="White">
             Album
         </Label>
-        <Label Grid.Row="4" Grid.Column="2"  BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Left" Foreground="White">
+        <Label Grid.Row="4" Grid.Column="2"  BorderBrush="Transparent" Background="{x:Null}" HorizontalAlignment="Left" Foreground="White">
             Link
         </Label>
 
-        <hc:TextBox x:Name="songName" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="8" BorderBrush="{x:Null}" IsReadOnly="True" Background="{x:Null}" Foreground="White" MouseDoubleClick="songName_MouseDoubleClick">
+        <hc:TextBox x:Name="songName" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="8" BorderBrush="{x:Null}" IsReadOnly="True" Background="Transparent" Foreground="White" MouseDoubleClick="songName_MouseDoubleClick">
             Song Name
         </hc:TextBox>
 
-        <hc:TextBox x:Name="artistName" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="8" BorderBrush="{x:Null}" IsReadOnly="True" Background="{x:Null}" Foreground="White">
+        <hc:TextBox x:Name="artistName" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="8" BorderBrush="{x:Null}" IsReadOnly="True" Background="Transparent" Foreground="White">
             Song Name
         </hc:TextBox>
-        <hc:TextBox x:Name="albumName"  Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="8" BorderBrush="{x:Null}" IsReadOnly="True" Background="{x:Null}" Foreground="White">
+        <hc:TextBox x:Name="albumName"  Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="8" BorderBrush="{x:Null}" IsReadOnly="True" Background="Transparent" Foreground="White">
             Song Name
         </hc:TextBox>
         <Button x:Name="linkButton" Grid.Column="10" Grid.Row= "4" BorderBrush="{x:Null}" Click="linkButton_Click" Height="16" Width="22" >

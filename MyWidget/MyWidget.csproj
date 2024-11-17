@@ -12,21 +12,18 @@
     <None Remove="Adsız.png" />
     <None Remove="ban-solid.png" />
     <None Remove="closeicon.png" />
-    <None Remove="forward.png" />
     <None Remove="foward.png" />
     <None Remove="Resources\api_key.json" />
     <None Remove="Resources\Icons\forward.png" />
     <None Remove="Resources\Icons\max.png" />
     <None Remove="Resources\Icons\min.png" />
+    <None Remove="Resources\Icons\minimize-solid.png" />
     <None Remove="Resources\Icons\mute.png" />
-    <None Remove="min.png" />
-    <None Remove="minimize-solid.png" />
     <None Remove="mute.png" />
     <None Remove="palette.png" />
     <None Remove="play.png" />
     <None Remove="power-off-solid %281%29.png" />
     <None Remove="power-off-solid %282%29.svg" />
-    <None Remove="power-off-solid.png" />
     <None Remove="Resources\Icons\play.png" />
     <None Remove="Resources\Icons\power-off-solid.png" />
     <None Remove="Resources\Icons\rotate-right-solid.png" />
@@ -48,11 +45,9 @@
     <None Remove="Resources\Icons\weather_icons\sun-solid.png" />
     <None Remove="Resources\Icons\weather_icons\wind-solid.png" />
     <None Remove="Resources\weather_code_exp.json" />
-    <None Remove="rotate-right-solid.png" />
     <None Remove="volume-xmark-solid.png" />
     <None Remove="weather_icon_match.json" />
     <None Remove="xmark-solid %281%29.png" />
-    <None Remove="xmark.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,12 +80,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="forward.png" />
     <Resource Include="Resources\api_key.json" />
     <Resource Include="Resources\Icons\ban-solid.png" />
     <Resource Include="Resources\Icons\forward.png" />
     <Resource Include="Resources\Icons\max.png" />
     <Resource Include="Resources\Icons\min.png" />
+    <Resource Include="Resources\Icons\minimize-solid.png" />
     <Resource Include="Resources\Icons\mute.png" />
     <Resource Include="Resources\Icons\palette.png" />
     <Resource Include="Resources\Icons\play.png" />
@@ -115,13 +110,8 @@
     <Resource Include="Resources\Icons\weather_icons\sun-solid.png" />
     <Resource Include="Resources\Icons\weather_icons\wind-solid.png" />
     <Resource Include="Resources\Icons\xmark.png" />
-    <Resource Include="min.png" />
-    <Resource Include="minimize-solid.png" />
-    <Resource Include="power-off-solid.png" />
     <Resource Include="Resources\weather_code_exp.json" />
-    <Resource Include="rotate-right-solid.png" />
     <Resource Include="Resources\weather_icon_match.json" />
-    <Resource Include="xmark.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,30 +6,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyWidget"
         mc:Ignorable="d"
-        Title="Similar Music List" Height="550" Width="456" Foreground="{x:Null}" MinWidth="460" MaxWidth="460" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="25"/>
-        </Grid.ColumnDefinitions>
-        <ListBox x:Name="songList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}"/>
-        <Button Grid.Row="0" Grid.Column="1" Width="17" Height="22"  VerticalAlignment="Bottom" Click="Button_Click" BorderBrush="{x:Null}" Panel.ZIndex="1">
-            <Button.Background>
-                <ImageBrush ImageSource="/Resources/Icons/xmark.png"/>
-            </Button.Background>
-        </Button>
-        <Rectangle x:Name="toprect" MouseLeftButtonDown="toprect_MouseDown" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-            <Rectangle.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FF085594" Offset="1"/>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
+        Title="Similar Music List" Height="550" Width="456" MinWidth="460" MaxWidth="460" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True">
+    <Border x:Name="borderx" CornerRadius="10,10,10,10" BorderThickness="1,1,1,1" BorderBrush="Black">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="songList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <Button Grid.Row="0" Grid.Column="1" Width="17" Height="22"  VerticalAlignment="Bottom" Click="Button_Click" BorderBrush="{x:Null}" Panel.ZIndex="1">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Resources/Icons/xmark.png"/>
+                </Button.Background>
+            </Button>
+            <Border x:Name="topborder" Background="Transparent" BorderBrush ="Black" CornerRadius="10,10,10,10" BorderThickness="1,1,1,1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+                <Rectangle x:Name="toprect" MouseLeftButtonDown="toprect_MouseDown" >
         
-    </Grid>
+            </Rectangle>
+            </Border>
+        </Grid>
+    </Border>
 </Window>

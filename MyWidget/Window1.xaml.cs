@@ -70,7 +70,7 @@ namespace MyWidget
             var z = new GradientStopCollection(coll);
 
             var x = new LinearGradientBrush(z, startPoint, endPoint);
-            this.Background = x;
+            borderx.Background = x;
             toprect.Fill = x;
 
             GetMusicList();
