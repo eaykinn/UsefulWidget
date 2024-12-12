@@ -1,25 +1,25 @@
-﻿using System.Diagnostics;
+﻿using HandyControl.Tools;
+using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
+using NPSMLib;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Threading;
-using NPSMLib;
-using Newtonsoft.Json.Linq;
-using System.Net.Http;
-using Microsoft.Win32;
 using System.Windows.Resources;
-using System.Globalization;
-using HandyControl.Tools;
+using System.Windows.Threading;
 
 
 namespace MyWidget
 {
 
-    public partial class MainWindow : System.Windows.Window
+    public partial class MainWindow : Window
     {
         private static string? _lat;
         private static string? _lon;
@@ -45,7 +45,6 @@ namespace MyWidget
         private bool AutoStopMusicSet;
         public MainWindow()
         {
-
             try
             {
                 InitializeComponent();
@@ -1160,5 +1159,14 @@ namespace MyWidget
             
         }
 
+        private void lbl1_MouseEnter(object sender, MouseEventArgs e)
+        {
+            lbl1.Foreground = Brushes.LightGray;
+        }
+
+        private void lbl1_MouseLeave(object sender, MouseEventArgs e)
+        {
+            lbl1.Foreground = Brushes.White;
+        }
     }
 }

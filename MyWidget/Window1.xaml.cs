@@ -160,8 +160,8 @@ namespace MyWidget
             JObject expjson = JObject.Parse(expjsonContent);
 
 
-            clientId = expjson["client_id"].ToString();
-            clientSecret = expjson["client_secret"].ToString();
+            clientId = expjson["clientId"].ToString();
+            clientSecret = expjson["clientSecret"].ToString();
 
             accessToken = await GetAccessToken(clientId, clientSecret);
             spotify = new SpotifyClient(accessToken);

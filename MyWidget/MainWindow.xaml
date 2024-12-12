@@ -1,12 +1,12 @@
 ﻿<Window
+        x:Class="MyWidget.MainWindow"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-        
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyWidget"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="MyWidget.MainWindow"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
         mc:Ignorable="d"
         Title="Widget" Background="Transparent" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" Icon="/power-off-solid.png" AllowsTransparency="True">
 
@@ -164,10 +164,14 @@
                 <Label x:Name="maxTimeLbl" Grid.Column="8" Content="Label" HorizontalAlignment="Left" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C3C3" Margin="16,21,0,0" FontWeight="Bold" HorizontalContentAlignment="Left" Width="52" VerticalAlignment="Top"/>
                 <Label x:Name="currentTimeLbl" Grid.ColumnSpan="2" Grid.Column="0" Content="Label" Grid.RowSpan="2" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C5C5" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Width="52" HorizontalAlignment="Left" Margin="22,21,0,0" VerticalAlignment="Top" />
                 <Image x:Name="songImage" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="6"  Stretch="UniformToFill" Margin="10,5,0,19" HorizontalAlignment="Left" Width="171"  />
-                <hc:RunningBlock x:Name="lbl1" MouseDoubleClick="lbl1_MouseDoubleClick" Content="Label" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"  AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" Grid.ColumnSpan="6" FontSize="16" Margin="15,6,21,25" Grid.RowSpan="3" FontWeight="Bold">
+                <hc:RunningBlock x:Name="lbl1" MouseDoubleClick="lbl1_MouseDoubleClick" Content="Label" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"  AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" Grid.ColumnSpan="6" FontSize="16" Margin="15,6,21,25" Grid.RowSpan="3" FontWeight="Bold" ForceCursor="True" MouseEnter="lbl1_MouseEnter" MouseLeave="lbl1_MouseLeave">
                     <hc:RunningBlock.Effect>
                         <DropShadowEffect/>
+
                     </hc:RunningBlock.Effect>
+                
+                    
+                    
                 </hc:RunningBlock>
                 <hc:RunningBlock x:Name="lbl2" Content="Label" Grid.Column="4"  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDADADA" Margin="17,6,0,0" Width="227" HorizontalContentAlignment="Left" Grid.RowSpan="2" Grid.ColumnSpan="6" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14" Height="40" VerticalAlignment="Top" AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True"   >
                     <hc:RunningBlock.Effect>

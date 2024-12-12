@@ -1,0 +1,17 @@
+C:\Users\PC_3741\deploy\MyWidget.exe
+C:\Users\PC_3741\deploy\MyWidget.dll
+C:\Users\PC_3741\deploy\MyWidget.deps.json
+C:\Users\PC_3741\deploy\MyWidget.runtimeconfig.json
+C:\Users\PC_3741\deploy\MyWidget.dll.config
+C:\Users\PC_3741\deploy\MyWidget.pdb
+C:\Users\PC_3741\deploy\EmbedIO.dll
+C:\Users\PC_3741\deploy\HandyControl.dll
+C:\Users\PC_3741\deploy\HtmlAgilityPack.dll
+C:\Users\PC_3741\deploy\Newtonsoft.Json.dll
+C:\Users\PC_3741\deploy\NPSMLib.dll
+C:\Users\PC_3741\deploy\SpotifyAPI.Web.dll
+C:\Users\PC_3741\deploy\SpotifyAPI.Web.Auth.dll
+C:\Users\PC_3741\deploy\Swan.Lite.dll
+C:\Users\PC_3741\deploy\Plugin.SimpleAudioPlayer.Abstractions.dll
+C:\Users\PC_3741\deploy\Plugin.SimpleAudioPlayer.dll
+C:\Users\PC_3741\deploy\en\HandyControl.resources.dll
