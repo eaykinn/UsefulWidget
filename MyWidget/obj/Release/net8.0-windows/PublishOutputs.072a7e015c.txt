@@ -1,0 +1,17 @@
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.exe
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.deps.json
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.runtimeconfig.json
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.dll.config
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.pdb
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\EmbedIO.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\HandyControl.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\HtmlAgilityPack.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Newtonsoft.Json.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\NPSMLib.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\SpotifyAPI.Web.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\SpotifyAPI.Web.Auth.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Swan.Lite.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Plugin.SimpleAudioPlayer.Abstractions.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Plugin.SimpleAudioPlayer.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\en\HandyControl.resources.dll

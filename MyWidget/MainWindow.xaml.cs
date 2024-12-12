@@ -1142,7 +1142,7 @@ namespace MyWidget
 
         }
 
-        private void lbl1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void lbl1_MouseClick(object sender, MouseButtonEventArgs e)
         {   
             string seachQuery = lbl1.Content.ToString();
             var x = Properties.Settings.Default.defaultColor;
