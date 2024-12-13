@@ -1,4 +1,5 @@
-﻿using HandyControl.Tools;
+﻿using HandyControl.Controls;
+using HandyControl.Tools;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using NPSMLib;
@@ -19,7 +20,7 @@ using System.Windows.Threading;
 namespace MyWidget
 {
 
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         private static string? _lat;
         private static string? _lon;
@@ -43,6 +44,7 @@ namespace MyWidget
         JObject weatherCodes;
         JObject weatherExpCodes;
         private bool AutoStopMusicSet;
+   
         public MainWindow()
         {
             try
@@ -54,6 +56,8 @@ namespace MyWidget
                 HandyControl.Controls.MessageBox.Show(ex.ToString());
                 Console.ReadLine();
             }
+
+            
         }
 
 
@@ -1154,7 +1158,7 @@ namespace MyWidget
             
             SolidColorBrush newCol = new(mediaColor);
 
-            var window1 = new Window1(seachQuery, newCol);
+            Window1 window1 = new Window1(seachQuery, newCol);
             window1.Show();
             
         }

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HandyControl.Controls;
 using SpotifyAPI.Web;
 
 namespace MyWidget
@@ -54,10 +55,10 @@ namespace MyWidget
 
             //Window1.GetAccessToken()
 
-
+            //Window1.GetAccessToken(acce);
 
             HttpClient client = new HttpClient();
-            string accessToken = "BQDYX0PxXZCRLSajIYlk7tmdaJG77DJcqXwv4qu_xlwDvmqEis4RlO5S6ZILUk3QbMeX7sq2qXstaSizyTxaDLZFrZu-dL2VdxGl2IJlMw71cPlj8JPYlzXgyZiUhc00o46PZNOxdeAmB7Klph2Jze35H1tJxtFXOVtDMimjvIjVXeC2_IxRhMJpAyiQOk_49J3WnpPWTAdxYd0";
+            string accessToken =  "BQDYX0PxXZCRLSajIYlk7tmdaJG77DJcqXwv4qu_xlwDvmqEis4RlO5S6ZILUk3QbMeX7sq2qXstaSizyTxaDLZFrZu-dL2VdxGl2IJlMw71cPlj8JPYlzXgyZiUhc00o46PZNOxdeAmB7Klph2Jze35H1tJxtFXOVtDMimjvIjVXeC2_IxRhMJpAyiQOk_49J3WnpPWTAdxYd0";
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
             string playUrl = "https://api.spotify.com/v1/me/player/play";
             string playBody = $"{{\"uris\": [\"{TrackUri}\"]}}";

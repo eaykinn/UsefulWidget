@@ -24,9 +24,9 @@ namespace MyWidget
     {
         List<FullTrack> tracks;
         string sLink;
-        string clientId;
-        string clientSecret;
-        string accessToken;
+        public string clientId;
+        public string clientSecret;
+        public static string? accessToken;
         SpotifyClient spotify;
         public Window1(string searchQuery, SolidColorBrush color)
         {
