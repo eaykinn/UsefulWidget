@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,8 +26,10 @@ namespace MyWidget
         public songCard()
         {
             InitializeComponent();
+            
         }
 
+        public string TrackUri { get; set; }
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             GoToLink();
@@ -46,9 +49,30 @@ namespace MyWidget
             Process.Start(linkx);
         }
 
-        private void linkButton_Click(object sender, RoutedEventArgs e)
+        private async void linkButton_Click(object sender, RoutedEventArgs e)
         {
-            GoToLink();
+
+            //Window1.GetAccessToken()
+
+
+
+            HttpClient client = new HttpClient();
+            string accessToken = "BQDYX0PxXZCRLSajIYlk7tmdaJG77DJcqXwv4qu_xlwDvmqEis4RlO5S6ZILUk3QbMeX7sq2qXstaSizyTxaDLZFrZu-dL2VdxGl2IJlMw71cPlj8JPYlzXgyZiUhc00o46PZNOxdeAmB7Klph2Jze35H1tJxtFXOVtDMimjvIjVXeC2_IxRhMJpAyiQOk_49J3WnpPWTAdxYd0";
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+            string playUrl = "https://api.spotify.com/v1/me/player/play";
+            string playBody = $"{{\"uris\": [\"{TrackUri}\"]}}";
+
+            HttpContent content = new StringContent(playBody, Encoding.UTF8, "application/json");
+            
+            HttpResponseMessage playResponse = await client.PutAsync(playUrl, content);
+
+            if (playResponse.IsSuccessStatusCode)
+                Console.WriteLine("Şarkı çalmaya başladı!");
+            else
+                Console.WriteLine("Hata: " + await playResponse.Content.ReadAsStringAsync());
+
+
+            //GoToLink();
         }
     }
 }

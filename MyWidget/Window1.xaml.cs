@@ -79,6 +79,7 @@ namespace MyWidget
                 songCard.songName.Text = track.Name;
                 songCard.artistName.Text = track.Artists[0].Name;
                 songCard.albumName.Text = track.Album.Name;
+                songCard.TrackUri = track.Uri;
                 sLink = track.ExternalUrls.Values.First().ToString();
                 Uri songUrl = new(sLink);
                 songCard.songHyperLink.NavigateUri = songUrl;          
@@ -185,7 +186,7 @@ namespace MyWidget
  
         }
 
-        static async Task<string> GetAccessToken(string clientId, string clientSecret)
+        public static async Task<string> GetAccessToken(string clientId, string clientSecret)
         {
 
             using (var client = new HttpClient())
