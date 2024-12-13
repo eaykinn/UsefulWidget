@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using Microsoft.Web.WebView2.Wpf;
+using Newtonsoft.Json.Linq;
+using SpotifyAPI.Web;
+using System;
+using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http.Headers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using HandyControl;
-using Newtonsoft.Json.Linq;
-using SpotifyAPI.Web;
-using System.Windows.Controls.Primitives;
-using System.Diagnostics;
 using System.Windows.Navigation;
-using System.Security.Policy;
-using System.IO;
 using System.Windows.Resources;
+
 
 namespace MyWidget
 {
@@ -98,7 +90,24 @@ namespace MyWidget
               
                 songList.Items.Add(songItem);
             }
-            
+
+            /*Uri iconExpjsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/index.html", UriKind.RelativeOrAbsolute);
+            StreamResourceInfo expresourceInfo = Application.GetResourceStream(iconExpjsonUri);
+            string expjsonContent;
+            using (StreamReader reader = new StreamReader(expresourceInfo.Stream))
+            {
+                expjsonContent = reader.ReadToEnd();
+            }
+            await webView2.EnsureCoreWebView2Async();
+            webView2.NavigateToString(expjsonContent);*/
+
+            string localHtmlPath = Path.GetFullPath("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Resources\\index.html");
+            string localHtmlUri = new Uri(localHtmlPath).AbsoluteUri;
+
+            await webView2.EnsureCoreWebView2Async();
+            // Yerel HTML dosyasını yükle
+            webView2.CoreWebView2.Navigate(localHtmlUri);
+
         }
 
         private async Task<BitmapImage> GetPicofTrack(string songId)

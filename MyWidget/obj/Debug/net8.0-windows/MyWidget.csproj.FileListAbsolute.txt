@@ -346,3 +346,14 @@ C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-win
 C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-windows\MyWidget.pdb
 C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-windows\MyWidget.genruntimeconfig.cache
 C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-windows\ref\MyWidget.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\runtimes\win-x86\native\WebView2Loader.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\runtimes\win-arm64\native\WebView2Loader.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Core.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Core.xml
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Wpf.xml
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-windows\MyWidget_Content.g.cs
+C:\Users\PC_3741\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Resources\index.html
