@@ -7,13 +7,12 @@
         xmlns:local="clr-namespace:MyWidget"
         xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Class="MyWidget.Window1"
         mc:Ignorable="d"
-        Title="Similar Music List" Height="750" Width="456" Foreground="{x:Null}" MinWidth="460" MaxWidth="460" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Similar Music List" Height="550" Width="456" Foreground="{x:Null}" MinWidth="460" MaxWidth="460" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
-
             <RowDefinition Height="*"/>
-            <RowDefinition Height="200"/>
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -33,8 +32,6 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-
-        <Wpf:WebView2 x:Name="webView2"  Grid.Row="2"/>
 
     </Grid>
 </Window>

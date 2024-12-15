@@ -52,13 +52,37 @@ namespace MyWidget
 
         private async void linkButton_Click(object sender, RoutedEventArgs e)
         {
+            string accessToken;
+            if (Properties.Settings.Default.accessTokenSet != "")
+            {
+                accessToken = Properties.Settings.Default.accessTokenSet;
 
-            //Window1.GetAccessToken()
+                using (HttpClient clientS = new HttpClient())
+                {
+                    clientS.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+                    HttpResponseMessage response = await clientS.GetAsync("https://api.spotify.com/v1/me");
 
-            //Window1.GetAccessToken(acce);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("Token geçerli!");
+                    }
+                    else
+                    {
+                        accessToken = await SpotifyGetAccessToken.GetUserPerm();
+                        Properties.Settings.Default.accessTokenSet = accessToken;
+                        Properties.Settings.Default.Save();
+                    }
+                }
+
+            }
+            else
+            {
+                accessToken = await SpotifyGetAccessToken.GetUserPerm();
+                Properties.Settings.Default.accessTokenSet = accessToken;
+                Properties.Settings.Default.Save();
+            }
 
             HttpClient client = new HttpClient();
-            string accessToken =  "BQDYX0PxXZCRLSajIYlk7tmdaJG77DJcqXwv4qu_xlwDvmqEis4RlO5S6ZILUk3QbMeX7sq2qXstaSizyTxaDLZFrZu-dL2VdxGl2IJlMw71cPlj8JPYlzXgyZiUhc00o46PZNOxdeAmB7Klph2Jze35H1tJxtFXOVtDMimjvIjVXeC2_IxRhMJpAyiQOk_49J3WnpPWTAdxYd0";
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
             string playUrl = "https://api.spotify.com/v1/me/player/play";
             string playBody = $"{{\"uris\": [\"{TrackUri}\"]}}";

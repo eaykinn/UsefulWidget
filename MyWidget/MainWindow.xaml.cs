@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Resources;
 using System.Windows.Threading;
-
+using System.Configuration;
 
 namespace MyWidget
 {
@@ -57,11 +57,10 @@ namespace MyWidget
                 Console.ReadLine();
             }
 
-            
+   
         }
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+    private void Button_Click(object sender, RoutedEventArgs e)
         {
             //timepicker.GettTime();
             ctHour = Convert.ToInt16(hourCmbx.SelectedValue);

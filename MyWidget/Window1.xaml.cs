@@ -92,23 +92,6 @@ namespace MyWidget
                 songList.Items.Add(songItem);
             }
 
-            /*Uri iconExpjsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/index.html", UriKind.RelativeOrAbsolute);
-            StreamResourceInfo expresourceInfo = Application.GetResourceStream(iconExpjsonUri);
-            string expjsonContent;
-            using (StreamReader reader = new StreamReader(expresourceInfo.Stream))
-            {
-                expjsonContent = reader.ReadToEnd();
-            }
-            await webView2.EnsureCoreWebView2Async();
-            webView2.NavigateToString(expjsonContent);*/
-
-            string localHtmlPath = Path.GetFullPath("C:\\Users\\PC_3741\\source\\repos\\eaykinn\\UsefulWidget\\MyWidget\\Resources\\index.html");
-            string localHtmlUri = new Uri(localHtmlPath).AbsoluteUri;
-
-            await webView2.EnsureCoreWebView2Async();
-            // Yerel HTML dosyasını yükle
-            webView2.CoreWebView2.Navigate(localHtmlUri);
-
         }
 
         private async Task<BitmapImage> GetPicofTrack(string songId)
@@ -159,21 +142,37 @@ namespace MyWidget
 
         async Task GetMusicList()
         {
-            Uri iconExpjsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/api_key.json", UriKind.RelativeOrAbsolute);
-            StreamResourceInfo expresourceInfo = Application.GetResourceStream(iconExpjsonUri);
-            string expjsonContent;
-            using (StreamReader reader = new StreamReader(expresourceInfo.Stream))
+
+            string accessToken;
+            if (Properties.Settings.Default.accessTokenSet != "")
             {
-                expjsonContent = reader.ReadToEnd();
+                accessToken = Properties.Settings.Default.accessTokenSet;
+
+                using (HttpClient clientS = new HttpClient())
+                {
+                    clientS.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+                    HttpResponseMessage response = await clientS.GetAsync("https://api.spotify.com/v1/me");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("Token geçerli!");
+                    }
+                    else
+                    {
+                        accessToken = await SpotifyGetAccessToken.GetUserPerm();
+                        Properties.Settings.Default.accessTokenSet = accessToken;
+                        Properties.Settings.Default.Save();
+                    }
+                }
+
+            }
+            else
+            {
+                accessToken = await SpotifyGetAccessToken.GetUserPerm();
+                Properties.Settings.Default.accessTokenSet = accessToken;
+                Properties.Settings.Default.Save();
             }
 
-            JObject expjson = JObject.Parse(expjsonContent);
-
-
-            clientId = expjson["clientId"].ToString();
-            clientSecret = expjson["clientSecret"].ToString();
-
-            accessToken = await GetAccessToken(clientId, clientSecret);
             spotify = new SpotifyClient(accessToken);
 
             SearchRequest searchRequest = new (SearchRequest.Types.Track, searchQuery);

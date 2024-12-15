@@ -8,13 +8,13 @@ C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-window
 MyWidget
 none
 false
-TRACE;RELEASE;NET;NET8_0;NETCOREAPP
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\App.xaml
 41480954361
-11783381588
-13549338124
-419-488527602
+3-483876945
+9-381389770
+211-355561535
 MainWindow.xaml;songCard.xaml;Themes\Generic.xaml;Window1.xaml;
 
-True
+False
 

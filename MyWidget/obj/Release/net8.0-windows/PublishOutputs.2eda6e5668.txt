@@ -1,4 +1,7 @@
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.exe
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\runtimes\win-x86\native\WebView2Loader.dll
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\runtimes\win-arm64\native\WebView2Loader.dll
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.dll
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.deps.json
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\MyWidget.runtimeconfig.json
@@ -15,3 +18,9 @@ C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-wind
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Plugin.SimpleAudioPlayer.Abstractions.dll
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Plugin.SimpleAudioPlayer.dll
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\en\HandyControl.resources.dll
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Microsoft.Web.WebView2.Core.dll
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Microsoft.Web.WebView2.Core.xml
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Release\net8.0-windows\app.publish\Microsoft.Web.WebView2.Wpf.xml

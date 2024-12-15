@@ -361,7 +361,6 @@ C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\obj\Debug\net8.0-window
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\runtimes\win-x86\native\WebView2Loader.dll
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\runtimes\win-x64\native\WebView2Loader.dll
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\runtimes\win-arm64\native\WebView2Loader.dll
-C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Resources\index.html
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Core.dll
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.WinForms.dll
 C:\Users\USER\source\repos\eaykinn\UsefulWidget\MyWidget\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Wpf.dll
