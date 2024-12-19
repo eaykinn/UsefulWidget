@@ -44,7 +44,9 @@ namespace MyWidget
         JObject weatherCodes;
         JObject weatherExpCodes;
         private bool AutoStopMusicSet;
-   
+        Window1 window1;
+
+
         public MainWindow()
         {
             try
@@ -1157,9 +1159,22 @@ namespace MyWidget
             
             SolidColorBrush newCol = new(mediaColor);
 
-            Window1 window1 = new Window1(seachQuery, newCol);
-            window1.ShowDialog();
-            
+           // window1 = new Window1(seachQuery, newCol);
+            //window1.Show();
+            //window1.ShowDialog();
+
+            if (window1 == null) // Eğer diyalog penceresi zaten açık değilse
+            {
+                window1 = new Window1(seachQuery, newCol);
+                window1.Closed += (s, args) => window1 = null; // Pencere kapandığında referansı sıfırla
+                window1.Show(); // Pencereyi modal olmadan aç
+            }
+            else
+            {
+                window1.Activate(); // Pencere zaten açıksa öne getir
+            }
+
+
         }
 
         private void lbl1_MouseEnter(object sender, MouseEventArgs e)
