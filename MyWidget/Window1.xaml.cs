@@ -226,5 +226,18 @@ namespace MyWidget
         {
             this.DragMove();
         }
+
+        private void songSearchBox_SearchStarted(object sender, HandyControl.Data.FunctionEventArgs<string> e)
+        {
+            songList.Items.Clear();
+            searchQuery = songSearchBox.Text;
+            GetMusicList();
+        }
+
+       /* private void songSearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            searchQuery = songSearchBox.Text;
+            GetMusicList();
+        }*/
     }
 }

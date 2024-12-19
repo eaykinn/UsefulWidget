@@ -63,12 +63,25 @@ namespace MyWidget
                 UseShellExecute = true
             };
             Process.Start(linkx);
+            HttpListenerContext context;
 
-            var context = listener.GetContext();
+            try
+            {
+                context = listener.GetContext();
+            }
+            catch (Exception)
+            {
 
+                throw;
+
+            }
+            
 
             string code = context.Request.QueryString["code"];
-
+            if(code == null)
+            {
+                return "No auth";
+            }
             var response = context.Response;
             string responseString = "Authorization successful. You can close this window.";
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
