@@ -144,10 +144,12 @@ namespace MyWidget
         {
 
             string accessToken;
+            string refreshToken;
+            List<string> tokens = new List<string>();
             if (Properties.Settings.Default.accessTokenSet != "")
             {
                 accessToken = Properties.Settings.Default.accessTokenSet;
-
+                refreshToken = Properties.Settings.Default.refreshToken;
                 using (HttpClient clientS = new HttpClient())
                 {
                     clientS.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
@@ -159,8 +161,12 @@ namespace MyWidget
                     }
                     else
                     {
-                        accessToken = await SpotifyGetAccessToken.GetUserPerm();
-                        Properties.Settings.Default.accessTokenSet = accessToken;
+                       
+                        tokens = await SpotifyGetAccessToken.GetUserPerm(0);
+                        accessToken = tokens[0];
+                        //refreshToken = tokens[1];
+                        Properties.Settings.Default.accessTokenSet = tokens[0];
+                        //Properties.Settings.Default.refreshToken = tokens[1];
                         Properties.Settings.Default.Save();
                     }
                 }
@@ -168,8 +174,12 @@ namespace MyWidget
             }
             else
             {
-                accessToken = await SpotifyGetAccessToken.GetUserPerm();
-                Properties.Settings.Default.accessTokenSet = accessToken;
+                
+                tokens = await SpotifyGetAccessToken.GetUserPerm(1);
+                accessToken = tokens[0];
+                refreshToken = tokens[1];
+                Properties.Settings.Default.accessTokenSet = tokens[0];
+                Properties.Settings.Default.refreshToken = tokens[1];
                 Properties.Settings.Default.Save();
             }
 

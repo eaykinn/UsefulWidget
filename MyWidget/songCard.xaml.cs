@@ -53,9 +53,13 @@ namespace MyWidget
         private async void linkButton_Click(object sender, RoutedEventArgs e)
         {
             string accessToken;
+            string refreshToken;
+            List<string> tokens;
+
             if (Properties.Settings.Default.accessTokenSet != "")
             {
                 accessToken = Properties.Settings.Default.accessTokenSet;
+                refreshToken = Properties.Settings.Default.refreshToken;
 
                 using (HttpClient clientS = new HttpClient())
                 {
@@ -68,8 +72,11 @@ namespace MyWidget
                     }
                     else
                     {
-                        accessToken = await SpotifyGetAccessToken.GetUserPerm();
+                        tokens = await SpotifyGetAccessToken.GetUserPerm(0);
+                        accessToken = tokens[0];
+                        //refreshToken = tokens[1];
                         Properties.Settings.Default.accessTokenSet = accessToken;
+                        //Properties.Settings.Default.refreshToken = accessToken;
                         Properties.Settings.Default.Save();
                     }
                 }
@@ -77,8 +84,11 @@ namespace MyWidget
             }
             else
             {
-                accessToken = await SpotifyGetAccessToken.GetUserPerm();
+                tokens = await SpotifyGetAccessToken.GetUserPerm(1);
+                accessToken = tokens[0];
+                refreshToken = tokens[1];
                 Properties.Settings.Default.accessTokenSet = accessToken;
+                Properties.Settings.Default.refreshToken = accessToken;
                 Properties.Settings.Default.Save();
             }
 

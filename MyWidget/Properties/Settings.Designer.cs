@@ -81,5 +81,17 @@ namespace MyWidget.Properties {
                 this["accessTokenSet"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string refreshToken {
+            get {
+                return ((string)(this["refreshToken"]));
+            }
+            set {
+                this["refreshToken"] = value;
+            }
+        }
     }
 }

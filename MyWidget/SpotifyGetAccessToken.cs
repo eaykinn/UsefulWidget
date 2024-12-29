@@ -1,9 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Windows;
 using System.Windows.Resources;
 
@@ -75,41 +78,100 @@ namespace MyWidget
                 throw;
 
             }
-            
 
+           
             string code = context.Request.QueryString["code"];
-            if(code == null)
+         
+
+            if (code == null)
             {
                 return "No auth";
             }
             var response = context.Response;
+          
             string responseString = "Authorization successful. You can close this window.";
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
             response.ContentLength64 = buffer.Length;
             response.OutputStream.Write(buffer, 0, buffer.Length);
             response.OutputStream.Close();
-
+            var z = context.Request.QueryString;
             listener.Stop();
+            
             return code;
         }
 
-        public static async Task<string> GetUserPerm()
+        public static async Task<List<string>> GetUserPerm(int getAuth)
         {
+            string code;
+            List<string> y = new();
+            List<string> accessToken = new();
+            List<string> x = new();
+
             GetClientIdandClientSecret();
 
-            string code = StartHttpListener();
+            if (getAuth == 0) 
+            {
+                code = await RefreshToken(clientId,clientSecret, Properties.Settings.Default.refreshToken);
+                x.Add(code);
+            }
+            else
+            {
+                code = StartHttpListener();
+                y = await GetAccessToken(code);
+                x.Add(y[0]);
 
+            }
 
-
-            string x = await GetAccessToken(code);
             return x;
 
         }
 
+        public async static Task<string> RefreshToken(string clientId, string clientSecret, string refreshToken)
+        {   
+            HttpClient httpClient = new HttpClient();   
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://accounts.spotify.com/api/token");
 
-        public static async Task<string> GetAccessToken(string code)
+            var authHeader = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authHeader);
+
+            request.Content = new FormUrlEncodedContent(new[]
+            {
+                 new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                 new KeyValuePair<string, string>("refresh_token", refreshToken),
+             });
+
+            HttpResponseMessage response = await httpClient.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = await response.Content.ReadAsStringAsync();
+                var tokenResponse = JsonSerializer.Deserialize<SpotifyTokenResponse>(responseBody);
+                return tokenResponse?.access_token;
+            }
+            else
+            {
+                throw new Exception("Token yenilenemedi.");
+            }
+        }
+
+        public class SpotifyTokenResponse
+        {
+            public string access_token { get; set; }
+            public string TokenType { get; set; }
+            public int ExpiresIn { get; set; }
+        }
+
+        public class SpToken
+        {   
+            public string access_token { get; set; }
+            public string refresh_token { get; set; }
+
+        }
+
+        public static async Task<List<string>> GetAccessToken(string code)
         {
 
+            List<string> tokens = new();
             string redirectUri = "http://localhost:5533/callback/";
 
             using (var client = new HttpClient())
@@ -129,13 +191,21 @@ namespace MyWidget
 
                 if (response.IsSuccessStatusCode)
                 {
-                    dynamic json = Newtonsoft.Json.JsonConvert.DeserializeObject(responseContent);
-                    return json.access_token;
+                    SpToken json = JsonSerializer.Deserialize<SpToken>(responseContent);
+                    tokens.Add(json.access_token);
+                    tokens.Add(json.refresh_token);
+
+                    Properties.Settings.Default.accessTokenSet = tokens[0];
+                    Properties.Settings.Default.refreshToken = tokens[1];
+                    Properties.Settings.Default.Save();
+                    // tokens[0] = (String)json.access_token;
+                    //tokens[1] = (String)json.refresh_token;
+                    return tokens;
                 }
                 else
                 {
                     Console.WriteLine("Error: " + responseContent);
-                    return null;
+                    return tokens;
                 }
             }
         }
