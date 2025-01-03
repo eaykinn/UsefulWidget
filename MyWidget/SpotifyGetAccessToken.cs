@@ -110,9 +110,27 @@ namespace MyWidget
             GetClientIdandClientSecret();
 
             if (getAuth == 0) 
-            {
-                code = await RefreshToken(clientId,clientSecret, Properties.Settings.Default.refreshToken);
-                x.Add(code);
+            {   
+                if(Properties.Settings.Default.refreshToken == "") 
+                {
+                    code = StartHttpListener();
+                    y = await GetAccessToken(code);
+                    x.Add(y[0]);
+                }
+                else
+                {
+                    code = await RefreshToken(clientId, clientSecret, Properties.Settings.Default.refreshToken);
+                    if(code == "")
+                    {
+                        await GetUserPerm(1);
+                    }
+                    else
+                    {
+                        x.Add(code);
+                    }
+                    
+                }
+                
             }
             else
             {
@@ -150,7 +168,7 @@ namespace MyWidget
             }
             else
             {
-                throw new Exception("Token yenilenemedi.");
+                return "";
             }
         }
 

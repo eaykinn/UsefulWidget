@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:MyWidget"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
         mc:Ignorable="d"
-        Title="Widget" Background="Transparent" Height="780" KeyUp="Window_KeyUp" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize"  AllowsTransparency="True" Icon="/U.png">
+        Title="Widget" Background="Transparent" Height="780" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize"  AllowsTransparency="True" Icon="/U.png">
         
     <Window.Resources>
 

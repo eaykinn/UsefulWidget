@@ -88,7 +88,9 @@
 
   <ItemGroup>
     <Resource Include="forward.png" />
-    <EmbeddedResource Include="Resources\api_key.json" />
+    <EmbeddedResource Include="Resources\api_key.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Resource Include="Resources\Icons\ban-solid.png" />
     <Resource Include="Resources\Icons\forward.png" />
     <Resource Include="Resources\Icons\max.png" />

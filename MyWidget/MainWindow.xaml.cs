@@ -16,6 +16,8 @@ using System.Windows.Navigation;
 using System.Windows.Resources;
 using System.Windows.Threading;
 using System.Configuration;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 
 namespace MyWidget
 {
@@ -46,6 +48,16 @@ namespace MyWidget
         private bool AutoStopMusicSet;
         Window1 window1;
 
+        private const int HOTKEY_ID = 9029;
+        private const int HOTKEY2_ID = 9061;// Benzersiz bir ID
+        private const uint VK_F9 = 0x78; // F9 tuşu
+        private const uint VK_F12 = 0x7A; // F12 tuşu
+
+        [DllImport("user32.dll")]
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         public MainWindow()
         {
@@ -59,10 +71,58 @@ namespace MyWidget
                 Console.ReadLine();
             }
 
-   
+            Loaded += MainWindow_Loaded2;
+            Closing += MainWindow_Closing;
+
+        }
+        private void MainWindow_Loaded2(object sender, RoutedEventArgs e)
+        {
+        
+            var helper = new WindowInteropHelper(this);
+            RegisterHotKey(helper.Handle, HOTKEY_ID, 0,VK_F9);
+            RegisterHotKey(helper.Handle, HOTKEY2_ID, 0, VK_F12); // Ctrl+Alt+F9
+            ComponentDispatcher.ThreadFilterMessage += ComponentDispatcher_ThreadFilterMessage;
+       
         }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var helper = new WindowInteropHelper(this);
+            UnregisterHotKey(helper.Handle, HOTKEY_ID);
+            UnregisterHotKey(helper.Handle, HOTKEY2_ID);
+        }
+
+        private void ComponentDispatcher_ThreadFilterMessage(ref MSG msg, ref bool handled)
+        {
+            if (msg.message != 0x0312) // Sadece WM_HOTKEY
+                return;
+
+            NowPlayingSessionManager player = new NowPlayingSessionManager();
+            NowPlayingSession currentSession = player.CurrentSession;
+            if (player.Count == 0) { return; }
+            MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
+
+            if (msg.message == 0x0312) // WM_HOTKEY
+            {
+                int id = msg.wParam.ToInt32();
+                if (id == HOTKEY_ID)
+                {
+                    handled = true;
+                    x.SendMediaPlaybackCommand(MediaPlaybackCommands.Previous);
+
+                }
+                else if(id == HOTKEY2_ID) 
+                {
+                    handled = true;
+                    x.SendMediaPlaybackCommand(MediaPlaybackCommands.Next);
+                }
+            }
+            GetCurrentMedia(false, true);
+        }
+
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             //timepicker.GettTime();
             ctHour = Convert.ToInt16(hourCmbx.SelectedValue);
@@ -957,19 +1017,6 @@ namespace MyWidget
            
         }
 
-
-        private void Window_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F12)
-            {
-                NowPlayingSessionManager player = new NowPlayingSessionManager();
-                NowPlayingSession currentSession = player.CurrentSession;
-                if (player.Count == 0) { return; }
-                MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
-                x.SendMediaPlaybackCommand(MediaPlaybackCommands.Next);
-                GetCurrentMedia(false, true);
-            }
-        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
