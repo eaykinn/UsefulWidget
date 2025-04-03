@@ -13,7 +13,8 @@
     <ul> 
       <li>Date & Clock</li>
       <li>System Volume Controller</li>
-      <li>Media Playback Control(NPSMLib)</li>
+      <li>Media Playback Control(NPSMLib) for only spotify app</li>
+      <li>Spotify api for searching content</li>
       <li> Weather Forecast (open-meteo)</li>
       <li>Countdown timer with Windows shutdown/restrart</li>
     </ul>
