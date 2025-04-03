@@ -44,7 +44,7 @@
    </div>
         <div> 
        <h2>Similar Music List</h2>
-          <p>Opens when double clicked on song name && a new song or artist can be searched</p>
+          <p>Opens when clicked on song name && a new song or artist can be searched</p>
       <picture>
         <img src = "https://github.com/user-attachments/assets/7c4ce1e1-4134-4250-a675-f8c5c3a341e3" alt="maximized" style="width:auto;">
       </picture>
