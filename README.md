@@ -38,8 +38,7 @@
     <div> 
        <h2>Minimized Window</h2>
       <picture>
-        <img src="![image](https://github.com/user-attachments/assets/4886c6ad-ad11-4a9a-84d6-2344a7a2a5de)
-" style="width:auto;">
+        <img src="https://github.com/user-attachments/assets/4886c6ad-ad11-4a9a-84d6-2344a7a2a5de" style="width:auto;">
       </picture>
    </div>
         <div> 
