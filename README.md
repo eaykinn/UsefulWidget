@@ -8,7 +8,7 @@
 
   <body>
     <h1>UsefulWidget</h1>
-    <p>My first C# WPF app. The app can be used as desktop widget.</p>
+    <p>My first C# WPF app (Hobby project). The app can be used as desktop widget.</p>
     <p>Widget includes:</p>
     <ul> 
       <li>Date & Clock</li>
