@@ -32,7 +32,7 @@
    <div>
      <h2>Maximized Window</h2>
      <picture>
-      <img src="https://github.com/user-attachments/assets/3eaccf4d-9a6b-406d-a887-2cfca5d6d63a" alt="maximized" style="width:auto;">
+      <img src="https://github.com/user-attachments/assets/d2d562bd-bf6a-4126-b3de-f1417648e3a2" alt="maximized" style="width:auto;">
     </picture> 
    </div> 
     <div> 
