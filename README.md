@@ -16,7 +16,7 @@
       <li>Media Playback Control(NPSMLib) for only spotify app</li>
       <li>Spotify api for searching content</li>
       <li> Weather Forecast (open-meteo)</li>
-      <li>Countdown timer with Windows shutdown/restrart</li>
+      <li>Countdown timer with Windows shutdown/restart</li>
     </ul>
     <p> You can also change theme from top left corner. Checkbox below the player provides stopping music when the user locks the current Windows session. I use HandyControl library for interface and colorpicker.</p>
     <h2>Note:</h2>
