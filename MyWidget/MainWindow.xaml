@@ -173,7 +173,7 @@
                     
                     
                 </hc:RunningBlock>
-                <hc:RunningBlock x:Name="lbl2" Content="Label" Grid.Column="4"  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDADADA" Margin="17,6,0,0" Width="227" HorizontalContentAlignment="Left" Grid.RowSpan="2" Grid.ColumnSpan="6" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14" Height="40" VerticalAlignment="Top" AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True"   >
+                <hc:RunningBlock x:Name="lbl2" MouseEnter="lbl2_MouseEnter" MouseLeave="lbl2_MouseLeave" Content="Label" Grid.Column="4"  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDADADA" Margin="17,6,0,0" Width="227" HorizontalContentAlignment="Left" Grid.RowSpan="2" Grid.ColumnSpan="6" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14" Height="40" VerticalAlignment="Top" AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" MouseLeftButtonDown="lbl1_MouseClick2"   >
                     <hc:RunningBlock.Effect>
                         <DropShadowEffect/>
                     </hc:RunningBlock.Effect>

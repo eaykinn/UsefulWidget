@@ -199,12 +199,9 @@ namespace MyWidget
         }
 
         private async void Button_Click_3(object sender, RoutedEventArgs e)
-        {
+             {
             PlayStopMedia();
         }
-
-    
-
 
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -1196,6 +1193,7 @@ namespace MyWidget
 
         private void lbl1_MouseClick(object sender, MouseButtonEventArgs e)
         {   
+            
             string seachQuery = lbl1.Content.ToString();
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
@@ -1212,7 +1210,40 @@ namespace MyWidget
 
             if (window1 == null) // Eğer diyalog penceresi zaten açık değilse
             {
-                window1 = new Window1(seachQuery, newCol);
+               
+                window1 = new Window1(seachQuery, newCol,true);
+                window1.Closed += (s, args) => window1 = null; // Pencere kapandığında referansı sıfırla
+                window1.Show(); // Pencereyi modal olmadan aç
+            }
+            else
+            {
+                window1.Activate(); // Pencere zaten açıksa öne getir
+            }
+
+
+        }
+
+        private void lbl1_MouseClick2(object sender, MouseButtonEventArgs e)
+        {
+
+            string seachQuery = lbl2.Content.ToString();
+            var x = Properties.Settings.Default.defaultColor;
+            Color mediaColor = new Color();
+            mediaColor.A = x.A;
+            mediaColor.R = x.R;
+            mediaColor.G = x.G;
+            mediaColor.B = x.B;
+
+            SolidColorBrush newCol = new(mediaColor);
+
+            // window1 = new Window1(seachQuery, newCol);
+            //window1.Show();
+            //window1.ShowDialog();
+
+            if (window1 == null) // Eğer diyalog penceresi zaten açık değilse
+            {
+
+                window1 = new Window1(seachQuery, newCol, false);
                 window1.Closed += (s, args) => window1 = null; // Pencere kapandığında referansı sıfırla
                 window1.Show(); // Pencereyi modal olmadan aç
             }
@@ -1233,5 +1264,17 @@ namespace MyWidget
         {
             lbl1.Foreground = Brushes.White;
         }
+
+        private void lbl2_MouseEnter(object sender, MouseEventArgs e)
+        {
+            lbl2.Foreground = Brushes.LightGray;
+        }
+
+        private void lbl2_MouseLeave(object sender, MouseEventArgs e)
+        {
+            lbl2.Foreground = Brushes.White;
+        }
+
+
     }
 }

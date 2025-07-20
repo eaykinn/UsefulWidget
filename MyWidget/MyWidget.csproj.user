@@ -9,6 +9,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ArtistCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="songCard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
