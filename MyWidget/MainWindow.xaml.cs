@@ -1,27 +1,26 @@
-﻿using HandyControl.Controls;
-using HandyControl.Tools;
-using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
-using NPSMLib;
+﻿using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Resources;
 using System.Windows.Threading;
-using System.Configuration;
-using System.Runtime.InteropServices;
-using System.Windows.Interop;
+using HandyControl.Controls;
+using HandyControl.Tools;
+using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
+using NPSMLib;
 
 namespace MyWidget
 {
-
     public partial class MainWindow : System.Windows.Window
     {
         private static string? _lat;
@@ -49,7 +48,7 @@ namespace MyWidget
         Window1 window1;
 
         private const int HOTKEY_ID = 9029;
-        private const int HOTKEY2_ID = 9061;// Benzersiz bir ID
+        private const int HOTKEY2_ID = 9061; // Benzersiz bir ID
         private const uint VK_F9 = 0x78; // F9 tuşu
         private const uint VK_F12 = 0x7A; // F12 tuşu
 
@@ -73,16 +72,14 @@ namespace MyWidget
 
             Loaded += MainWindow_Loaded2;
             Closing += MainWindow_Closing;
-
         }
+
         private void MainWindow_Loaded2(object sender, RoutedEventArgs e)
         {
-        
             var helper = new WindowInteropHelper(this);
-            RegisterHotKey(helper.Handle, HOTKEY_ID, 0,VK_F9);
+            RegisterHotKey(helper.Handle, HOTKEY_ID, 0, VK_F9);
             RegisterHotKey(helper.Handle, HOTKEY2_ID, 0, VK_F12); // Ctrl+Alt+F9
             ComponentDispatcher.ThreadFilterMessage += ComponentDispatcher_ThreadFilterMessage;
-       
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -99,7 +96,10 @@ namespace MyWidget
 
             NowPlayingSessionManager player = new NowPlayingSessionManager();
             NowPlayingSession currentSession = player.CurrentSession;
-            if (player.Count == 0) { return; }
+            if (player.Count == 0)
+            {
+                return;
+            }
             MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
 
             if (msg.message == 0x0312) // WM_HOTKEY
@@ -109,9 +109,8 @@ namespace MyWidget
                 {
                     handled = true;
                     x.SendMediaPlaybackCommand(MediaPlaybackCommands.Previous);
-
                 }
-                else if(id == HOTKEY2_ID) 
+                else if (id == HOTKEY2_ID)
                 {
                     handled = true;
                     x.SendMediaPlaybackCommand(MediaPlaybackCommands.Next);
@@ -119,8 +118,6 @@ namespace MyWidget
             }
             GetCurrentMedia(false, true);
         }
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -170,39 +167,37 @@ namespace MyWidget
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
             if (colorPiclerOpened == false)
             {
                 OpenCloseColorPicker(false);
                 colorPiclerOpened = true;
-            }else
+            }
+            else
             {
                 OpenCloseColorPicker(true);
                 colorPiclerOpened = false;
-            }      
+            }
         }
 
         private void OpenCloseColorPicker(bool isOpened)
         {
-            if (isOpened == false) 
+            if (isOpened == false)
             {
                 themeColor = border.Background;
                 themeColorPicker.Visibility = Visibility.Visible;
                 Grid.SetColumnSpan(themeColorPicker, 8);
                 Grid.SetRowSpan(themeColorPicker, 15);
-            }else
+            }
+            else
             {
                 themeColorPicker.Visibility = Visibility.Hidden;
             }
-
-           
         }
 
         private async void Button_Click_3(object sender, RoutedEventArgs e)
-             {
+        {
             PlayStopMedia();
         }
-
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -217,12 +212,10 @@ namespace MyWidget
             CountDowntimer(0);
         }
 
-        
-
-        private void  ChangeTheme(SolidColorBrush color)
+        private void ChangeTheme(SolidColorBrush color)
         {
             var color2 = Colors.Black;
-           
+
             var startPoint = new System.Windows.Point();
             startPoint.X = 0.5;
             startPoint.Y = 0;
@@ -254,7 +247,7 @@ namespace MyWidget
 
             //searchBarTxt.Background = color;
             // searchBarTxt.BorderBrush = Brushes.White;
-            
+
             SetColorSettings(color);
         }
 
@@ -320,17 +313,26 @@ namespace MyWidget
             {
                 mTxtBox.Text = ctMin.ToString();
             }
-            
         }
 
         private protected async Task GetCurrentMedia(bool onLoad, bool getTimeLine)
         {
-            if (onLoad == false) { Thread.Sleep(50); }
+            if (onLoad == false)
+            {
+                Thread.Sleep(50);
+            }
 
             NowPlayingSessionManager player = new NowPlayingSessionManager();
-          
+
             NowPlayingSession[] sessions = player.GetSessions();
-            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe" || x.SourceAppId.Contains("spotify") || x.SourceAppId.Contains("Spotify")).Select(x => x.GetSessionInfo()).ToList();
+            var sessionInfos = sessions
+                .Where(x =>
+                    x.SourceAppId == "Spotify.exe"
+                    || x.SourceAppId.Contains("spotify")
+                    || x.SourceAppId.Contains("Spotify")
+                )
+                .Select(x => x.GetSessionInfo())
+                .ToList();
             if (sessionInfos.Count == 0)
             {
                 return;
@@ -338,17 +340,21 @@ namespace MyWidget
             else
             {
                 player.SetCurrentSession(sessionInfos[0]);
-
             }
             NowPlayingSession currentSession = player.CurrentSession;
-            MediaPlaybackDataSource playnaclDataSource = currentSession.ActivateMediaPlaybackDataSource();
+            MediaPlaybackDataSource playnaclDataSource =
+                currentSession.ActivateMediaPlaybackDataSource();
 
             await GetTimeLinePosition(playnaclDataSource, true);
 
             Stream streamInfo = playnaclDataSource.GetThumbnailStream();
             if (streamInfo != null)
             {
-                songImage.Source = BitmapFrame.Create(streamInfo, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                songImage.Source = BitmapFrame.Create(
+                    streamInfo,
+                    BitmapCreateOptions.None,
+                    BitmapCacheOption.OnLoad
+                );
             }
 
             MediaObjectInfo mediaInfo = playnaclDataSource.GetMediaObjectInfo();
@@ -365,7 +371,10 @@ namespace MyWidget
 
             SetCitySettings(cityName);
 
-            if (_lat == null || _lon == null) { return; }
+            if (_lat == null || _lon == null)
+            {
+                return;
+            }
             await GetWheather(_lat, _lon);
 
             Grid weatherGrid = (Grid)FindName("weatherGrid");
@@ -379,28 +388,33 @@ namespace MyWidget
             }
         }
 
-    /*    private string GetImageDir(string imgName,bool isIcon)
-        {
-
-            string lastPath;
-            var path2 = Directory.GetParent(path1);
-            if (path2 != null)
+        /*    private string GetImageDir(string imgName,bool isIcon)
             {
-                DirectoryInfo? path3 = Directory.GetParent(path2.ToString());
-                if (path3 != null)
+    
+                string lastPath;
+                var path2 = Directory.GetParent(path1);
+                if (path2 != null)
                 {
-                    DirectoryInfo? path4 = Directory.GetParent(path3.ToString());
-                    if (path4 != null)
-                    {   
-                        if(isIcon == false)
+                    DirectoryInfo? path3 = Directory.GetParent(path2.ToString());
+                    if (path3 != null)
+                    {
+                        DirectoryInfo? path4 = Directory.GetParent(path3.ToString());
+                        if (path4 != null)
                         {
-                            lastPath = path4.ToString() + "\\Resources\\Icons\\" + imgName;
+                            if(isIcon == false)
+                            {
+                                lastPath = path4.ToString() + "\\Resources\\Icons\\" + imgName;
+                            }
+                            else
+                            {
+                                lastPath = path4.ToString() + "\\Resources\\Icons\\weather_icons\\" + imgName;
+                            }
+                           
                         }
                         else
                         {
-                            lastPath = path4.ToString() + "\\Resources\\Icons\\weather_icons\\" + imgName;
+                            return "noImage";
                         }
-                       
                     }
                     else
                     {
@@ -411,15 +425,10 @@ namespace MyWidget
                 {
                     return "noImage";
                 }
+    
+                return lastPath;
             }
-            else
-            {
-                return "noImage";
-            }
-
-            return lastPath;
-        }
-    */
+        */
         private async Task GetLatitudeAndLongitude(string nameOfTheCity)
         {
             _lat = null;
@@ -428,21 +437,26 @@ namespace MyWidget
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
             {
-                string connectionStr = "https://geocoding-api.open-meteo.com/v1/search?name=" + nameOfTheCity + "& count=10&language=en&format=json";
+                string connectionStr =
+                    "https://geocoding-api.open-meteo.com/v1/search?name="
+                    + nameOfTheCity
+                    + "& count=10&language=en&format=json";
                 HttpResponseMessage response = await client.GetAsync(connectionStr);
                 var httpResponse = response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-               
+
                 List<JToken> results;
                 // Convert JSON string to JObject
                 JObject jsonObject = JObject.Parse(responseBody);
-                if(jsonObject.First.Path == "generationtime_ms")
+                if (jsonObject.First.Path == "generationtime_ms")
                 {
                     return;
                 }
                 try
                 {
-                    results = (jsonObject["results"] ?? throw new InvalidOperationException()).ToList();
+                    results = (
+                        jsonObject["results"] ?? throw new InvalidOperationException()
+                    ).ToList();
                 }
                 catch (System.ArgumentNullException e)
                 {
@@ -479,13 +493,23 @@ namespace MyWidget
             if (z.PlaybackState.ToString() == "Playing")
             {
                 lastPath = "stop.png";
-                img.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/" + lastPath, UriKind.Absolute));
+                img.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/" + lastPath,
+                        UriKind.Absolute
+                    )
+                );
                 playStop.Content = img;
             }
             else
             {
                 lastPath = "play.png";
-                img.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/" + lastPath, UriKind.Absolute));
+                img.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/" + lastPath,
+                        UriKind.Absolute
+                    )
+                );
                 playStop.Content = img;
             }
         }
@@ -505,10 +529,12 @@ namespace MyWidget
             AutoStopMusicSet = Properties.Settings.Default.musicLock;
             AutoStopMusic.IsChecked = AutoStopMusicSet;
             AutoStopMusicChange(AutoStopMusicSet);
-
         }
 
-        private Task GetTimeLinePosition(MediaPlaybackDataSource playnaclDataSource, bool getTimeLine)
+        private Task GetTimeLinePosition(
+            MediaPlaybackDataSource playnaclDataSource,
+            bool getTimeLine
+        )
         {
             MediaTimelineProperties timeline = playnaclDataSource.GetMediaTimelineProperties();
 
@@ -578,7 +604,12 @@ namespace MyWidget
             {
                 lat = lat.Replace(",", ".");
                 lon = lon.Replace(",", ".");
-                string connectionStr = "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon + "&current=temperature_2m,rain,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=4";
+                string connectionStr =
+                    "https://api.open-meteo.com/v1/forecast?latitude="
+                    + lat
+                    + "&longitude="
+                    + lon
+                    + "&current=temperature_2m,rain,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=4";
                 HttpResponseMessage response = await client.GetAsync(connectionStr);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -599,9 +630,10 @@ namespace MyWidget
                 string weatherCode = currentWC.ToString();
                 JToken currentWeatherIconPath = weatherCodes[weatherCode];
 
-
-                System.Windows.Controls.Image anlikDurumİmage = new ();
-                path = "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + currentWeatherIconPath.ToString();
+                System.Windows.Controls.Image anlikDurumİmage = new();
+                path =
+                    "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
+                    + currentWeatherIconPath.ToString();
                 anlikDurumİmage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 CurrentWeatherPic.Content = anlikDurumİmage;
 
@@ -620,8 +652,14 @@ namespace MyWidget
                 string birinciGunWeatherIconCode = dailyWheatherCode[0].ToString();
                 JToken birinciGunWeatherIconPath = weatherCodes[birinciGunWeatherIconCode];
                 path = birinciGunWeatherIconPath.ToString();
-                System.Windows.Controls.Image birinciGunImage = new ();
-                birinciGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
+                System.Windows.Controls.Image birinciGunImage = new();
+                birinciGunImage.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
+                            + path,
+                        UriKind.Absolute
+                    )
+                );
                 birinciGunDurum.Content = birinciGunImage;
 
                 System.Windows.Controls.Image ikinciGunImage = new();
@@ -629,18 +667,29 @@ namespace MyWidget
                 string ikinciGunWeatherIconCode = dailyWheatherCode[1].ToString();
                 JToken ikinciGunWeatherIconPath = weatherCodes[ikinciGunWeatherIconCode];
                 path = ikinciGunWeatherIconPath.ToString();
-                ikinciGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
+                ikinciGunImage.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
+                            + path,
+                        UriKind.Absolute
+                    )
+                );
                 ikinciGunMin.Content = $"{dailyMin[1]:#}" + " °C";
                 ikinciGunMax.Content = $"{dailyMax[1]:#}" + " °C";
                 ikinciGunDurum.Content = ikinciGunImage;
 
-               
                 ucuncuGunDurum.Content = dailyWheatherCode[2].ToString();
                 string ucuncuGunWeatherIconCode = dailyWheatherCode[2].ToString();
                 JToken ucuncuGunWeatherIconPath = weatherCodes[ucuncuGunWeatherIconCode];
-                System.Windows.Controls.Image ucuncuGunImage = new ();
+                System.Windows.Controls.Image ucuncuGunImage = new();
                 path = ucuncuGunWeatherIconPath.ToString();
-                ucuncuGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
+                ucuncuGunImage.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
+                            + path,
+                        UriKind.Absolute
+                    )
+                );
                 ucuncuGunMin.Content = $"{dailyMin[2]:#}" + " °C";
                 ucuncuGunMax.Content = $"{dailyMax[2]:#}" + " °C";
                 ucuncuGunDurum.Content = ucuncuGunImage;
@@ -648,13 +697,18 @@ namespace MyWidget
                 dorduncuGunDurum.Content = dailyWheatherCode[3].ToString();
                 string dorduncuGunWeatherIconCode = dailyWheatherCode[3].ToString();
                 JToken dorduncuGunWeatherIconPath = weatherCodes[dorduncuGunWeatherIconCode];
-                System.Windows.Controls.Image dorduncuGunImage = new ();
+                System.Windows.Controls.Image dorduncuGunImage = new();
                 path = dorduncuGunWeatherIconPath.ToString();
-                dorduncuGunImage.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/" + path, UriKind.Absolute));
+                dorduncuGunImage.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
+                            + path,
+                        UriKind.Absolute
+                    )
+                );
                 dorduncuGunMin.Content = $"{dailyMin[3]:#}" + " °C";
                 dorduncuGunMax.Content = $"{dailyMax[3]:#}" + " °C";
                 dorduncuGunDurum.Content = dorduncuGunImage;
-
             }
             catch (HttpRequestException e)
             {
@@ -683,10 +737,16 @@ namespace MyWidget
         private void oncekiSarki_Click(object sender, RoutedEventArgs e)
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
-         
-            
+
             NowPlayingSession[] sessions = player.GetSessions();
-            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe" || x.SourceAppId.Contains("spotify") || x.SourceAppId.Contains("Spotify")).Select(x => x.GetSessionInfo()).ToList();
+            var sessionInfos = sessions
+                .Where(x =>
+                    x.SourceAppId == "Spotify.exe"
+                    || x.SourceAppId.Contains("spotify")
+                    || x.SourceAppId.Contains("Spotify")
+                )
+                .Select(x => x.GetSessionInfo())
+                .ToList();
             if (sessionInfos.Count == 0)
             {
                 return;
@@ -694,7 +754,6 @@ namespace MyWidget
             else
             {
                 player.SetCurrentSession(sessionInfos[0]);
-
             }
             NowPlayingSession currentSession = player.CurrentSession;
             MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
@@ -705,9 +764,16 @@ namespace MyWidget
         private void PlayStopMedia()
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
-           
+
             NowPlayingSession[] sessions = player.GetSessions();
-            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe" || x.SourceAppId.Contains("spotify") || x.SourceAppId.Contains("Spotify")).Select(x => x.GetSessionInfo()).ToList();
+            var sessionInfos = sessions
+                .Where(x =>
+                    x.SourceAppId == "Spotify.exe"
+                    || x.SourceAppId.Contains("spotify")
+                    || x.SourceAppId.Contains("Spotify")
+                )
+                .Select(x => x.GetSessionInfo())
+                .ToList();
             if (sessionInfos.Count == 0)
             {
                 return;
@@ -715,7 +781,6 @@ namespace MyWidget
             else
             {
                 player.SetCurrentSession(sessionInfos[0]);
-
             }
             NowPlayingSession currentSession = player.CurrentSession;
 
@@ -726,8 +791,13 @@ namespace MyWidget
             {
                 x.SendMediaPlaybackCommand(MediaPlaybackCommands.Stop);
                 x.SendMediaPlaybackCommand(MediaPlaybackCommands.Pause);
-               // string lastpath = GetImageDir("stop.png", false);
-                img.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/stop.png", UriKind.Absolute));
+                // string lastpath = GetImageDir("stop.png", false);
+                img.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/stop.png",
+                        UriKind.Absolute
+                    )
+                );
                 playStop.Content = img;
             }
             else
@@ -735,7 +805,12 @@ namespace MyWidget
                 x.SendMediaPlaybackCommand(MediaPlaybackCommands.Play);
 
                 //string lastpath = GetImageDir("play.png", false);
-                img.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/play.png", UriKind.Absolute));
+                img.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/play.png",
+                        UriKind.Absolute
+                    )
+                );
                 playStop.Content = img;
             }
         }
@@ -760,7 +835,10 @@ namespace MyWidget
             }
         }
 
-        private async void SearchBar_SearchStarted(object sender, HandyControl.Data.FunctionEventArgs<string> e)
+        private async void SearchBar_SearchStarted(
+            object sender,
+            HandyControl.Data.FunctionEventArgs<string> e
+        )
         {
             await GetFiveDaysWeatherForecast(searchBarTxt.Text);
         }
@@ -776,7 +854,10 @@ namespace MyWidget
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
             {
-                string connectionStr = "https://geocoding-api.open-meteo.com/v1/search?name=" + nameOfTheCity + "& count=10&language=en&format=json";
+                string connectionStr =
+                    "https://geocoding-api.open-meteo.com/v1/search?name="
+                    + nameOfTheCity
+                    + "& count=10&language=en&format=json";
                 HttpResponseMessage response = await client.GetAsync(connectionStr);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -804,7 +885,10 @@ namespace MyWidget
                 async void srcBoxSelected(object sender, MouseButtonEventArgs e)
                 {
                     int selectedIndex = searchBarListBox.SelectedIndex;
-                    if (selectedIndex < 0 ) { return;}
+                    if (selectedIndex < 0)
+                    {
+                        return;
+                    }
                     string x = cordList[selectedIndex][0];
                     string y = cordList[selectedIndex][1];
                     CityLabel.Content = cityNames[selectedIndex];
@@ -822,18 +906,31 @@ namespace MyWidget
                     }
                 }
 
-               
                 foreach (JToken obj in results)
                 {
                     var ccExist = obj["country_code"];
-                    
+
                     if (ccExist == null)
                     {
-                        searchBarListBox.Items.Add(obj["name"].ToString() + " " + obj["latitude"].ToString() + "," + obj["longitude"].ToString());
+                        searchBarListBox.Items.Add(
+                            obj["name"].ToString()
+                                + " "
+                                + obj["latitude"].ToString()
+                                + ","
+                                + obj["longitude"].ToString()
+                        );
                     }
                     else
                     {
-                        searchBarListBox.Items.Add(obj["country_code"].ToString() + "," + obj["name"].ToString() + " " + obj["latitude"].ToString() + "," + obj["longitude"].ToString());
+                        searchBarListBox.Items.Add(
+                            obj["country_code"].ToString()
+                                + ","
+                                + obj["name"].ToString()
+                                + " "
+                                + obj["latitude"].ToString()
+                                + ","
+                                + obj["longitude"].ToString()
+                        );
                     }
                     cordList.Add([obj["latitude"].ToString(), obj["longitude"].ToString()]);
                     cityNames.Add(obj["name"].ToString());
@@ -861,7 +958,12 @@ namespace MyWidget
 
         private void SetColorSettings(SolidColorBrush newcolor)
         {
-            System.Drawing.Color newColorDrawing = System.Drawing.Color.FromArgb(0Xff, (byte)newcolor.Color.R, (byte)newcolor.Color.G, (byte)newcolor.Color.B);
+            System.Drawing.Color newColorDrawing = System.Drawing.Color.FromArgb(
+                0Xff,
+                (byte)newcolor.Color.R,
+                (byte)newcolor.Color.G,
+                (byte)newcolor.Color.B
+            );
             Properties.Settings.Default.defaultColor = newColorDrawing;
             Properties.Settings.Default.Save();
         }
@@ -902,17 +1004,23 @@ namespace MyWidget
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
             NowPlayingSession[] sessions = player.GetSessions();
-            var sessionInfos = sessions.Where(x => x.SourceAppId == "Spotify.exe" || x.SourceAppId.Contains("spotify") || x.SourceAppId.Contains("Spotify")).Select(x => x.GetSessionInfo()).ToList();
-            if(sessionInfos.Count == 0)
+            var sessionInfos = sessions
+                .Where(x =>
+                    x.SourceAppId == "Spotify.exe"
+                    || x.SourceAppId.Contains("spotify")
+                    || x.SourceAppId.Contains("Spotify")
+                )
+                .Select(x => x.GetSessionInfo())
+                .ToList();
+            if (sessionInfos.Count == 0)
             {
                 return;
             }
             else
             {
                 player.SetCurrentSession(sessionInfos[0]);
-               
             }
-            
+
             NowPlayingSession currentSession = player.CurrentSession;
             /*if (currentSession == null)
             {
@@ -928,7 +1036,7 @@ namespace MyWidget
 
             MediaPlaybackDataSource x = currentSession.ActivateMediaPlaybackDataSource();
             x.SendMediaPlaybackCommand(MediaPlaybackCommands.Next);
-            
+
             GetCurrentMedia(false, true);
         }
 
@@ -940,14 +1048,20 @@ namespace MyWidget
             toprect.Fill = themeColor;
         }
 
-        private void themeColorPicker_Confirmed(object sender, HandyControl.Data.FunctionEventArgs<System.Windows.Media.Color> e)
+        private void themeColorPicker_Confirmed(
+            object sender,
+            HandyControl.Data.FunctionEventArgs<System.Windows.Media.Color> e
+        )
         {
             themeColorPicker.Visibility = Visibility.Hidden;
             var color = themeColorPicker.SelectedBrush;
             ChangeTheme(color);
         }
 
-        private void themeColorPicker_SelectedColorChanged(object sender, HandyControl.Data.FunctionEventArgs<System.Windows.Media.Color> e)
+        private void themeColorPicker_SelectedColorChanged(
+            object sender,
+            HandyControl.Data.FunctionEventArgs<System.Windows.Media.Color> e
+        )
         {
             var color = themeColorPicker.SelectedBrush;
             ChangeTheme(color);
@@ -963,7 +1077,11 @@ namespace MyWidget
             }
             else
             {
-                if (currentSession.SourceAppId != "Spotify.exe" && currentSession.SourceAppId.Contains("spotify") == false && currentSession.SourceAppId.Contains("Spotify") == false)
+                if (
+                    currentSession.SourceAppId != "Spotify.exe"
+                    && currentSession.SourceAppId.Contains("spotify") == false
+                    && currentSession.SourceAppId.Contains("Spotify") == false
+                )
                 {
                     return;
                 }
@@ -982,7 +1100,7 @@ namespace MyWidget
 
             prewslid.Value = currentVolume;
             currentSoundLevel.Content = currentVolume;
-            System.Windows.Controls.Image img2 = new ();
+            System.Windows.Controls.Image img2 = new();
             string lastpath;
             if (currentVolume > 50)
             {
@@ -994,10 +1112,15 @@ namespace MyWidget
             }
             else
             {
-                lastpath = "volume-xmark-solid.png";    
+                lastpath = "volume-xmark-solid.png";
             }
 
-            img2.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/" + lastpath, UriKind.Absolute));
+            img2.Source = new BitmapImage(
+                new Uri(
+                    "pack://application:,,,/MyWidget;component/Resources/Icons/" + lastpath,
+                    UriKind.Absolute
+                )
+            );
             img2.Stretch = Stretch.Uniform;
             muteButton.Content = img2;
 
@@ -1006,18 +1129,12 @@ namespace MyWidget
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            ProcessStartInfo link = new("https://open-meteo.com/")
-            {
-                UseShellExecute = true
-            };
+            ProcessStartInfo link = new("https://open-meteo.com/") { UseShellExecute = true };
             Process.Start(link);
-           
         }
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             ConfigHelper.Instance.SetLang("en");
@@ -1025,11 +1142,15 @@ namespace MyWidget
             GetSettings();
             ChangeWindowSize(colorPiclerOpened);
             System.Windows.Controls.Image xxx = new();
-            
-            xxx.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/play.png", UriKind.Absolute));
+
+            xxx.Source = new BitmapImage(
+                new Uri(
+                    "pack://application:,,,/MyWidget;component/Resources/Icons/play.png",
+                    UriKind.Absolute
+                )
+            );
             ImageSource imageSrc = xxx.Source;
             TrayIcon.Icon = imageSrc;
-
 
             GetCurrentMedia(true, true);
 
@@ -1054,13 +1175,14 @@ namespace MyWidget
 
             GetFiveDaysWeatherForecast(searchBarTxt.Text);
             LoadJson();
-
-
         }
 
         private void LoadJson()
         {
-            Uri iconPathjsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/weather_icon_match.json", UriKind.RelativeOrAbsolute);
+            Uri iconPathjsonUri = new Uri(
+                "pack://application:,,,/MyWidget;component/Resources/weather_icon_match.json",
+                UriKind.RelativeOrAbsolute
+            );
             StreamResourceInfo resourceInfo = Application.GetResourceStream(iconPathjsonUri);
             string jsonContent;
             using (StreamReader reader = new StreamReader(resourceInfo.Stream))
@@ -1071,7 +1193,10 @@ namespace MyWidget
             JObject json = JObject.Parse(jsonContent);
             weatherCodes = json;
 
-            Uri iconExpjsonUri = new Uri("pack://application:,,,/MyWidget;component/Resources/weather_code_exp.json", UriKind.RelativeOrAbsolute);
+            Uri iconExpjsonUri = new Uri(
+                "pack://application:,,,/MyWidget;component/Resources/weather_code_exp.json",
+                UriKind.RelativeOrAbsolute
+            );
             StreamResourceInfo expresourceInfo = Application.GetResourceStream(iconExpjsonUri);
             string expjsonContent;
             using (StreamReader reader = new StreamReader(expresourceInfo.Stream))
@@ -1081,23 +1206,20 @@ namespace MyWidget
 
             JObject expjson = JObject.Parse(expjsonContent);
             weatherExpCodes = expjson;
-
-
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            if (colorPiclerOpened == true) 
+            if (colorPiclerOpened == true)
             {
                 ChangeWindowSize(false);
                 colorPiclerOpened = false;
             }
-            else 
+            else
             {
                 ChangeWindowSize(true);
                 colorPiclerOpened = true;
             }
-
         }
 
         private void ChangeWindowSize(bool opened)
@@ -1105,7 +1227,7 @@ namespace MyWidget
             SetMinMax(opened);
             string iconPath;
             if (opened == true)
-            { 
+            {
                 grid1.Visibility = Visibility.Hidden;
                 weatherGrid.Visibility = Visibility.Hidden;
                 paletteButton.Visibility = Visibility.Hidden;
@@ -1114,40 +1236,49 @@ namespace MyWidget
                 Mscply.SetValue(Grid.RowProperty, 1);
                 Mscply.SetValue(Grid.RowSpanProperty, 4);
                 //MaxMinButton.SetValue(Grid.ColumnProperty, 6);
-               // iconPath = GetImageDir("max.png", false);
-                imageSource.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/max.png", UriKind.Absolute));
+                // iconPath = GetImageDir("max.png", false);
+                imageSource.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/max.png",
+                        UriKind.Absolute
+                    )
+                );
                 imageSource.Stretch = Stretch.Fill;
                 MaxMinButton.Content = imageSource;
                 opened = false;
             }
             else
-            { 
+            {
                 grid1.Visibility = Visibility.Visible;
                 weatherGrid.Visibility = Visibility.Visible;
                 paletteButton.Visibility = Visibility.Visible;
-                MscPlaterDivider.Visibility= Visibility.Visible;
+                MscPlaterDivider.Visibility = Visibility.Visible;
                 //MaxMinButton.SetValue(Grid.ColumnProperty, 5);
                 this.Height = 780;
                 Mscply.SetValue(Grid.RowProperty, 2);
                 Mscply.SetValue(Grid.RowSpanProperty, 1);
 
                 iconPath = "min.png";
-                imageSource.Source = new BitmapImage(new Uri("pack://application:,,,/MyWidget;component/Resources/Icons/" + iconPath, UriKind.Absolute));
+                imageSource.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/MyWidget;component/Resources/Icons/" + iconPath,
+                        UriKind.Absolute
+                    )
+                );
                 imageSource.Stretch = Stretch.Fill;
                 MaxMinButton.Content = imageSource;
                 opened = true;
-
-               
             }
-           
-
         }
-        
+
         public void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
         {
             NowPlayingSessionManager player = new NowPlayingSessionManager();
             NowPlayingSession currentSession = player.CurrentSession;
-            if (player.Count == 0) { return; }
+            if (player.Count == 0)
+            {
+                return;
+            }
             var x = currentSession.ActivateMediaPlaybackDataSource();
             var z = x.GetMediaPlaybackInfo();
 
@@ -1180,7 +1311,6 @@ namespace MyWidget
                 Properties.Settings.Default.musicLock = true;
 
                 SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
-
             }
             else
             {
@@ -1188,12 +1318,10 @@ namespace MyWidget
                 SystemEvents.SessionSwitch -= SystemEvents_SessionSwitch;
             }
             Properties.Settings.Default.Save();
-
         }
 
         private void lbl1_MouseClick(object sender, MouseButtonEventArgs e)
-        {   
-            
+        {
             string seachQuery = lbl1.Content.ToString();
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
@@ -1201,17 +1329,16 @@ namespace MyWidget
             mediaColor.R = x.R;
             mediaColor.G = x.G;
             mediaColor.B = x.B;
-            
+
             SolidColorBrush newCol = new(mediaColor);
 
-           // window1 = new Window1(seachQuery, newCol);
+            // window1 = new Window1(seachQuery, newCol);
             //window1.Show();
             //window1.ShowDialog();
 
             if (window1 == null) // Eğer diyalog penceresi zaten açık değilse
             {
-               
-                window1 = new Window1(seachQuery, newCol,true);
+                window1 = new Window1(seachQuery, newCol, true);
                 window1.Closed += (s, args) => window1 = null; // Pencere kapandığında referansı sıfırla
                 window1.Show(); // Pencereyi modal olmadan aç
             }
@@ -1219,13 +1346,10 @@ namespace MyWidget
             {
                 window1.Activate(); // Pencere zaten açıksa öne getir
             }
-
-
         }
 
         private void lbl1_MouseClick2(object sender, MouseButtonEventArgs e)
         {
-
             string seachQuery = lbl2.Content.ToString();
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
@@ -1242,7 +1366,6 @@ namespace MyWidget
 
             if (window1 == null) // Eğer diyalog penceresi zaten açık değilse
             {
-
                 window1 = new Window1(seachQuery, newCol, false);
                 window1.Closed += (s, args) => window1 = null; // Pencere kapandığında referansı sıfırla
                 window1.Show(); // Pencereyi modal olmadan aç
@@ -1251,8 +1374,6 @@ namespace MyWidget
             {
                 window1.Activate(); // Pencere zaten açıksa öne getir
             }
-
-
         }
 
         private void lbl1_MouseEnter(object sender, MouseEventArgs e)
@@ -1274,7 +1395,5 @@ namespace MyWidget
         {
             lbl2.Foreground = Brushes.White;
         }
-
-
     }
 }

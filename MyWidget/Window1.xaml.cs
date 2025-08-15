@@ -1,19 +1,20 @@
-﻿using Microsoft.Web.WebView2.Wpf;
-using Newtonsoft.Json.Linq;
-using SpotifyAPI.Web;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Resources;
-
+using Microsoft.Web.WebView2.Wpf;
+using Newtonsoft.Json.Linq;
+using SpotifyAPI.Web;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MyWidget
 {
@@ -23,16 +24,19 @@ namespace MyWidget
     public partial class Window1 : Window
     {
         List<FullTrack> tracks;
+        List<FullArtist> artists;
+        bool srchType;
         string sLink;
         public string clientId;
         public string clientSecret;
         public static string? accessToken;
         SpotifyClient spotify;
-        public Window1(string searchQuery, SolidColorBrush color)
+
+        public Window1(string searchQuery, SolidColorBrush color, bool srcLblType)
         {
+            srchType = srcLblType;
             this.searchQuery = searchQuery;
             InitializeComponent();
-
 
             Color color2 = Colors.Black;
 
@@ -64,51 +68,80 @@ namespace MyWidget
             var x = new LinearGradientBrush(z, startPoint, endPoint);
             this.Background = x;
             toprect.Fill = x;
+            if (srchType == true)
+                SearchTypeLabel.Text = "Search Song";
+            else
+                SearchTypeLabel.Text = "Search Artist";
 
-            GetMusicList();
+            GetMusicList(srchType);
         }
-        private string searchQuery {  get; set; }   
-        
-        private async void UpdateLabels()
-        {
 
-            foreach (FullTrack track in tracks)
+        private string searchQuery { get; set; }
+
+        private async void UpdateLabels(bool isSong)
+        {
+            if (isSong)
             {
-                
-                songCard songCard = new songCard();
-                songCard.songName.Text = track.Name;
-                songCard.artistName.Text = track.Artists[0].Name;
-                songCard.albumName.Text = track.Album.Name;
-                songCard.TrackUri = track.Uri;
-                sLink = track.ExternalUrls.Values.First().ToString();
-                Uri songUrl = new(sLink);
-                songCard.songHyperLink.NavigateUri = songUrl;          
-                songCard.linkText.Text = sLink;
-                ListBoxItem songItem = new ListBoxItem();
-                songItem.Content = songCard;
-                songItem.Background = null;
-                songCard.songImage.Source = await GetPicofTrack(track.Id);
-              
-                songList.Items.Add(songItem);
+                foreach (FullTrack track in tracks)
+                {
+                    songCard songCard = new songCard();
+                    songCard.songName.Text = track.Name;
+                    songCard.artistName.Text = track.Artists[0].Name;
+                    songCard.albumName.Text = track.Album.Name;
+                    songCard.TrackUri = track.Uri;
+                    sLink = track.ExternalUrls.Values.First().ToString();
+                    Uri songUrl = new(sLink);
+                    songCard.songHyperLink.NavigateUri = songUrl;
+                    songCard.linkText.Text = sLink;
+                    ListBoxItem songItem = new ListBoxItem();
+                    songItem.Content = songCard;
+                    songItem.Background = null;
+                    songCard.songImage.Source = await GetPicofTrack(track.Id);
+
+                    songList.Items.Add(songItem);
+                }
             }
+            else
+            {
+                foreach (FullArtist artist in artists)
+                {
+                    ArtistCard artistCard = new ArtistCard();
+                    artistCard.artistName.Text = artist.Name;
 
+                    sLink = artist.ExternalUrls.Values.First().ToString();
+                    Uri songUrl = new(sLink);
+                    artistCard.songHyperLink.NavigateUri = songUrl;
+                    artistCard.linkText.Text = sLink;
+
+                    ListBoxItem songItem = new ListBoxItem();
+                    songItem.Content = artistCard;
+                    songItem.Background = null;
+                    artistCard.songImage.Source = await GetPicofTrack(artist.Id);
+                    songList.Items.Add(songItem);
+                }
+            }
         }
 
-        private async Task<BitmapImage> GetPicofTrack(string songId)
+        private async Task<BitmapImage> GetPicofTrack(string id)
         {
-            var fullTrack = await spotify.Tracks.Get(songId);
-            var imageUrl = fullTrack.Album.Images[0].Url;
-            return await LoadImageFromUrl(imageUrl);
-       
+            if (srchType)
+            {
+                var fullTrack = await spotify.Tracks.Get(id);
+                var imageUrl = fullTrack.Album.Images[0].Url;
+                return await LoadImageFromUrl(imageUrl);
+            }
+            else
+            {
+                var fullTrack = await spotify.Artists.Get(id);
+                var imageUrl = fullTrack.Images[0].Url;
+                return await LoadImageFromUrl(imageUrl);
+            }
         }
+
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            ProcessStartInfo link = new(sLink)
-            {
-                UseShellExecute = true
-            };
+            ProcessStartInfo link = new(sLink) { UseShellExecute = true };
             Process.Start(link);
-
         }
 
         private async Task<BitmapImage> LoadImageFromUrl(string url)
@@ -137,12 +170,10 @@ namespace MyWidget
             }
             return bitmap;
             // İndirilen resmi Image kontrolüne ata
-           
         }
 
-        async Task GetMusicList()
+        async Task GetMusicList(bool isSong)
         {
-
             string accessToken;
             string refreshToken;
             List<string> tokens = new List<string>();
@@ -153,7 +184,9 @@ namespace MyWidget
                 using (HttpClient clientS = new HttpClient())
                 {
                     clientS.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
-                    HttpResponseMessage response = await clientS.GetAsync("https://api.spotify.com/v1/me");
+                    HttpResponseMessage response = await clientS.GetAsync(
+                        "https://api.spotify.com/v1/me"
+                    );
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -161,7 +194,6 @@ namespace MyWidget
                     }
                     else
                     {
-                       
                         tokens = await SpotifyGetAccessToken.GetUserPerm(0);
                         accessToken = tokens[0];
                         //refreshToken = tokens[1];
@@ -170,11 +202,9 @@ namespace MyWidget
                         Properties.Settings.Default.Save();
                     }
                 }
-
             }
             else
             {
-                
                 tokens = await SpotifyGetAccessToken.GetUserPerm(1);
                 accessToken = tokens[0];
                 refreshToken = tokens[1];
@@ -185,32 +215,45 @@ namespace MyWidget
 
             spotify = new SpotifyClient(accessToken);
 
-            SearchRequest searchRequest = new (SearchRequest.Types.Track, searchQuery);
-            searchRequest.Limit = 10;
-           
-            var searchResponse = await spotify.Search.Item(searchRequest);
-            var fullTracks = searchResponse.Tracks;
-            tracks = fullTracks.Items;
-            UpdateLabels();
- 
+            if (isSong)
+            {
+                SearchRequest searchRequest = new(SearchRequest.Types.Track, searchQuery);
+                searchRequest.Limit = 10;
+                var searchResponse = await spotify.Search.Item(searchRequest);
+                var fullTracks = searchResponse.Tracks;
+                tracks = fullTracks.Items;
+            }
+            else
+            {
+                SearchRequest searchRequest = new(SearchRequest.Types.Artist, searchQuery);
+                searchRequest.Limit = 10;
+                var searchResponse = await spotify.Search.Item(searchRequest);
+                var fullArtists = searchResponse.Artists;
+                artists = fullArtists.Items;
+            }
+
+            UpdateLabels(isSong);
         }
 
         public static async Task<string> GetAccessToken(string clientId, string clientSecret)
         {
-
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
-                    Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}")));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                    "Basic",
+                    Convert.ToBase64String(
+                        System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}")
+                    )
+                );
 
-                var content = new FormUrlEncodedContent(new[]
-                {
-                new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                var content = new FormUrlEncodedContent(
+                    new[] { new KeyValuePair<string, string>("grant_type", "client_credentials") }
+                );
 
-            });
-
-
-                var response = await client.PostAsync("https://accounts.spotify.com/api/token", content);
+                var response = await client.PostAsync(
+                    "https://accounts.spotify.com/api/token",
+                    content
+                );
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -237,17 +280,20 @@ namespace MyWidget
             this.DragMove();
         }
 
-        private void songSearchBox_SearchStarted(object sender, HandyControl.Data.FunctionEventArgs<string> e)
+        private void songSearchBox_SearchStarted(
+            object sender,
+            HandyControl.Data.FunctionEventArgs<string> e
+        )
         {
             songList.Items.Clear();
             searchQuery = songSearchBox.Text;
-            GetMusicList();
+            GetMusicList(srchType);
         }
 
-       /* private void songSearchBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            searchQuery = songSearchBox.Text;
-            GetMusicList();
-        }*/
+        /* private void songSearchBox_KeyDown(object sender, KeyEventArgs e)
+         {
+             searchQuery = songSearchBox.Text;
+             GetMusicList();
+         }*/
     }
 }

@@ -22,7 +22,11 @@
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="SearchTypeLabel" Background="{x:Null}" Foreground="White"  Grid.Row="2" Width="160"   TextAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" HorizontalAlignment="Left" FontWeight="Bold" TextDecorations="Underline" FontSize="16" />
+        <TextBlock x:Name="SearchTypeLabel" Background="{x:Null}" Foreground="White"  Grid.Row="2" Width="160"   TextAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="16" >
+            <TextBlock.Effect>
+                <DropShadowEffect/>
+            </TextBlock.Effect>
+        </TextBlock>
 
         <hc:SearchBar x:Name ="songSearchBox"  Grid.Row="2" Background="{x:Null}" BorderBrush="White" SearchStarted="songSearchBox_SearchStarted" Foreground="White" CaretBrush="#FFF5F2F2" Margin="165,0,0,0"/>
         <ListBox x:Name="songList" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}"/>

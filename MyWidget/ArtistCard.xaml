@@ -39,7 +39,7 @@
         </Label>
 
         <hc:TextBox x:Name="artistName" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="8" BorderBrush="{x:Null}" IsReadOnly="True" Background="{x:Null}" Foreground="White">
-            Song Name
+            Artist Name
         </hc:TextBox>
         <TextBlock x:Name="link" Grid.Column="3" Grid.Row= "3" Grid.ColumnSpan="7" VerticalAlignment="Center" Padding="8,0,8,0" Foreground="White" >
            <Hyperlink x:Name="songHyperLink" RequestNavigate= "Hyperlink_RequestNavigate" Foreground= "#FF020202" >
