@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
+using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -433,7 +434,34 @@ namespace MyWidget
         {
             _lat = null;
             _lon = null;
-            HttpClient client = new HttpClient();
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (
+                    httpRequestMessage,
+                    cert,
+                    chain,
+                    errors
+                ) =>
+                {
+                    // Sadece open-meteo domaini için bypass yap
+                    if (
+                        httpRequestMessage.RequestUri.Host.Equals(
+                            "geocoding-api.open-meteo.com",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        // Eğer sertifikada başka kritik hata yoksa devam et
+                        return errors == SslPolicyErrors.None
+                            || errors == SslPolicyErrors.RemoteCertificateChainErrors;
+                    }
+
+                    // Diğer tüm domainler için normal kontrol
+                    return errors == SslPolicyErrors.None;
+                },
+            };
+
+            using var client = new HttpClient(handler);
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
             {
@@ -597,7 +625,35 @@ namespace MyWidget
 
         private async Task GetWheather(string lat, string lon)
         {
-            HttpClient client = new HttpClient();
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (
+                    httpRequestMessage,
+                    cert,
+                    chain,
+                    errors
+                ) =>
+                {
+                    // Sadece open-meteo domaini için bypass yap
+                    if (
+                        httpRequestMessage.RequestUri.Host.Equals(
+                            "api.open-meteo.com",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        // Eğer sertifikada başka kritik hata yoksa devam et
+                        return errors == SslPolicyErrors.None
+                            || errors == SslPolicyErrors.RemoteCertificateChainErrors;
+                    }
+
+                    // Diğer tüm domainler için normal kontrol
+                    return errors == SslPolicyErrors.None;
+                },
+            };
+
+            using var client = new HttpClient(handler);
+
             string path;
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
