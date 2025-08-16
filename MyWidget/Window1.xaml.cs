@@ -127,14 +127,28 @@ namespace MyWidget
             if (srchType)
             {
                 var fullTrack = await spotify.Tracks.Get(id);
-                var imageUrl = fullTrack.Album.Images[0].Url;
-                return await LoadImageFromUrl(imageUrl);
+                if (fullTrack.Album.Images.Count != 0)
+                {
+                    var imageUrl = fullTrack.Album.Images[0].Url;
+                    return await LoadImageFromUrl(imageUrl);
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
                 var fullTrack = await spotify.Artists.Get(id);
-                var imageUrl = fullTrack.Images[0].Url;
-                return await LoadImageFromUrl(imageUrl);
+                if (fullTrack.Images.Count != 0)
+                {
+                    var imageUrl = fullTrack.Images[0].Url;
+                    return await LoadImageFromUrl(imageUrl);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
