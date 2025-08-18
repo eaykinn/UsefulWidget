@@ -2,8 +2,11 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,6 +21,9 @@ using HandyControl.Tools;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using NPSMLib;
+using static MyWidget.SpotifyGetAccessToken;
+using static SpotifyAPI.Web.LoginRequest;
+using static SpotifyAPI.Web.PlayerSetRepeatRequest;
 
 namespace MyWidget
 {
@@ -1320,9 +1326,13 @@ namespace MyWidget
             Properties.Settings.Default.Save();
         }
 
-        private void lbl1_MouseClick(object sender, MouseButtonEventArgs e)
+        private async void lbl1_MouseClick(object sender, MouseButtonEventArgs e)
         {
             string seachQuery = lbl1.Content.ToString();
+
+            GeniusApiAccesToket gnApiToken = new GeniusApiAccesToket();
+            await gnApiToken.SearchSongAsync(seachQuery);
+
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
             mediaColor.A = x.A;
