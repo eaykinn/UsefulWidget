@@ -164,15 +164,23 @@
                 <Label x:Name="maxTimeLbl" Grid.Column="8" Content="Label" HorizontalAlignment="Left" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C3C3" Margin="16,21,0,0" FontWeight="Bold" HorizontalContentAlignment="Left" Width="52" VerticalAlignment="Top"/>
                 <Label x:Name="currentTimeLbl" Grid.ColumnSpan="2" Grid.Column="0" Content="Label" Grid.RowSpan="2" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC5C5C5" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Width="52" HorizontalAlignment="Left" Margin="22,21,0,0" VerticalAlignment="Top" />
                 <Image x:Name="songImage" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="6"  Stretch="UniformToFill" Margin="10,5,0,19" HorizontalAlignment="Left" Width="171"  />
-                <hc:RunningBlock x:Name="lbl1" Content="Label" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"  AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" Grid.ColumnSpan="6" FontSize="16" Margin="15,6,21,25" Grid.RowSpan="3" FontWeight="Bold" ForceCursor="True" MouseEnter="lbl1_MouseEnter" MouseLeave="lbl1_MouseLeave" MouseLeftButtonDown="lbl1_MouseClick">
+                <hc:RunningBlock x:Name="lbl1" Content="Label" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"  AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" Grid.ColumnSpan="5" FontSize="16" Margin="15,6,21,25" Grid.RowSpan="3" FontWeight="Bold" ForceCursor="True" MouseEnter="lbl1_MouseEnter" MouseLeave="lbl1_MouseLeave" MouseLeftButtonDown="lbl1_MouseClick">
                     <hc:RunningBlock.Effect>
                         <DropShadowEffect/>
 
                     </hc:RunningBlock.Effect>
-                
-                    
-                    
                 </hc:RunningBlock>
+                <Button x:Name="LyricsButton" Grid.Column="9" Grid.Row="0" Grid.RowSpan="2" Click="LyricsButtonClick" Width="24" Height="24" BorderBrush="{x:Null}">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.Background>
+                        <ImageBrush ImageSource="/music.png"/>
+                    </Button.Background>
+                </Button>
                 <hc:RunningBlock x:Name="lbl2" MouseEnter="lbl2_MouseEnter" MouseLeave="lbl2_MouseLeave" Content="Label" Grid.Column="4"  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFDADADA" Margin="17,6,0,0" Width="227" HorizontalContentAlignment="Left" Grid.RowSpan="2" Grid.ColumnSpan="6" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14" Height="40" VerticalAlignment="Top" AutoRun="True" IsRunning="False" Duration="00:00:10" AutoReverse="True" MouseLeftButtonDown="lbl1_MouseClick2"   >
                     <hc:RunningBlock.Effect>
                         <DropShadowEffect/>

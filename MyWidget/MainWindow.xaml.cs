@@ -53,6 +53,7 @@ namespace MyWidget
         JObject weatherExpCodes;
         private bool AutoStopMusicSet;
         Window1 window1;
+        Window2 window2;
 
         private const int HOTKEY_ID = 9029;
         private const int HOTKEY2_ID = 9061; // Benzersiz bir ID
@@ -1386,9 +1387,6 @@ namespace MyWidget
         {
             string seachQuery = lbl1.Content.ToString();
 
-            GeniusApiAccesToket gnApiToken = new GeniusApiAccesToket();
-            await gnApiToken.SearchSongAsync(seachQuery);
-
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
             mediaColor.A = x.A;
@@ -1397,10 +1395,6 @@ namespace MyWidget
             mediaColor.B = x.B;
 
             SolidColorBrush newCol = new(mediaColor);
-
-            // window1 = new Window1(seachQuery, newCol);
-            //window1.Show();
-            //window1.ShowDialog();
 
             if (window1 == null) // Eğer diyalog penceresi zaten açık değilse
             {
@@ -1411,6 +1405,34 @@ namespace MyWidget
             else
             {
                 window1.Activate(); // Pencere zaten açıksa öne getir
+            }
+        }
+
+        private async void LyricsButtonClick(object sender, RoutedEventArgs e)
+        {
+            string seachQuery = lbl1.Content.ToString();
+            string artistName = lbl2.Content.ToString();
+            GeniusApiAccesToket gnApiToken = new GeniusApiAccesToket();
+            string lyrics = await gnApiToken.SearchSongAsync(seachQuery, artistName);
+
+            var x = Properties.Settings.Default.defaultColor;
+            Color mediaColor = new Color();
+            mediaColor.A = x.A;
+            mediaColor.R = x.R;
+            mediaColor.G = x.G;
+            mediaColor.B = x.B;
+
+            SolidColorBrush newCol = new(mediaColor);
+
+            if (window2 == null) // Eğer diyalog penceresi zaten açık değilse
+            {
+                window2 = new Window2(newCol, lyrics, seachQuery, artistName);
+                window2.Closed += (s, args) => window2 = null; // Pencere kapandığında referansı sıfırla
+                window2.Show(); // Pencereyi modal olmadan aç
+            }
+            else
+            {
+                window2.Activate(); // Pencere zaten açıksa öne getir
             }
         }
 
@@ -1425,10 +1447,6 @@ namespace MyWidget
             mediaColor.B = x.B;
 
             SolidColorBrush newCol = new(mediaColor);
-
-            // window1 = new Window1(seachQuery, newCol);
-            //window1.Show();
-            //window1.ShowDialog();
 
             if (window1 == null) // Eğer diyalog penceresi zaten açık değilse
             {

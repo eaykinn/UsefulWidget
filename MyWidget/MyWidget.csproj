@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -8,13 +7,13 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\U.ico</ApplicationIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Adsız.png" />
     <None Remove="ban-solid.png" />
     <None Remove="closeicon.png" />
     <None Remove="forward.png" />
     <None Remove="foward.png" />
+    <None Remove="music.png" />
     <None Remove="Resources\api_key.json" />
     <None Remove="Resources\Icons\forward.png" />
     <None Remove="Resources\Icons\max.png" />
@@ -56,7 +55,6 @@
     <None Remove="xmark-solid %281%29.png" />
     <None Remove="xmark.png" />
   </ItemGroup>
-
   <ItemGroup>
     <COMReference Include="Microsoft.Vbe.Interop.Forms">
       <WrapperTool>tlbimp</WrapperTool>
@@ -74,11 +72,9 @@
       <Guid>215d64d2-031c-33c7-96e3-61794cd1ee61</Guid>
     </COMReference>
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="Resources\U.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.5.1" />
     <PackageReference Include="HandyControl.Lang.en" Version="3.5.1" />
@@ -90,12 +86,12 @@
     <PackageReference Include="SpotifyAPI.Web.Auth" Version="7.1.1" />
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="forward.png" />
     <EmbeddedResource Include="Resources\api_key.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="music.png" />
     <Resource Include="Resources\Icons\ban-solid.png" />
     <Resource Include="Resources\Icons\forward.png" />
     <Resource Include="Resources\Icons\max.png" />
@@ -133,20 +129,20 @@
     <Resource Include="U.png" />
     <Resource Include="xmark.png" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Window2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
 </Project>
