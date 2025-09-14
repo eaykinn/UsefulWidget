@@ -40,7 +40,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <TextBox x:Name="Lyrics" Background="{x:Null}" Foreground="White"  Grid.Row="4" Width="420"   TextAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Height="470" BorderBrush="{x:Null}" VerticalScrollBarVisibility="Visible" Padding="5,0,5,0" >
+        <TextBox x:Name="Lyrics" Background="{x:Null}" Foreground="White"  Grid.Row="4" Width="420"   TextAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" Height="470" BorderBrush="{x:Null}" VerticalScrollBarVisibility="Visible" Padding="5,0,5,0" TextWrapping="Wrap" >
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
