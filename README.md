@@ -41,14 +41,16 @@
     <div> 
        <h2>Minimized Window</h2>
       <picture>
-        <img src="https://github.com/user-attachments/assets/4886c6ad-ad11-4a9a-84d6-2344a7a2a5de" style="width:auto;">
+        <img src="https://github.com/user-attachments/assets/5006c9fc-db1e-4533-a3d1-89b7536c91e8" />
+ style="width:auto;">
       </picture>
    </div>
         <div> 
        <h2>Similar Music List</h2>
           <p>Opens when clicked on song name && a new song or artist can be searched</p>
       <picture>
-        <img src = "https://github.com/user-attachments/assets/7c4ce1e1-4134-4250-a675-f8c5c3a341e3" alt="maximized" style="width:auto;">
+        <img src="https://github.com/user-attachments/assets/f0abec9f-a1f4-4431-861a-a5622072cdde" />
+ alt="maximized" style="width:auto;">
       </picture>
    </div>
   </body>
