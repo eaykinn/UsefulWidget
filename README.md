@@ -17,6 +17,7 @@
       <li>Spotify api for searching content</li>
       <li> Weather Forecast (open-meteo)</li>
       <li>Countdown timer with Windows shutdown/restart</li>
+      <li>Lyrics (by GeniusApi with web parsing)</li>
     </ul>
     <p> You can also change theme from top left corner. Checkbox below the player provides stopping music when the user locks the current Windows session. I use HandyControl library for interface and colorpicker.</p>
     <h2>Note:</h2>
@@ -33,7 +34,8 @@
    <div>
      <h2>Maximized Window</h2>
      <picture>
-      <img src="https://github.com/user-attachments/assets/d2d562bd-bf6a-4126-b3de-f1417648e3a2" alt="maximized" style="width:auto;">
+      <img src=<img width="426" height="781" alt="image" src="https://github.com/user-attachments/assets/ff3e9225-34ee-4969-9425-675156b13dce" />
+ alt="maximized" style="width:auto;">
     </picture> 
    </div> 
     <div> 
