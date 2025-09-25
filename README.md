@@ -34,7 +34,7 @@
    <div>
      <h2>Maximized Window</h2>
      <picture>
-      <img src=<img width="426" height="781" alt="image" src="https://github.com/user-attachments/assets/ff3e9225-34ee-4969-9425-675156b13dce" />
+      <img src="https://github.com/user-attachments/assets/ff3e9225-34ee-4969-9425-675156b13dce" />
  alt="maximized" style="width:auto;">
     </picture> 
    </div> 
