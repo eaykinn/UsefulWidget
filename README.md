@@ -34,22 +34,28 @@
    <div>
      <h2>Maximized Window</h2>
      <picture>
-      <img src="https://github.com/user-attachments/assets/ff3e9225-34ee-4969-9425-675156b13dce" />
+    <img width="430" height="786" alt="image" src="https://github.com/user-attachments/assets/ea0b810b-fdc0-4b0c-98a1-466e75e65f7b" />
     </picture> 
    </div> 
     <div> 
        <h2>Minimized Window</h2>
       <picture>
-        <img src="https://github.com/user-attachments/assets/5006c9fc-db1e-4533-a3d1-89b7536c91e8" />
- style="width:auto;">
+       <img src="https://github.com/user-attachments/assets/f68fb27f-6d81-43a7-bbfa-c952fe737e19" />
       </picture>
    </div>
         <div> 
        <h2>Similar Music List</h2>
           <p>Opens when clicked on song name && a new song or artist can be searched</p>
       <picture>
-        <img src="https://github.com/user-attachments/assets/f0abec9f-a1f4-4431-861a-a5622072cdde" />
- alt="maximized" style="width:auto;">
+       <img src="https://github.com/user-attachments/assets/c049fc17-edb6-4fdf-9714-d9ae0c65de9f" />
+      </picture>
+   </div>
+       </div>
+        <div> 
+       <h2>Lyrics</h2>
+          <p>Opens when clicked music icon</p>
+      <picture>
+          <img src="https://github.com/user-attachments/assets/94e728fd-54af-4831-9cfd-d8ffedd5492b" />
       </picture>
    </div>
   </body>
