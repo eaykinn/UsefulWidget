@@ -17,6 +17,7 @@
       <li>Spotify api for searching content</li>
       <li> Weather Forecast (open-meteo)</li>
       <li>Countdown timer with Windows shutdown/restart</li>
+      <li>Lyrics (by GeniusApi with web parsing)</li>
     </ul>
     <p> You can also change theme from top left corner. Checkbox below the player provides stopping music when the user locks the current Windows session. I use HandyControl library for interface and colorpicker.</p>
     <h2>Note:</h2>
@@ -33,20 +34,28 @@
    <div>
      <h2>Maximized Window</h2>
      <picture>
-      <img src="https://github.com/user-attachments/assets/d2d562bd-bf6a-4126-b3de-f1417648e3a2" alt="maximized" style="width:auto;">
+    <img width="430" height="786" alt="image" src="https://github.com/user-attachments/assets/ea0b810b-fdc0-4b0c-98a1-466e75e65f7b" />
     </picture> 
    </div> 
     <div> 
        <h2>Minimized Window</h2>
       <picture>
-        <img src="https://github.com/user-attachments/assets/4886c6ad-ad11-4a9a-84d6-2344a7a2a5de" style="width:auto;">
+       <img src="https://github.com/user-attachments/assets/f68fb27f-6d81-43a7-bbfa-c952fe737e19" />
       </picture>
    </div>
         <div> 
        <h2>Similar Music List</h2>
           <p>Opens when clicked on song name && a new song or artist can be searched</p>
       <picture>
-        <img src = "https://github.com/user-attachments/assets/7c4ce1e1-4134-4250-a675-f8c5c3a341e3" alt="maximized" style="width:auto;">
+       <img src="https://github.com/user-attachments/assets/c049fc17-edb6-4fdf-9714-d9ae0c65de9f" />
+      </picture>
+   </div>
+       </div>
+        <div> 
+       <h2>Lyrics</h2>
+          <p>Opens when clicked music icon</p>
+      <picture>
+          <img src="https://github.com/user-attachments/assets/94e728fd-54af-4831-9cfd-d8ffedd5492b" />
       </picture>
    </div>
   </body>
