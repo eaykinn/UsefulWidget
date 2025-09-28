@@ -13,7 +13,9 @@
     <None Remove="closeicon.png" />
     <None Remove="forward.png" />
     <None Remove="foward.png" />
+    <None Remove="list.png" />
     <None Remove="music.png" />
+    <None Remove="play.png" />
     <None Remove="Resources\api_key.json" />
     <None Remove="Resources\Icons\forward.png" />
     <None Remove="Resources\Icons\max.png" />
@@ -23,7 +25,6 @@
     <None Remove="minimize-solid.png" />
     <None Remove="mute.png" />
     <None Remove="palette.png" />
-    <None Remove="play.png" />
     <None Remove="power-off-solid %281%29.png" />
     <None Remove="power-off-solid %282%29.svg" />
     <None Remove="power-off-solid.png" />
@@ -83,7 +84,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NPSMLib" Version="0.9.14" />
     <PackageReference Include="SpotifyAPI.Web" Version="7.1.1" />
-    <PackageReference Include="SpotifyAPI.Web.Auth" Version="7.1.1" />
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
@@ -91,8 +91,11 @@
     <EmbeddedResource Include="Resources\api_key.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="list.png" />
     <Resource Include="music.png" />
+    <Resource Include="play.png" />
     <Resource Include="Resources\Icons\ban-solid.png" />
+  
     <Resource Include="Resources\Icons\forward.png" />
     <Resource Include="Resources\Icons\max.png" />
     <Resource Include="Resources\Icons\min.png" />
@@ -134,6 +137,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="albumCard.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Update="Window2.xaml.cs">
       <SubType>Code</SubType>

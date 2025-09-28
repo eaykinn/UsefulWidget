@@ -22,9 +22,6 @@ using HandyControl.Tools;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using NPSMLib;
-using static MyWidget.SpotifyGetAccessToken;
-using static SpotifyAPI.Web.LoginRequest;
-using static SpotifyAPI.Web.PlayerSetRepeatRequest;
 
 namespace MyWidget
 {
@@ -54,6 +51,7 @@ namespace MyWidget
         private bool AutoStopMusicSet;
         Window1 window1;
         Window2 window2;
+        PlayList playlist;
 
         private const int HOTKEY_ID = 9029;
         private const int HOTKEY2_ID = 9061; // Benzersiz bir ID
@@ -88,6 +86,14 @@ namespace MyWidget
             RegisterHotKey(helper.Handle, HOTKEY_ID, 0, VK_F9);
             RegisterHotKey(helper.Handle, HOTKEY2_ID, 0, VK_F12); // Ctrl+Alt+F9
             ComponentDispatcher.ThreadFilterMessage += ComponentDispatcher_ThreadFilterMessage;
+
+            img.Source = new BitmapImage(
+            new Uri(
+            "pack://application:,,,/MyWidget;component/Resources/Icons/play.png",
+            UriKind.Absolute
+    )
+);
+            playStop.Content = img;
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -338,11 +344,16 @@ namespace MyWidget
                     x.SourceAppId == "Spotify.exe"
                     || x.SourceAppId.Contains("spotify")
                     || x.SourceAppId.Contains("Spotify")
+                    || x.SourceDeviceId == "Local"
                 )
                 .Select(x => x.GetSessionInfo())
                 .ToList();
             if (sessionInfos.Count == 0)
             {
+                lbl1.Content = "No Data";
+                lbl2.Content = "No Data";
+                lbl3.Content = "No Data";
+                songImage.Source = null;
                 return;
             }
             else
@@ -366,11 +377,21 @@ namespace MyWidget
             }
 
             MediaObjectInfo mediaInfo = playnaclDataSource.GetMediaObjectInfo();
-            lbl1.Content = mediaInfo.Title;
-            lbl2.Content = mediaInfo.Artist;
-            lbl3.Content = mediaInfo.AlbumTitle;
+            if(mediaInfo.Title != null)
+            {
+                lbl1.Content = mediaInfo.Title;
+                lbl2.Content = mediaInfo.Artist;
+                lbl3.Content = mediaInfo.AlbumTitle;
+            }
+            else
+            {
+                lbl1.Content = "No Data";
+                lbl2.Content = "No Data";
+                lbl3.Content = "No Data";
+            }
 
-            await GetPic(playnaclDataSource);
+
+                await GetPic(playnaclDataSource);
         }
 
         private async Task GetFiveDaysWeatherForecast(string cityName)
@@ -807,6 +828,7 @@ namespace MyWidget
                     x.SourceAppId == "Spotify.exe"
                     || x.SourceAppId.Contains("spotify")
                     || x.SourceAppId.Contains("Spotify")
+                    || x.SourceDeviceId == "Local"
                 )
                 .Select(x => x.GetSessionInfo())
                 .ToList();
@@ -834,6 +856,7 @@ namespace MyWidget
                     x.SourceAppId == "Spotify.exe"
                     || x.SourceAppId.Contains("spotify")
                     || x.SourceAppId.Contains("Spotify")
+                    || x.SourceDeviceId == "Local"
                 )
                 .Select(x => x.GetSessionInfo())
                 .ToList();
@@ -1072,6 +1095,7 @@ namespace MyWidget
                     x.SourceAppId == "Spotify.exe"
                     || x.SourceAppId.Contains("spotify")
                     || x.SourceAppId.Contains("Spotify")
+                    || x.SourceDeviceId == "Local"
                 )
                 .Select(x => x.GetSessionInfo())
                 .ToList();
@@ -1142,8 +1166,10 @@ namespace MyWidget
             {
                 if (
                     currentSession.SourceAppId != "Spotify.exe"
+                    && currentSession.SourceDeviceId != "Local"
                     && currentSession.SourceAppId.Contains("spotify") == false
                     && currentSession.SourceAppId.Contains("Spotify") == false
+
                 )
                 {
                     return;
@@ -1407,6 +1433,32 @@ namespace MyWidget
                 window1.Activate(); // Pencere zaten açıksa öne getir
             }
         }
+
+        private async void albumAc(object sender, RoutedEventArgs e)
+        {
+            string seachQuery = lbl1.Content.ToString();
+
+            var x = Properties.Settings.Default.defaultColor;
+            Color mediaColor = new Color();
+            mediaColor.A = x.A;
+            mediaColor.R = x.R;
+            mediaColor.G = x.G;
+            mediaColor.B = x.B;
+
+            SolidColorBrush newCol = new(mediaColor);
+
+            if (playlist == null) // Eğer diyalog penceresi zaten açık değilse
+            {
+                playlist = new PlayList(newCol);
+                playlist.Closed += (s, args) => playlist = null; // Pencere kapandığında referansı sıfırla
+                playlist.Show(); // Pencereyi modal olmadan aç
+            }
+            else
+            {
+                playlist.Activate(); // Pencere zaten açıksa öne getir
+            }
+        }
+
 
         private async void LyricsButtonClick(object sender, RoutedEventArgs e)
         {

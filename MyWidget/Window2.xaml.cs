@@ -13,7 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Resources;
 using Microsoft.Web.WebView2.Wpf;
 using Newtonsoft.Json.Linq;
-using SpotifyAPI.Web;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace MyWidget

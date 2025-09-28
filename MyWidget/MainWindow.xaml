@@ -9,7 +9,7 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
         mc:Ignorable="d"
         Title="Widget" Background="Transparent" Height="780" Width="425" Loaded="Window_Loaded" Cursor="" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize"  AllowsTransparency="True" Icon="/U.png">
-        
+
     <Window.Resources>
 
         <Style x:Key="FocusVisual">
@@ -209,7 +209,7 @@
                         </Style>
                     </Button.Resources>
                     <Button.Background>
-                        <ImageBrush/>
+                        <ImageBrush Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="sonrakiSarki" Width="18" Height="24"  Click="sonrakiSarki_Click"  Grid.Column="6"   Grid.Row="7" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.RowSpan="2" VerticalAlignment="Top" Margin="12,7,0,0" HorizontalAlignment="Left" >
@@ -217,6 +217,12 @@
                         <ImageBrush ImageSource="/forward.png"/>
                     </Button.Background>
                 </Button>
+                <Button Grid.Column="9" Grid.Row="2" Width="24" Height="24" Click="albumAc" BorderBrush="{x:Null}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/list.png"/>
+                    </Button.Background>
+                </Button>
+
                 <hc:RunningBlock x:Name="lbl3" Content="Label"  IsRunning="False" AutoRun="True" Grid.Column="4" Grid.Row="4"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFBFBFBF" Width="226" HorizontalContentAlignment="Left" Grid.ColumnSpan="6" HorizontalAlignment="Right" Margin="0,2,12,0" Grid.RowSpan="2" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="40" Duration="00:00:10" AutoReverse="True"  >
                     <hc:RunningBlock.Effect>
                         <DropShadowEffect/>

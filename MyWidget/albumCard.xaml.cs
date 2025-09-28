@@ -1,8 +1,12 @@
-﻿using System;
+﻿using HandyControl.Controls;
+using Newtonsoft.Json;
+using NPSMLib;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,22 +18,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HandyControl.Controls;
 
 namespace MyWidget
 {
     /// <summary>
-    /// Interaction logic for songCard.xaml
+    /// Interaction logic for albumCard.xaml
     /// </summary>
-    public partial class ArtistCard : UserControl
+    public partial class albumCard : UserControl
     {
-        public ArtistCard()
+        public class Device
         {
-            InitializeComponent();
-
+            public string id { get; set; }
+            public bool is_active { get; set; }
+            public string name { get; set; }
+            // Add other properties as needed
         }
 
-        public string TrackUri { get; set; }
+        public class DevicesResponse
+        {
+            public List<Device> devices { get; set; }
+        }
+
+        public albumCard()
+        {
+            InitializeComponent();
+            
+        }
+
+        public string PlayListUri { get; set; }
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             GoToLink();
@@ -94,9 +110,49 @@ namespace MyWidget
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
             string playUrl = "https://api.spotify.com/v1/me/player/play";
-            string playBody = $"{{\"uris\": [\"{TrackUri}\"]}}";
+            string playBody = $"{{\"context_uri\": \"{PlayListUri}\"}}";
 
             HttpContent content = new StringContent(playBody, Encoding.UTF8, "application/json");
+            
+            // Cihazları al
+            var devicesResponse = await client.GetAsync("https://api.spotify.com/v1/me/player/devices");
+            var devicesJson = await devicesResponse.Content.ReadAsStringAsync();
+            var devicesObj = JsonConvert.DeserializeObject<DevicesResponse>(devicesJson);
+            string actDevId;
+
+            if (devicesObj != null && devicesObj.devices.Count() > 0) {
+                var activeDevice = devicesObj.devices.FirstOrDefault();
+                if(activeDevice.is_active == false)
+                {
+                    actDevId = activeDevice.id;
+                    string transferUrl = "https://api.spotify.com/v1/me/player";
+                    string deviceId = actDevId; // Seçtiğin cihazın id'si
+                    string transferBody = $"{{\"device_ids\": [\"{deviceId}\"], \"play\": true}}";
+                    HttpContent transferContent = new StringContent(transferBody, Encoding.UTF8, "application/json");
+                    await client.PutAsync(transferUrl, transferContent);
+
+                }
+
+
+            }
+            else
+            {   
+                StartSpotify.Start();
+
+                var dvcResp = await client.GetAsync("https://api.spotify.com/v1/me/player/devices");
+                var dvc = await dvcResp.Content.ReadAsStringAsync();
+                var dvcObj = JsonConvert.DeserializeObject<DevicesResponse>(dvc);
+                var actDI = dvcObj.devices.FirstOrDefault();
+                string transferUrl = "https://api.spotify.com/v1/me/player";
+                string deviceId = actDI.id; // Seçtiğin cihazın id'si
+                string transferBody = $"{{\"device_ids\": [\"{deviceId}\"], \"play\": true}}";
+                HttpContent transferContent = new StringContent(transferBody, Encoding.UTF8, "application/json");
+                await client.PutAsync(transferUrl, transferContent);
+                Thread.Sleep(1500);
+
+            }
+         
+
 
             HttpResponseMessage playResponse = await client.PutAsync(playUrl, content);
 
@@ -105,8 +161,8 @@ namespace MyWidget
             else
                 Console.WriteLine("Hata: " + await playResponse.Content.ReadAsStringAsync());
 
-
-            //GoToLink();
         }
+
+       
     }
 }

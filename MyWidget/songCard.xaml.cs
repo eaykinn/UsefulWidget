@@ -1,8 +1,11 @@
-﻿using System;
+﻿using HandyControl.Controls;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,8 +17,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HandyControl.Controls;
-using SpotifyAPI.Web;
 
 namespace MyWidget
 {
@@ -24,6 +25,19 @@ namespace MyWidget
     /// </summary>
     public partial class songCard : UserControl
     {
+        public class Device
+        {
+            public string id { get; set; }
+            public bool is_active { get; set; }
+            public string name { get; set; }
+            // Add other properties as needed
+        }
+
+        public class DevicesResponse
+        {
+            public List<Device> devices { get; set; }
+        }
+
         public songCard()
         {
             InitializeComponent();
@@ -99,12 +113,51 @@ namespace MyWidget
 
             HttpContent content = new StringContent(playBody, Encoding.UTF8, "application/json");
             
+            // Cihazları al
+            var devicesResponse = await client.GetAsync("https://api.spotify.com/v1/me/player/devices");
+            var devicesJson = await devicesResponse.Content.ReadAsStringAsync();
+            var devicesObj = JsonConvert.DeserializeObject<DevicesResponse>(devicesJson);
+            string actDevId;
+
+            if (devicesObj != null && devicesObj.devices.Count() > 0) {
+                var activeDevice = devicesObj.devices.FirstOrDefault();
+                actDevId = activeDevice.id;
+                string transferUrl = "https://api.spotify.com/v1/me/player";
+                string deviceId = actDevId; // Seçtiğin cihazın id'si
+                string transferBody = $"{{\"device_ids\": [\"{deviceId}\"], \"play\": true}}";
+                HttpContent transferContent = new StringContent(transferBody, Encoding.UTF8, "application/json");
+                await client.PutAsync(transferUrl, transferContent);
+            }
+            else
+            {
+                StartSpotify.Start();
+
+                var dvcResp = await client.GetAsync("https://api.spotify.com/v1/me/player/devices");
+                var dvc = await dvcResp.Content.ReadAsStringAsync();
+                var dvcObj = JsonConvert.DeserializeObject<DevicesResponse>(dvc);
+                var actDI = dvcObj.devices.FirstOrDefault();
+                string transferUrl = "https://api.spotify.com/v1/me/player";
+                string deviceId = actDI.id; // Seçtiğin cihazın id'si
+                string transferBody = $"{{\"device_ids\": [\"{deviceId}\"], \"play\": true}}";
+                HttpContent transferContent = new StringContent(transferBody, Encoding.UTF8, "application/json");
+                await client.PutAsync(transferUrl, transferContent);
+                Thread.Sleep(1500);
+            }
+            
+
             HttpResponseMessage playResponse = await client.PutAsync(playUrl, content);
 
             if (playResponse.IsSuccessStatusCode)
                 Console.WriteLine("Şarkı çalmaya başladı!");
             else
                 Console.WriteLine("Hata: " + await playResponse.Content.ReadAsStringAsync());
+
+
+
+
+            // Buradan aktif cihazı seçip, play isteğini ona gönderebilirsin.
+
+
 
 
             //GoToLink();

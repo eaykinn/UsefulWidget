@@ -86,7 +86,13 @@ namespace MyWidget
                 {
                     songCard songCard = new songCard();
                     songCard.songName.Text = track.Name;
+
                     songCard.artistName.Text = track.Artists[0].Name;
+                    foreach (var artist in track.Artists.Where(x => x.Name != songCard.artistName.Text))
+                    {
+                        songCard.artistName.Text = songCard.artistName.Text  + ", " + artist.Name;
+                    }
+
                     songCard.albumName.Text = track.Album.Name;
                     songCard.TrackUri = track.Uri;
                     sLink = track.ExternalUrls.Values.First().ToString();
@@ -247,6 +253,15 @@ namespace MyWidget
             }
 
             UpdateLabels(isSong);
+            var x = Properties.Settings.Default.defaultColor;
+            Color mediaColor = new Color();
+            mediaColor.A = x.A;
+            mediaColor.R = x.R;
+            mediaColor.G = x.G;
+            mediaColor.B = x.B;
+
+            SolidColorBrush newCol = new(mediaColor);
+
         }
 
         public static async Task<string> GetAccessToken(string clientId, string clientSecret)
