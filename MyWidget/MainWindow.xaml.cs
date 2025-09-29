@@ -40,18 +40,18 @@ namespace MyWidget
         private readonly System.Windows.Controls.Image img = new();
         private readonly System.Windows.Controls.Image imageSource = new();
         private byte isMuted;
-        private string lblSecOfTheSong;
+        private string? lblSecOfTheSong;
         private readonly string path1 = Directory.GetCurrentDirectory();
         private byte restartProcessStarted = 0;
-        private Brush themeColor;
+        private Brush? themeColor;
         private readonly DispatcherTimer timer = new();
         bool colorPiclerOpened;
-        JObject weatherCodes;
-        JObject weatherExpCodes;
+        JObject? weatherCodes;
+        JObject? weatherExpCodes;
         private bool AutoStopMusicSet;
-        Window1 window1;
-        Window2 window2;
-        PlayList playlist;
+        Window1? window1;
+        Window2? window2;
+        PlayList? playlist;
 
         private const int HOTKEY_ID = 9029;
         private const int HOTKEY2_ID = 9061; // Benzersiz bir ID
@@ -96,7 +96,7 @@ namespace MyWidget
             playStop.Content = img;
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             var helper = new WindowInteropHelper(this);
             UnregisterHotKey(helper.Handle, HOTKEY_ID);
@@ -208,7 +208,7 @@ namespace MyWidget
             }
         }
 
-        private async void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             PlayStopMedia();
         }
@@ -277,7 +277,7 @@ namespace MyWidget
             }
         }
 
-        private void CtTimerTick(object sender, EventArgs e)
+        private void CtTimerTick(object? sender, EventArgs e)
         {
             if (ctSec > 0)
             {
@@ -329,7 +329,7 @@ namespace MyWidget
             }
         }
 
-        private protected async Task GetCurrentMedia(bool onLoad, bool getTimeLine)
+        private void GetCurrentMedia(bool onLoad, bool getTimeLine)
         {
             if (onLoad == false)
             {
@@ -364,7 +364,7 @@ namespace MyWidget
             MediaPlaybackDataSource playnaclDataSource =
                 currentSession.ActivateMediaPlaybackDataSource();
 
-            await GetTimeLinePosition(playnaclDataSource, true);
+            GetTimeLinePosition(playnaclDataSource, true);
 
             Stream streamInfo = playnaclDataSource.GetThumbnailStream();
             if (streamInfo != null)
@@ -391,7 +391,7 @@ namespace MyWidget
             }
 
 
-                await GetPic(playnaclDataSource);
+                GetPic(playnaclDataSource);
         }
 
         private async Task GetFiveDaysWeatherForecast(string cityName)
@@ -473,6 +473,7 @@ namespace MyWidget
                 {
                     // Sadece open-meteo domaini için bypass yap
                     if (
+                        httpRequestMessage.RequestUri != null &&
                         httpRequestMessage.RequestUri.Host.Equals(
                             "geocoding-api.open-meteo.com",
                             StringComparison.OrdinalIgnoreCase
@@ -504,7 +505,7 @@ namespace MyWidget
                 List<JToken> results;
                 // Convert JSON string to JObject
                 JObject jsonObject = JObject.Parse(responseBody);
-                if (jsonObject.First.Path == "generationtime_ms")
+                if (jsonObject.First?.Path == "generationtime_ms")
                 {
                     return;
                 }
@@ -542,7 +543,7 @@ namespace MyWidget
             }
         }
 
-        private async Task GetPic(MediaPlaybackDataSource playnaclDataSource)
+        private void GetPic(MediaPlaybackDataSource playnaclDataSource)
         {
             MediaPlaybackInfo z = playnaclDataSource.GetMediaPlaybackInfo();
             string lastPath;
@@ -587,7 +588,7 @@ namespace MyWidget
             AutoStopMusicChange(AutoStopMusicSet);
         }
 
-        private Task GetTimeLinePosition(
+        private void GetTimeLinePosition(
             MediaPlaybackDataSource playnaclDataSource,
             bool getTimeLine
         )
@@ -648,7 +649,7 @@ namespace MyWidget
             }
 
             maxTimeLbl.Content = maxminOfTheSong.ToString() + ":" + lblSecOfTheSong;
-            return Task.CompletedTask;
+           
         }
 
         private async Task GetWheather(string lat, string lon)
@@ -700,29 +701,30 @@ namespace MyWidget
 
                 // Convert JSON string to JObject
                 JObject jsonObject = JObject.Parse(responseBody);
-                List<JToken> days = jsonObject["daily"]["time"].ToList();
-                List<JToken> dailyMax = jsonObject["daily"]["temperature_2m_max"].ToList();
-                List<JToken> dailyMin = jsonObject["daily"]["temperature_2m_min"].ToList();
-                List<JToken> dailyWheatherCode = jsonObject["daily"]["weather_code"].ToList();
-                JToken currentTemp = jsonObject["current"]["temperature_2m"];
-                JToken currentWC = jsonObject["current"]["weather_code"];
+                List<JToken> days = jsonObject["daily"]?["time"]?.ToList() ?? new List<JToken>();
+                List<JToken> dailyMax = jsonObject["daily"]?["temperature_2m_max"]?.ToList() ?? new List<JToken>();
+                List<JToken> dailyMin = jsonObject["daily"]?["temperature_2m_min"]?.ToList() ?? new List<JToken>();
+                List<JToken> dailyWheatherCode = jsonObject["daily"]?["weather_code"]?.ToList() ?? new List<JToken>();
+                JToken? currentTemp = jsonObject["current"]?["temperature_2m"];
+                JToken? currentWC = jsonObject["current"]?["weather_code"];
 
                 string firstday = days[0].ToString();
 
                 /*CurrentWeatherLabel.Content = currentTemp.ToString() + " °C";*/
                 CurrentWeatherLabel.Content = $"{currentTemp:#}" + " °C";
-                string weatherCode = currentWC.ToString();
-                JToken currentWeatherIconPath = weatherCodes[weatherCode];
+                string weatherCode = currentWC?.ToString() ?? "";
+                JToken? currentWeatherIconPath = weatherCodes != null ? weatherCodes[weatherCode] : null;
 
                 System.Windows.Controls.Image anlikDurumİmage = new();
+                string iconPathStr = currentWeatherIconPath?.ToString() ?? "default.png";
                 path =
                     "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
-                    + currentWeatherIconPath.ToString();
+                    + iconPathStr;
                 anlikDurumİmage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 CurrentWeatherPic.Content = anlikDurumİmage;
 
-                string currentGunWeatherExp = currentWC.ToString();
-                currentweatherCodeExpl.Content = weatherExpCodes[currentGunWeatherExp];
+                string currentGunWeatherExp = currentWC!.ToString();
+                currentweatherCodeExpl.Content = weatherExpCodes != null ? weatherExpCodes[currentGunWeatherExp] : null;
 
                 birinciGunTarih.Content = days[0].ToString();
                 ikinciGunTarih.Content = days[1].ToString();
@@ -734,8 +736,8 @@ namespace MyWidget
                 birinciGunDurum.Content = dailyWheatherCode[0].ToString();
 
                 string birinciGunWeatherIconCode = dailyWheatherCode[0].ToString();
-                JToken birinciGunWeatherIconPath = weatherCodes[birinciGunWeatherIconCode];
-                path = birinciGunWeatherIconPath.ToString();
+                JToken? birinciGunWeatherIconPath = weatherCodes != null ? weatherCodes[birinciGunWeatherIconCode] : null;
+                path = birinciGunWeatherIconPath?.ToString() ?? "default.png";
                 System.Windows.Controls.Image birinciGunImage = new();
                 birinciGunImage.Source = new BitmapImage(
                     new Uri(
@@ -749,8 +751,8 @@ namespace MyWidget
                 System.Windows.Controls.Image ikinciGunImage = new();
                 ikinciGunDurum.Content = dailyWheatherCode[1].ToString();
                 string ikinciGunWeatherIconCode = dailyWheatherCode[1].ToString();
-                JToken ikinciGunWeatherIconPath = weatherCodes[ikinciGunWeatherIconCode];
-                path = ikinciGunWeatherIconPath.ToString();
+                JToken? ikinciGunWeatherIconPath = weatherCodes != null ? weatherCodes[ikinciGunWeatherIconCode] : null;
+                path = ikinciGunWeatherIconPath?.ToString() ?? "default.png";
                 ikinciGunImage.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
@@ -764,9 +766,9 @@ namespace MyWidget
 
                 ucuncuGunDurum.Content = dailyWheatherCode[2].ToString();
                 string ucuncuGunWeatherIconCode = dailyWheatherCode[2].ToString();
-                JToken ucuncuGunWeatherIconPath = weatherCodes[ucuncuGunWeatherIconCode];
+                JToken? ucuncuGunWeatherIconPath = weatherCodes != null ? weatherCodes[ucuncuGunWeatherIconCode] : null;
                 System.Windows.Controls.Image ucuncuGunImage = new();
-                path = ucuncuGunWeatherIconPath.ToString();
+                path = ucuncuGunWeatherIconPath?.ToString() ?? "default.png";
                 ucuncuGunImage.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
@@ -780,9 +782,9 @@ namespace MyWidget
 
                 dorduncuGunDurum.Content = dailyWheatherCode[3].ToString();
                 string dorduncuGunWeatherIconCode = dailyWheatherCode[3].ToString();
-                JToken dorduncuGunWeatherIconPath = weatherCodes[dorduncuGunWeatherIconCode];
+                JToken dorduncuGunWeatherIconPath = weatherCodes != null ? weatherCodes[dorduncuGunWeatherIconCode] : null;
                 System.Windows.Controls.Image dorduncuGunImage = new();
-                path = dorduncuGunWeatherIconPath.ToString();
+                path = dorduncuGunWeatherIconPath?.ToString() ?? "default.png";
                 dorduncuGunImage.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/MyWidget;component/Resources/Icons/weather_icons/"
@@ -952,7 +954,7 @@ namespace MyWidget
                 JObject jsonObject = JObject.Parse(responseBody);
                 try
                 {
-                    results = jsonObject["results"].ToList();
+                    results = jsonObject["results"]?.ToList() ?? new List<JToken>();
                 }
                 catch (System.ArgumentNullException e)
                 {
@@ -996,30 +998,34 @@ namespace MyWidget
                 {
                     var ccExist = obj["country_code"];
 
+                    string name = obj["name"]?.ToString() ?? "";
+                    string latitude = obj["latitude"]?.ToString() ?? "";
+                    string longitude = obj["longitude"]?.ToString() ?? "";
+                    string countryCode = obj["country_code"]?.ToString() ?? "";
+
                     if (ccExist == null)
                     {
                         searchBarListBox.Items.Add(
-                            obj["name"].ToString()
+                            name
                                 + " "
-                                + obj["latitude"].ToString()
+                                + latitude
                                 + ","
-                                + obj["longitude"].ToString()
+                                + longitude
                         );
                     }
                     else
                     {
                         searchBarListBox.Items.Add(
-                            obj["country_code"].ToString()
-                                + ","
-                                + obj["name"].ToString()
+                            countryCode + ","
+                                + name
                                 + " "
-                                + obj["latitude"].ToString()
+                                + latitude
                                 + ","
-                                + obj["longitude"].ToString()
+                                + longitude
                         );
                     }
-                    cordList.Add([obj["latitude"].ToString(), obj["longitude"].ToString()]);
-                    cityNames.Add(obj["name"].ToString());
+                    cordList.Add([latitude, longitude]);
+                    cityNames.Add(name);
                 }
 
                 Grid.SetRow(searchBarListBox, 1);
@@ -1180,7 +1186,7 @@ namespace MyWidget
             x.SendPlaybackPositionChangeRequest(TimeSpan.FromSeconds(timelineSlider.Value));
         }
 
-        private void TimerTickAsync(object sender, EventArgs e)
+        private void TimerTickAsync(object? sender, EventArgs e)
         {
             timeLbl.Content = DateTime.Now.ToString("HH:mm:ss");
             dateLbl.Content = DateTime.Now.ToString("yyy-MM-dd") + " / " + DateTime.Now.DayOfWeek;
@@ -1409,9 +1415,9 @@ namespace MyWidget
             Properties.Settings.Default.Save();
         }
 
-        private async void lbl1_MouseClick(object sender, MouseButtonEventArgs e)
+        private async void lbl1_MouseClick(object sender, RoutedEventArgs e)
         {
-            string seachQuery = lbl1.Content.ToString();
+            string seachQuery = lbl1.Content?.ToString() ?? "";
 
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
@@ -1436,7 +1442,7 @@ namespace MyWidget
 
         private async void albumAc(object sender, RoutedEventArgs e)
         {
-            string seachQuery = lbl1.Content.ToString();
+            string seachQuery = lbl1.Content?.ToString() ?? "";
 
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
@@ -1462,10 +1468,10 @@ namespace MyWidget
 
         private async void LyricsButtonClick(object sender, RoutedEventArgs e)
         {
-            string seachQuery = lbl1.Content.ToString();
-            string artistName = lbl2.Content.ToString();
+            string seachQuery = lbl1.Content?.ToString() ?? "";
+            string artistName = lbl2.Content?.ToString() ?? "";
             GeniusApiAccesToket gnApiToken = new GeniusApiAccesToket();
-            string lyrics = await gnApiToken.SearchSongAsync(seachQuery, artistName);
+            string lyrics = await gnApiToken.SearchSongAsync(seachQuery ?? "", artistName ?? "");
 
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
@@ -1490,7 +1496,7 @@ namespace MyWidget
 
         private void lbl1_MouseClick2(object sender, MouseButtonEventArgs e)
         {
-            string seachQuery = lbl2.Content.ToString();
+            string seachQuery = lbl2.Content?.ToString() ?? "";
             var x = Properties.Settings.Default.defaultColor;
             Color mediaColor = new Color();
             mediaColor.A = x.A;

@@ -23,14 +23,14 @@ namespace MyWidget
     /// </summary>
     public partial class Window1 : Window
     {
-        List<FullTrack> tracks;
-        List<FullArtist> artists;
+        List<FullTrack>? tracks;
+        List<FullArtist>? artists;
         bool srchType;
-        string sLink;
-        public string clientId;
-        public string clientSecret;
+        string? sLink;
+        public string? clientId;
+        public string? clientSecret;
         public static string? accessToken;
-        SpotifyClient spotify;
+        SpotifyClient? spotify;
 
         public Window1(string searchQuery, SolidColorBrush color, bool srcLblType)
         {
@@ -82,7 +82,7 @@ namespace MyWidget
         {
             if (isSong)
             {
-                foreach (FullTrack track in tracks)
+                foreach (FullTrack track in tracks!)
                 {
                     songCard songCard = new songCard();
                     songCard.songName.Text = track.Name;
@@ -309,14 +309,14 @@ namespace MyWidget
             this.DragMove();
         }
 
-        private void songSearchBox_SearchStarted(
+        private async void songSearchBox_SearchStarted(
             object sender,
             HandyControl.Data.FunctionEventArgs<string> e
         )
         {
             songList.Items.Clear();
             searchQuery = songSearchBox.Text;
-            GetMusicList(srchType);
+            await GetMusicList(srchType);
         }
 
         /* private void songSearchBox_KeyDown(object sender, KeyEventArgs e)

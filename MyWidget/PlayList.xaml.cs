@@ -61,6 +61,8 @@ namespace MyWidget
 
             playListBox = this.FindName("playListBox") as ListBox;
             Task.Run(() => GetPlayLists());
+
+
         }
 
 
@@ -80,12 +82,22 @@ namespace MyWidget
                 {
                     clientS.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
                     HttpResponseMessage response = await clientS.GetAsync(
-                        "https://api.spotify.com/v1/me"
+                        "https://api.spotify.com/v1/me/playlists"
                     );
 
                     if (response.IsSuccessStatusCode)
-                    {
+                    {   
+                        if(response.ReasonPhrase == "Unauthorized")
+                        {
+                            tokens = await SpotifyGetAccessToken.GetUserPerm(1);
+                            accessToken = tokens[0];
+                            refreshToken = tokens[1];
+                            Properties.Settings.Default.accessTokenSet = tokens[0];
+                            Properties.Settings.Default.refreshToken = tokens[1];
+                            Properties.Settings.Default.Save();
+                        }
                         Console.WriteLine("Token geçerli!");
+                        
                     }
                     else
                     {
@@ -112,14 +124,23 @@ namespace MyWidget
 
             var playlists = await spotify.Playlists.CurrentUsers();
 
-            foreach (var item in playlists.Items)
+            // Sıralama için Name özelliği null olabilirse, null kontrolü ekleyin
+            var orderedPlaylists = playlists.Items
+                .OrderBy(x => x.Name.ToLowerInvariant())
+                .ToList();
+
+
+            playListBox.Dispatcher.Invoke(() => playListBox.Items.Clear());
+
+            foreach (var item in orderedPlaylists)
             {
-                await UpdateList(item);
+               
+               UpdateList(item);
             }
-            return;
+
         }
 
-        async Task UpdateList(FullPlaylist playlist)
+         void UpdateList(FullPlaylist playlist)
         {
             // Make sure this runs on the UI thread
             _ = playListBox.Dispatcher.Invoke(async () =>
@@ -142,6 +163,7 @@ namespace MyWidget
 
 
                 playListBox.Items.Add(card);
+                
             });
         }
 

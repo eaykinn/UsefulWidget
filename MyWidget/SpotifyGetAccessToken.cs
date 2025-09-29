@@ -14,8 +14,8 @@ namespace MyWidget
 {
     internal class SpotifyGetAccessToken
     {
-        public static string clientId { get; set; }
-        public static string clientSecret { get; set; }
+        public static string? clientId { get; set; }
+        public static string? clientSecret { get; set; }
 
         static void GetClientIdandClientSecret()
         {
@@ -45,7 +45,7 @@ namespace MyWidget
             /* HttpListenerContext context = null;*/
             Console.WriteLine("Waiting for redirect...");
 
-            string scopes = "streaming user-read-playback-state user-modify-playback-state";
+            string scopes = "streaming user-read-playback-state user-modify-playback-state playlist-read-private";
 
             string authorizationUrl =
                 $"https://accounts.spotify.com/authorize"
@@ -177,15 +177,15 @@ namespace MyWidget
 
         public class SpotifyTokenResponse
         {
-            public string access_token { get; set; }
-            public string TokenType { get; set; }
+            public string? access_token { get; set; }
+            public string? TokenType { get; set; }
             public int ExpiresIn { get; set; }
         }
 
         public class SpToken
         {
-            public string access_token { get; set; }
-            public string refresh_token { get; set; }
+            public string? access_token { get; set; }
+            public string? refresh_token { get; set; }
         }
 
         public static async Task<List<string>> GetAccessToken(string code)

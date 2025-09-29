@@ -28,24 +28,27 @@ namespace MyWidget
     {
         public class Device
         {
-            public string id { get; set; }
-            public bool is_active { get; set; }
-            public string name { get; set; }
+            public string? id { get; set; }
+            public bool? is_active { get; set; }
+            public string? name { get; set; }
             // Add other properties as needed
         }
 
         public class DevicesResponse
         {
-            public List<Device> devices { get; set; }
+            public List<Device>? devices { get; set; }
         }
 
+
+
         public albumCard()
-        {
+        {   
+            
             InitializeComponent();
             
         }
 
-        public string PlayListUri { get; set; }
+        public string? PlayListUri { get; set; }
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             GoToLink();
@@ -120,20 +123,17 @@ namespace MyWidget
             var devicesObj = JsonConvert.DeserializeObject<DevicesResponse>(devicesJson);
             string actDevId;
 
-            if (devicesObj != null && devicesObj.devices.Count() > 0) {
+            if (devicesObj?.devices != null && devicesObj.devices.Count > 0) {
                 var activeDevice = devicesObj.devices.FirstOrDefault();
-                if(activeDevice.is_active == false)
+                if (activeDevice != null && activeDevice.is_active == false)
                 {
-                    actDevId = activeDevice.id;
+                    actDevId = activeDevice.id!;
                     string transferUrl = "https://api.spotify.com/v1/me/player";
                     string deviceId = actDevId; // Seçtiğin cihazın id'si
                     string transferBody = $"{{\"device_ids\": [\"{deviceId}\"], \"play\": true}}";
                     HttpContent transferContent = new StringContent(transferBody, Encoding.UTF8, "application/json");
                     await client.PutAsync(transferUrl, transferContent);
-
                 }
-
-
             }
             else
             {   
@@ -142,18 +142,30 @@ namespace MyWidget
                 var dvcResp = await client.GetAsync("https://api.spotify.com/v1/me/player/devices");
                 var dvc = await dvcResp.Content.ReadAsStringAsync();
                 var dvcObj = JsonConvert.DeserializeObject<DevicesResponse>(dvc);
-                var actDI = dvcObj.devices.FirstOrDefault();
-                string transferUrl = "https://api.spotify.com/v1/me/player";
-                string deviceId = actDI.id; // Seçtiğin cihazın id'si
-                string transferBody = $"{{\"device_ids\": [\"{deviceId}\"], \"play\": true}}";
-                HttpContent transferContent = new StringContent(transferBody, Encoding.UTF8, "application/json");
-                await client.PutAsync(transferUrl, transferContent);
-                Thread.Sleep(1500);
 
+                if (dvcObj?.devices != null && dvcObj.devices.Count > 0)
+                {
+                    var actDI = dvcObj.devices.FirstOrDefault();
+                    if (actDI != null)
+                    {
+                        string transferUrl = "https://api.spotify.com/v1/me/player";
+                        string deviceId = actDI.id!; // Seçtiğin cihazın id'si
+                        string transferBody = $"{{\"device_ids\": [\"{deviceId}\"], \"play\": true}}";
+                        HttpContent transferContent = new StringContent(transferBody, Encoding.UTF8, "application/json");
+                        await client.PutAsync(transferUrl, transferContent);
+                        Thread.Sleep(1500);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No device found after starting Spotify.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No devices available.");
+                }
             }
          
-
-
             HttpResponseMessage playResponse = await client.PutAsync(playUrl, content);
 
             if (playResponse.IsSuccessStatusCode)

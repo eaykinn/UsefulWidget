@@ -70,6 +70,7 @@ namespace MyWidget
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                 }
             }
 
@@ -94,6 +95,7 @@ namespace MyWidget
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                     return -1;
                 }
             }
